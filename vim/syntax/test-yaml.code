@@ -1,0 +1,5 @@
+# vi: ft=yaml
+
+- something:
+    10
+    "plouf"

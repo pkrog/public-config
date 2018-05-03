@@ -1,0 +1,12 @@
+[user]
+	name = Pierrick Roger
+	email = pk.roger@icloud.com
+[alias]
+	btree = log --graph  --pretty=format:\"%C(81)%h %C(15)%s %C(196)%D %C(27)%an %C(220)%ar%C(15) %C(34)%aD %C(15)%b\" --decorate --all 
+	tree = log --graph  --pretty=format:\"%C(81)%h %C(15)%s %C(196)%D %C(27)%an %C(220)%ar%C(15) %C(34)%aD\" --decorate --all 
+[push]
+	default = current
+	followTags = true
+[core]
+	autocrlf = input
+	excludesFile = ~/.gitignore

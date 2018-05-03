@@ -1,0 +1,19 @@
+# Vim backup files
+*~
+.DS_Store
+*.log
+.swp
+.*.swp
+
+# Ignore emulator files
+.vagrant
+
+# Ignore Galaxy tools that I'm testing
+tools/biosigner
+tools/isa2w4m
+tools/lcmsmatching
+tools/mtbls-dwnld
+tools/multivariate
+tools/transformation
+tools/univariate
+tools/batch_correction

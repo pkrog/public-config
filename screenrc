@@ -1,0 +1,56 @@
+# Switch off the copyright page
+startup_message off
+
+# Login off (turns off "/var/run/utmp: No such file or directory" error message)
+deflogin off
+
+# Charset / encoding
+defutf8 on
+
+# Colors
+attrcolor b ".I"    # allow bold colors
+term "screen-256color"
+
+# Commands
+bind -c movewindow 0 number 0
+bind -c movewindow 1 number 1
+bind -c movewindow 2 number 2
+bind -c movewindow 3 number 3
+bind -c movewindow 4 number 4
+bind -c movewindow 5 number 5
+bind -c movewindow 6 number 6
+bind -c movewindow 7 number 7
+bind -c movewindow 8 number 8
+bind -c movewindow 9 number 9
+
+# Key shortcuts
+bind - split
+bind | split -v
+bind = command -c movewindow
+# bind c    --> set to "new screen".
+bind j focus down
+bind k focus up
+bind h focus left
+bind l focus right
+#bind p layout prev
+#bind n layout next
+bind C screen bc
+bind L screen links www.goole.com
+bind M screen mutt
+bind P screen python3
+# bind p    --> set to "previous window".
+bind R screen R
+# bind S    --> set to "split".
+bind T screen top
+bind V screen vim
+
+# Status bar
+hardstatus ignore
+#hardstatus alwayslastline "%{= kc}%w%=%H - %D %d %M %0c%{-}"
+
+# Window caption
+caption always # splitonly # by default, used only if there's a split (splitonly).
+caption string "%?%F%{= ${SCREEN_BG_COLOR}${SCREEN_FG_COLOR}}%:%?%n %t on ${HOSTNAME} %L=%45L>[%W]%-17= %D %d %M %0c%{-}"
+
+# Set default scrollback size
+defscrollback 10000

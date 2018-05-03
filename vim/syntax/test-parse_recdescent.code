@@ -1,0 +1,122 @@
+# vi: ft=parse_recdescent
+
+############
+# KEYWORDS #
+############
+
+INCOME:     "INCOME"
+EXPENSE:    "EXPENSE"
+FIELD:      "FIELD"
+
+KEYWORD: INCOME | EXPENSE | FIELD
+
+##########
+# LEXONS #
+##########
+
+INTEGER: /\\d+/
+FLOAT: /\\d+[.]\\d+/
+NUMBER: FLOAT | INTEGER
+OPERATOR: /[*+-]/
+LC_ID: /[a-z]+/
+UC_ID: ...!KEYWORD /[A-Z_-]+/
+STRING: /"/ /[^"]*/ /"/ { $return = $item[2]; }
+FREQUENCY: INTEGER 'm' { \$return = new Accounting::Frequency(\$Accounting::Frequency::MONTH, \$item{INTEGER}); }
+
+###############
+# BASIC RULES #
+###############
+
+date: /\\d{4}/ /-/ /\\d{2}/ /-/ /\\d{2}/ { \$return = new Class::Date({year => \$item[1], month => \$item[3], day => \$item[5]}); }
+
+description: STRING
+person: LC_ID { \$return = \$accounting->createPerson(\$item[-1]); }
+place: UC_ID { \$return = \$accounting->createPlace(\$item[-1]); }
+
+expression: <rulevar: local \$expr>
+expression:
+(
+	NUMBER { \$expr = \$item{NUMBER}; }
+	(OPERATOR NUMBER { \$expr .= \$item{OPERATOR} . \$item{NUMBER}; })(s?)
+	)
+	{ \$return = \$expr; }
+
+########
+# LINE #
+########
+
+amount: expression { \$return = new Accounting::Amount(\$item{expression}); }
+
+person_from: person
+person_to: person
+
+date_end: date
+
+line: <rulevar: local \$to>
+line: <rulevar: local \$end>
+line: <rulevar: local \$freq>
+line:
+#	<skip: q{[ \\t]+}>
+	(
+	date ('..' date_end FREQUENCY { \$end = \$item{date_end}; \$freq = \$item{FREQUENCY}; })(?)
+	person_from
+	('->' person_to { \$to = \$item{person_to}; })(?)
+	place description amount
+#/\\n/
+	{
+		if (defined \$freq) {
+			\$return = [Accounting::LineFactory::createRangeOfLines(\$item{date}, \$end, \$freq, \$arg{type}, \$item{person_from}, \$to, \$item{place}, \$item{description}, \$item{amount})];
+		}
+		else {
+			\$return = [new Accounting::Line(\$arg{type}, \$item{date}, \$item{person_from}, \$to, \$item{place}, \$item{description}, \$item{amount})];
+		}
+	}
+	)
+
+####################
+# SECTION SETTINGS #
+####################
+
+field: FIELD '=' LC_ID { \$return = \$accounting->createField(\$item[-1]); }
+
+settings: <rulevar: local \$settings_list = {}>
+settings:
+	(
+		field { \$settings_list->{field} = \$item{field}; }
+	)(s /,/)
+	{ \$return = \$settings_list; }
+
+###########
+# SECTION #
+###########
+
+section: <rulevar: local \$settings>
+section:
+	'[' "\$arg[0]" (/,/ settings { \$settings = \$item{settings}; } )(?) ']'
+	(line[type => \$arg[0] eq 'INCOME' ? \$Accounting::Line::INCOME : \$Accounting::Line::EXPENSE] {
+	 	foreach my \$line (\@{\$item{line}}) {
+	 		\$line->setField(\$settings->{field}) if defined \$settings->{field};
+	 		\$accounting->addLine(\$line);
+		}
+	})(s?)
+
+########
+# MAIN #
+########
+
+main: (section['INCOME'] | section['EXPENSE'])(s) | <error>
+
+##############
+# START RULE #
+##############
+
+startrule: <rulevar: local \$accounting = \$arg[0]> # create local variable that will be accessible from all subrules.
+startrule: 
+	<skip: qr{(?xs:
+    				(?: \\s+                # WHITESPACE
+					  | \\# [^\\n]* \\n?    # LINE COMMENT
+					)
+			  )*}>
+	(main /\\Z/) | <error: parse error with "\$text">
+
+

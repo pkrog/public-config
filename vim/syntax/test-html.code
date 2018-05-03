@@ -1,0 +1,7 @@
+<!-- vi: se ft=html: -->
+
+<html>
+	<body>
+		<p>Some text in <b>bold</b> and in <i>italic</i>.</p>
+	</body>
+</html>
