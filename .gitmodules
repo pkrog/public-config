@@ -1,0 +1,42 @@
+[submodule "tmux-plugins/tmux-battery"]
+	path = tmux-plugins/tmux-battery
+	url = https://github.com/tmux-plugins/tmux-battery
+[submodule "vim/bundle/vim-tmux"]
+	path = vim/bundle/vim-tmux
+	url = https://github.com/tmux-plugins/vim-tmux
+[submodule "vim/bundle/plantuml-syntax"]
+	path = vim/bundle/plantuml-syntax
+	url = https://github.com/aklt/plantuml-syntax
+[submodule "vim/bundle/vim-markdown"]
+	path = vim/bundle/vim-markdown
+	url = https://github.com/pkrog/vim-markdown
+[submodule "vim/bundle/Smart-Tabs"]
+	path = vim/bundle/Smart-Tabs
+	url = https://github.com/vim-scripts/Smart-Tabs
+[submodule "vim/bundle/keepcase.vim"]
+	path = vim/bundle/keepcase.vim
+	url = https://github.com/vim-scripts/keepcase.vim
+[submodule "vim/bundle/vim-surround"]
+	path = vim/bundle/vim-surround
+	url = https://github.com/tpope/vim-surround
+[submodule "vim/bundle/vim-bbye"]
+	path = vim/bundle/vim-bbye
+	url = https://github.com/moll/vim-bbye
+[submodule "vim/bundle/git-vim"]
+	path = vim/bundle/git-vim
+	url = https://github.com/motemen/git-vim
+[submodule "vim/bundle/vim-perl6"]
+	path = vim/bundle/vim-perl6
+	url = https://github.com/vim-perl/vim-perl6
+[submodule "vim/bundle/taboo.vim"]
+	path = vim/bundle/taboo.vim
+	url = https://github.com/gcmt/taboo.vim
+[submodule "vim/bundle/SyntaxRange"]
+	path = vim/bundle/SyntaxRange
+	url = https://github.com/vim-scripts/SyntaxRange
+[submodule "vim/bundle/vim-perl"]
+	path = vim/bundle/vim-perl
+	url = https://github.com/vim-perl/vim-perl
+[submodule "vim/bundle/vim-markdown-folding"]
+	path = vim/bundle/vim-markdown-folding
+	url = https://github.com/pkrog/vim-markdown-folding
