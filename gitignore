@@ -17,3 +17,5 @@ tools/multivariate
 tools/transformation
 tools/univariate
 tools/batch_correction
+tools/isa-extractor
+tools/isatools-galaxy
