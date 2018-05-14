@@ -38,7 +38,13 @@ all:
 # Install {{{1
 ################################################################
 
-install: office versioning dev screen shell imgbg
+install: office versioning dev screen shell imgbg $(HOME)/.mplayer/config
+
+$(HOME)/.mplayer/config: mplayer.conf $(HOME)/.mplayer
+	ln -sf $(CURDIR)/$< $@
+
+$(HOME)/.mplayer:
+	mkdir -$@
 
 # Uninstall, test and clean {{{1
 ################################################################
@@ -49,7 +55,7 @@ uninstall:
 # Shell {{{1
 ################################################################
 
-shell: $(HOME)/.bashrc $(HOME)/.profile $(HOME)/.bash_profile $(HOME)/.xsessionrc
+shell: $(HOME)/.bashrc $(HOME)/.profile $(HOME)/.bash_profile
 
 $(HOME)/.profile: profile
 	ln -sf $(CURDIR)/$< $@
@@ -57,8 +63,8 @@ $(HOME)/.profile: profile
 $(HOME)/.bash_profile: bash_profile
 	ln -sf $(CURDIR)/$< $@
 
-$(HOME)/.xsessionrc: xsessionrc
-	ln -sf $(CURDIR)/$< $@
+#$(HOME)/.xsessionrc: xsessionrc
+#	ln -sf $(CURDIR)/$< $@
 
 $(HOME)/.bashrc: bashrc
 	ln -sf $(CURDIR)/$< $@
