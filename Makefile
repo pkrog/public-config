@@ -55,7 +55,7 @@ uninstall:
 # Shell {{{1
 ################################################################
 
-shell: $(HOME)/.bashrc $(HOME)/.profile $(HOME)/.bash_profile
+shell: $(HOME)/.bashrc $(HOME)/.profile $(HOME)/.bash_profile $(HOME)/.xsessionrc
 
 $(HOME)/.profile: profile
 	ln -sf $(CURDIR)/$< $@
@@ -63,8 +63,8 @@ $(HOME)/.profile: profile
 $(HOME)/.bash_profile: bash_profile
 	ln -sf $(CURDIR)/$< $@
 
-#$(HOME)/.xsessionrc: xsessionrc
-#	ln -sf $(CURDIR)/$< $@
+$(HOME)/.xsessionrc: xsessionrc
+	ln -sf $(CURDIR)/$< $@
 
 $(HOME)/.bashrc: bashrc
 	ln -sf $(CURDIR)/$< $@
