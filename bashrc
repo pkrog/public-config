@@ -40,6 +40,7 @@ alias xterm="xterm -bg black -cr white -fg white"
 alias ls="ls -Fh"
 alias today='date "+%a %b %e %k:%M %Z W%V"'
 alias wakeupshermy='wakeonlan 00:26:bb:60:51:16'
+alias wakeupschroeder='wakeonlan 3c:07:54:69:be:c0'
 alias mailcheck='while true ; do offlineimap && sleep 30 ; done'
 alias docker-clean='docker rm $(docker ps -aq) ; docker rmi $(docker images -aq)'
 
