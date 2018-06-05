@@ -44,7 +44,7 @@ $(HOME)/.mplayer/config: mplayer.conf $(HOME)/.mplayer
 	ln -sf $(CURDIR)/$< $@
 
 $(HOME)/.mplayer:
-	mkdir -$@
+	mkdir -p $@
 
 # Uninstall, test and clean {{{1
 ################################################################
