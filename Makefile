@@ -27,8 +27,6 @@ ifneq ($(HOSTPICT_LINK),)
   HOSTPICT=$(HOME)/Pictures/bg/$(HOSTNAME).png
 endif
 
-# Sub-directories {{{2
-dirs = vi
 
 # Default target {{{1
 ################################################################
@@ -125,6 +123,10 @@ $(HOME)/tmp/vim.bkp:
 # Screen saver & desktop backgrounds {{{1
 ################################################################
 
+CONVERT=$(which convert)
+ifeq ($(CONVERT),)
+imgbg:
+else
 ifeq ($(HOSTPICT_LINK),)
 imgbg:
 else
@@ -134,6 +136,7 @@ $(HOSTPICT):
 	mkdir -p "$(dir $@)"
 	wget -O - "$(HOSTPICT_LINK)" | convert - $@
 	convert -scale 400 $@ $(dir $@)/$(HOSTNAME)-big.png
+endif
 endif
 
 # Phony targets {{{1
