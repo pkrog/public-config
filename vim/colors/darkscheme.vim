@@ -50,6 +50,7 @@ hi markdownCode             term=NONE       ctermfg=69              cterm=NONE
 hi markdownCodeBlock        term=NONE       ctermfg=69              cterm=NONE
 
 hi Todo                     term=reverse    ctermfg=0   ctermbg=11  cterm=NONE
+hi Debug                    term=reverse    ctermfg=255 ctermbg=12  cterm=NONE
 hi Error                    term=reverse    ctermfg=255 ctermbg=9   cterm=NONE
 
 hi StatusLine               term=reverse    ctermfg=0   ctermbg=153 cterm=NONE

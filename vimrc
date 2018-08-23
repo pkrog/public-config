@@ -56,15 +56,20 @@ autocmd Syntax sh call SyntaxRange#Include('^.*@@@BEGIN_PYTHON@@@.*$', '^.*@@@EN
 
 " FIXME When splitting a window, the highlighting disappears.
 if has("autocmd")
-  " Highlight TODO, FIXME, NOTE, etc everywhere (not only in comments)
+  " Highlight TODO, FIXME, XXX, NOTE, INFO, IDEA, URGENT, DEPRECATED etc everywhere (not only in comments)
   if v:version > 701
     autocmd Syntax * call matchadd('Todo',  '\W\zs\(TODO\|FIXME\|XXX\)')
     autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\)')
-    autocmd Syntax * call matchadd('Error', '\W\zs\(URGENT\|DEPRECATED\)')
+    autocmd Syntax * call matchadd('Error', '\W\zs\(URGENT\|DEPRECATED\|BUG\|ERROR\)')
   endif
 endif
 
-" MAKE {{{1
+" Search & replace {{{1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set hlsearch
+
+" Make {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
  
 autocmd syntax make set list
@@ -170,6 +175,8 @@ cabbrev E Explore
 "    j  cursor down
 "    k  cursor up
 "    l  cursor right
+"    p  paste
+"    P  paste
 "    r  replace current character
 "    R  replace mode
 "    s  DISABLED delete current character and go into insert mode.
@@ -177,10 +184,13 @@ nmap se :SpellCheck en<CR>
 nmap sf :SpellCheck fr<CR>
 nmap si :SpellCheck it<CR>
 nmap sn :se nospell<CR>
+nmap zj :%!python -m json.tool<CR>
 "    S  delete current line and go into insert mode.
 nmap t  gt
 nmap T  gT
+"    x  cut
 nmap zs :source $MYVIMRC<CR>
+nmap zh :noh<CR>
 
 " TODO create a key binding for editing file under cursor and jumping to first occurence of a specified word.
 " Format: `some/path/to/a/file.txt#chapter1`.
