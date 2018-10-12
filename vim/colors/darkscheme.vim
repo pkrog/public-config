@@ -42,7 +42,7 @@ hi Float                    term=NONE       ctermfg=33              cterm=NONE
 hi Character                term=NONE       ctermfg=81              cterm=NONE
 hi String                   term=NONE       ctermfg=36              cterm=NONE
 hi Title                    term=bold       ctermfg=196             cterm=NONE
-hi Folded                   term=NONE       ctermfg=27  ctermbg=0   cterm=NONE
+hi Folded                   term=NONE       ctermfg=51  ctermbg=0   cterm=NONE
 hi fortranTab               term=NONE       ctermfg=255 ctermbg=236 cterm=NONE
 hi SpecialKey               term=NONE       ctermfg=255 ctermbg=236 cterm=NONE
 hi markdownCodeDelimiter    term=NONE       ctermfg=69              cterm=NONE

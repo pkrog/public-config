@@ -184,13 +184,20 @@ nmap se :SpellCheck en<CR>
 nmap sf :SpellCheck fr<CR>
 nmap si :SpellCheck it<CR>
 nmap sn :se nospell<CR>
-nmap zj :%!python -m json.tool<CR>
 "    S  delete current line and go into insert mode.
 nmap t  gt
 nmap T  gT
 "    x  cut
-nmap zs :source $MYVIMRC<CR>
+"    zb Put cursor line at bottom
+"    zc Close a fold.
 nmap zh :noh<CR>
+nmap zj :%!python -m json.tool<CR>
+"    zm Close all folds by one level.
+"    zo Open a fold.
+"    zr Open all folds by one level.
+nmap zs :source $MYVIMRC<CR>
+"    zt Put cursor line at top
+"    zz center cursor line
 
 " TODO create a key binding for editing file under cursor and jumping to first occurence of a specified word.
 " Format: `some/path/to/a/file.txt#chapter1`.
