@@ -36,13 +36,16 @@ all:
 # Install {{{1
 ################################################################
 
-install: office versioning dev screen shell imgbg $(HOME)/.mplayer/config
+install: office versioning dev screen shell imgbg $(HOME)/.mplayer/config $(HOME)/.signature
 
 $(HOME)/.mplayer/config: mplayer.conf $(HOME)/.mplayer
 	ln -sf $(CURDIR)/$< $@
 
 $(HOME)/.mplayer:
 	mkdir -p $@
+
+$(HOME)/.%: %
+	ln -sf $(CURDIR)/$< $@
 
 # Uninstall, test and clean {{{1
 ################################################################
