@@ -197,6 +197,7 @@ nmap zj :%!python -m json.tool<CR>
 "    zr Open all folds by one level.
 nmap zs :source $MYVIMRC<CR>
 "    zt Put cursor line at top
+nmap zT :TabooRename 
 "    zz center cursor line
 
 " TODO create a key binding for editing file under cursor and jumping to first occurence of a specified word.
