@@ -44,6 +44,7 @@ alias wakeupschroeder='wakeonlan 3c:07:54:69:be:c0'
 alias mailcheck='while true ; do offlineimap && sleep 30 ; done'
 alias docker-clean='docker rm $(docker ps -aq) ; docker rmi $(docker images -aq)'
 alias runglx='([[ -d .venv ]] || virtualenv .venv) && R_LIBS_USER= && ./run.sh'
+alias restartmails="brew services restart offlineimap"
 
 # Tunnels
 alias mkdsh-tun='ssh -gNL 30000:192.168.99.100:30000'
