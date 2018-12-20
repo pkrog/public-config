@@ -55,4 +55,4 @@ caption always # splitonly # by default, used only if there's a split (splitonly
 caption string "%?%F%{= ${SCREEN_BG_COLOR}${SCREEN_FG_COLOR}}%:%?%Lw%-= ${HOSTNAME}, %D %d %M %0c%{-}"
 
 # Set default scrollback size
-defscrollback 10000
+defscrollback 100000
