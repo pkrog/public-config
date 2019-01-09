@@ -20,6 +20,10 @@ if has("autocmd")
 	filetype plugin indent on
 endif
 
+" Disable some plug-ins
+let g:pathogen_disabled = []
+"call add(g:pathogen_disabled, 'Smart-Tabs')
+
 " Enable loading of plugins stored inside ~/.vim/bundle folder.
 execute pathogen#infect()
 
@@ -38,6 +42,12 @@ syntax on
 " TODO put the following inside dedicated file
 au BufRead,BufNewFile *.prd set filetype=parse_recdescent
 colorscheme darkscheme
+
+" Print tabs
+set listchars=tab:\|\ 
+set list
+" Override Make filetype definition:
+autocmd FileType make set listchars=tab:\|\ 
 
 " Included syntax highlighting {{{2
 
@@ -76,7 +86,7 @@ autocmd syntax make set list
 autocmd syntax make set listchars=tab:\ \ 
 set autowrite
 
-" FILE AUTOCOMPLETION {{{1
+" File autocompletion {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set wildmenu
@@ -86,13 +96,13 @@ set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
 set wildignore+=.DS_Store,.git,.hg,.svn
 set wildignore+=*~,*.swp,*.tmp
 
-" ENCODING AND FILE FORMAT {{{1
+" Encoding and file format {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set enc=utf-8
 set fileformat=unix
 
-" MISC {{{1
+" Miscellaneous {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Redefine what is selected under cursor when calling `gx`.
@@ -116,7 +126,7 @@ endfunction
 " Display syntax highlighting group in status bar
 "set statusline+=%{SyntaxItem()}
 
-" AUTO-COMMENT {{{1
+" Auto-comment {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Disable auto-comment for all file types
@@ -146,7 +156,7 @@ set errorformat+=[ERROR]\ %f:[%l\\,%c]\ %m      " Maven
 "	\ . '%-C%.%#'
 "execute 'set errorformat+=' . fmt
 
-" SPELL CHECKING {{{1
+" Spell checking {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 for lang in ['fr', 'en', 'it']
