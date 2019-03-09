@@ -73,7 +73,7 @@ $(HOME)/.bashrc: bashrc
 # Screen {{{1
 ################################################################
 
-screen: $(HOME)/.screenrc $(HOME)/.tmux.conf $(HOME)/.tmux-plugins
+screen: $(HOME)/.screenrc $(HOME)/.tmux.conf $(HOME)/.tmux-plugins $(HOME)/bin/get-battery-charge
 
 $(HOME)/.screenrc: screenrc
 	ln -sf $(CURDIR)/$< $@
@@ -82,6 +82,9 @@ $(HOME)/.tmux.conf: tmux.conf
 	ln -sf $(CURDIR)/$< $@
 
 $(HOME)/.tmux-plugins: tmux-plugins
+	ln -sf $(CURDIR)/$< $@
+
+$(HOME)/bin/get-battery-charge: get-battery-charge
 	ln -sf $(CURDIR)/$< $@
 
 # Versioning {{{1

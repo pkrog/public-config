@@ -1,0 +1,25 @@
+#!/bin/bash
+# vi: ft=sh fdm=marker
+
+# Constants {{{1
+################################################################
+
+# uname
+UNAME=$(which uname)
+if [ -z "$UNAME" ] ; then
+	echo "Cannot find uname program." >&2
+	exit 1
+fi
+
+# OS type
+PLATFORM=
+if [ -n "$UNAME" ] ; then
+	PLATFORM=$($UNAME)
+fi
+
+# Main {{{1
+################################################################
+
+if [[ $PLATFORM == Darwin ]] ; then
+	pmset -g batt | grep InternalBattery | sed -E 's/^.*[[:space:]]([[:digit:]]+%).*$/\1/'
+fi
