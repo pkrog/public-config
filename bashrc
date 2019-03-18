@@ -80,6 +80,8 @@ function ps1_host {
 		marcie|marcie.*|marcie-*)           color=220 ; host=marcie ;;
 		rat|rat.*|rat-*)                    color=249 ; host=rat ;;
 		pig|pig.*|pig-*)                    color=212 ; host=pig ;;
+		is228583)                           color=160 ;;
+		is*)                                color=160 ;;
 		*)                                  color=255 ;;
 	esac
 	
