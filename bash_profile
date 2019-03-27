@@ -128,6 +128,13 @@ if [ -x $jh ] ; then
 	fi
 fi
 
+# Linux
+jh=/usr/lib/jvm/default-java
+if [ -d $jh ] ; then
+	export JAVA_HOME=$jh
+fi
+
+# Cygwin
 if [ "$PLATFORM" = "cygwin" ] ; then
 	if [ -z "$JAVA_HOME" ] ; then
 		for java_home_unix in /cygdrive/c/Java/jdk* /cygdrive/c/Program\ Files*/Java/jdk* ; do
