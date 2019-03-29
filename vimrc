@@ -135,8 +135,10 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " Error formats {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-set errorformat& " Reset to default value
-set errorformat^=%A\ %#[javac]\ %f:%l:\ %m,%-Z\ %#[javac]\ %p^,%-C%.%# " Ant/Java. Put at beginning of list, otherwise another takes precedence.
+"set errorformat& " Reset to default value
+set errorformat=%-GDEBUG%.%#                           " Ignore all debug messages, starting by DEBUG.
+set errorformat+=%-G[%.%#INFO%.%#]%.%#                  " Maven info message. We ignore all of them.
+set errorformat+=%A\ %#[javac]\ %f:%l:\ %m,%-Z\ %#[javac]\ %p^,%-C%.%# " Ant/Java. Put at beginning of list, otherwise another takes precedence.
 "set errorformat^=%.%#[exec]%.%#\ %f:%l:%c:\ %m    " R error when run with devtools package
 "set errorformat+=%.%#(from\ %f#%l)%m  " R error when run with devtools package
 set errorformat+=%m\ at\ %f:%l        " R testthat error
