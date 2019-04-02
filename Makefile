@@ -36,16 +36,22 @@ all:
 # Install {{{1
 ################################################################
 
-install: office versioning dev screen shell imgbg $(HOME)/.mplayer/config $(HOME)/.signature
+install: office versioning dev screen shell imgbg $(HOME)/.mplayer/config $(HOME)/.signature $(HOME)/.config/redshift.conf
 
 $(HOME)/.mplayer/config: mplayer.conf $(HOME)/.mplayer
-	ln -sf $(CURDIR)/$< $@
+	ln -sf "$(CURDIR)/$<" "$@"
 
 $(HOME)/.mplayer:
-	mkdir -p $@
+	mkdir -p "$@"
+
+$(HOME)/.config:
+	mkdir "$@"
 
 $(HOME)/.%: %
-	ln -sf $(CURDIR)/$< $@
+	ln -sf "$(CURDIR)/$<" "$@"
+
+$(HOME)/.config/%: %
+	ln -sf "$(CURDIR)/$<" "$@"
 
 # Uninstall, test and clean {{{1
 ################################################################
