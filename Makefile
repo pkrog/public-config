@@ -36,7 +36,7 @@ all:
 # Install {{{1
 ################################################################
 
-install: office versioning dev screen shell imgbg $(HOME)/.mplayer/config $(HOME)/.signature $(HOME)/.config/redshift.conf
+install: office versioning dev screen shell imgbg $(HOME)/.mplayer/config $(HOME)/.signature $(HOME)/.config/redshift.conf x11
 
 $(HOME)/.mplayer/config: mplayer.conf $(HOME)/.mplayer
 	ln -sf "$(CURDIR)/$<" "$@"
@@ -132,6 +132,15 @@ $(HOME)/tmp/vim.swp:
 $(HOME)/tmp/vim.bkp:
 	mkdir -p $@
 
+# X11 {{{1
+################################################################
+
+ifeq ($(PLATFORM),Linux)
+x11: $(HOME)/.XCompose
+else
+x11:
+endif
+
 # Screen saver & desktop backgrounds {{{1
 ################################################################
 
@@ -154,4 +163,4 @@ endif
 # Phony targets {{{1
 ################################################################
 
-.PHONY: install all uninstall office versioning shell dev imgbg
+.PHONY: install all uninstall office versioning shell dev imgbg x11
