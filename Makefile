@@ -96,13 +96,11 @@ $(HOME)/bin/get-battery-charge: get-battery-charge
 # Versioning {{{1
 ################################################################
 
+ifeq ($(PLATFORM),Linux)
+versioning: $(HOME)/.gitconfig $(HOME)/.gitignore $(HOME)/.gitlinux
+else
 versioning: $(HOME)/.gitconfig $(HOME)/.gitignore
-
-$(HOME)/.gitignore: gitignore
-	ln -sf $(CURDIR)/$< $@
-
-$(HOME)/.gitconfig: gitconfig
-	ln -sf $(CURDIR)/$< $@
+endif
 
 # Web {{{1
 ################################################################
