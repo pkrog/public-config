@@ -1,5 +1,7 @@
 <Multi_key> <`> <A> : "À" U00C0
 <Multi_key> <`> <a> : "à" U00E0
+<Multi_key> <i> <A> : "Â" U00C2
+<Multi_key> <i> <a> : "â" U00E2
 <Multi_key> <e> <E> : "É" U00C9
 <Multi_key> <e> <e> : "é" U00E9
 <Multi_key> <`> <E> : "È" U00C8
