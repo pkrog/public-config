@@ -90,8 +90,11 @@ $(HOME)/.tmux.conf: tmux.conf
 $(HOME)/.tmux-plugins: tmux-plugins
 	ln -sf $(CURDIR)/$< $@
 
-$(HOME)/bin/get-battery-charge: get-battery-charge
+$(HOME)/bin/get-battery-charge: get-battery-charge $(HOME)/bin
 	ln -sf $(CURDIR)/$< $@
+
+$(HOME)/bin:
+	mkdir "$@"
 
 # Versioning {{{1
 ################################################################
