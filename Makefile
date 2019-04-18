@@ -50,7 +50,7 @@ $(HOME)/.config:
 $(HOME)/.%: %
 	ln -sf "$(CURDIR)/$<" "$@"
 
-$(HOME)/.config/%: %
+$(HOME)/.config/%: % $(HOME)/.config
 	ln -sf "$(CURDIR)/$<" "$@"
 
 # Uninstall, test and clean {{{1
