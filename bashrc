@@ -65,7 +65,7 @@ fi
 # Prompt {{{1
 ################################################################
 
-if [ -n "$(which msmtp-queue)" -a -d ~/.msmtp.queue ] ; then
+if [ -n "$(which msmtp-queue 2>/dev/null)" -a -d ~/.msmtp.queue ] ; then
 	export PROMPT_COMMAND="if [ -n \"\$(ls ~/.msmtp.queue)\" ] ; then echo $'\e[31mYou have messages waiting in outgoing mail queue.\e[0m' ; fi"
 fi
 
