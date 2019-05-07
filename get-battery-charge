@@ -22,4 +22,8 @@ fi
 
 if [[ $PLATFORM == Darwin ]] ; then
 	pmset -g batt | grep InternalBattery | sed -E 's/^.*[[:space:]]([[:digit:]]+%).*$/\1/'
+elif [[ $PLATFORM == Linux ]] && which acpi >/dev/null 2>/dev/null ; then
+	charge=$(acpi -b | sed 's/^.* \([0-9]\+%\)$/\1/')
+	plugged=$(acpi -a | sed -e 's/^.* \(on\|off\)-line$/\1/' -e 's/on/^/' -e 's/off/v/')
+	echo "$charge$plugged"
 fi
