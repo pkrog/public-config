@@ -1,4 +1,7 @@
 ; vi: ft=gitconfig
 
 [credential]
-	helper = /usr/share/doc/git/contrib/credential/gnome-keyring/git-credential-gnome-keyring
+# On Ubuntu:
+#	helper = /usr/share/doc/git/contrib/credential/gnome-keyring/git-credential-gnome-keyring
+# On ArchLinux with gnome-keyring and libsecret packages installed:
+	helper = /usr/lib/git-core/git-credential-libsecret
