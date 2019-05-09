@@ -80,8 +80,7 @@ function ps1_host {
 		marcie|marcie.*|marcie-*)           color=220 ; host=marcie ;;
 		rat|rat.*|rat-*)                    color=249 ; host=rat ;;
 		pig|pig.*|pig-*)                    color=212 ; host=pig ;;
-		is228583)                           color=160 ;;
-		is*)                                color=160 ;;
+		is*)                                color=160 ; host=$(hostname | sed 's/\.intra\.cea\.fr$//') ;;
 		*)                                  color=255 ;;
 	esac
 	
