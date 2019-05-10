@@ -52,7 +52,9 @@ alias mkglx-tun='ssh -gNL 30700:192.168.99.100:30700'
 alias glx-tun='ssh -gNL 8080:localhost:8080'
 
 # Top {{{2
-if [ "$PLATFORM" = "darwin" ] ; then
+if [ "$PLATFORM" = "Linux" ] ; then
+	alias top='top'
+elif [ "$PLATFORM" = "Darwin" ] ; then
 	if [ "`which top 2>/dev/null`" != "/usr/bin/top" ] ; then
 		# GNU version of top
 		top_head='  PID COMMAND    USER   %CPU   TIME   #TH #PRTS RPRVT  RSHRD  RSIZE   VSIZE #MREGS'
