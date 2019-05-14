@@ -37,7 +37,7 @@ bind l focus right
 #bind p layout prev
 #bind n layout next
 bind C screen bc
-bind L screen links www.goole.com
+bind L screen links https://lite.qwant.com/
 bind M screen mutt
 bind P screen python3
 # bind p    --> set to "previous window".

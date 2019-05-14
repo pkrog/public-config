@@ -108,7 +108,13 @@ endif
 # Web {{{1
 ################################################################
 
-office: $(HOME)/.lynxrc
+office: $(HOME)/.lynxrc $(HOME)/.links/bookmarks.html
+
+$(HOME)/.links/bookmarks.html: links_bookmarks.html $(HOME)/.links
+	ln -sf $(CURDIR)/$< $@
+
+$(HOME)/.links:
+	mkdir -p "$@"
 
 $(HOME)/.lynxrc: lynxrc
 	ln -sf $(CURDIR)/$< $@
