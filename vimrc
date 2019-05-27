@@ -116,7 +116,7 @@ set guioptions=
 
 " Status line (bottom bar)
 set laststatus=2
-set statusline=%n:%<%f%m%=%l,%c-%P%Y%R
+set statusline=%n:%<%f%m%=%{getcwd()},%l,%c-%P%Y%R
 
 function! SyntaxItem()
 "	  return synIDattr(synID(line("."),col("."),1),"name")
