@@ -170,14 +170,15 @@ for lang in ['fr', 'en', 'it']
 endfor
 command! -nargs=1 SpellCheck setlocal spelllang=<args> | set spell
 
-" Complete line {{{1
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-function CompleteLine(c)
-	exec 'normal '.(&cc - strlen(getline('.'))).'A'.nr2char(a:c)
-endfunction
-
-nnoremap <expr> m ':call CompleteLine('.getchar().")\<CR>"
+" " Complete line {{{1
+" """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" " Gives trouble with file system explorer netrw.
+" 
+" function CompleteLine(c)
+" 	exec 'normal '.(&cc - strlen(getline('.'))).'A'.nr2char(a:c)
+" endfunction
+" 
+" nnoremap <expr> m ':call CompleteLine('.getchar().")\<CR>"
 
 " Key bindings {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
