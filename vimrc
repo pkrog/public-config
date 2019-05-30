@@ -139,11 +139,22 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 set errorformat=%-GDEBUG%.%#                           " Ignore all debug messages, starting by DEBUG.
 set errorformat+=%-G[%.%#INFO%.%#]%.%#                  " Maven info message. We ignore all of them.
 set errorformat+=%A\ %#[javac]\ %f:%l:\ %m,%-Z\ %#[javac]\ %p^,%-C%.%# " Ant/Java. Put at beginning of list, otherwise another takes precedence.
+
+set errorformat+=Error\ in\ %f\ (line\ %l)      " Matlab    Note that it requires that the Matlab output be filtered first in order to add the .m extension to the file.
+
+" R
 "set errorformat^=%.%#[exec]%.%#\ %f:%l:%c:\ %m    " R error when run with devtools package
 "set errorformat+=%.%#(from\ %f#%l)%m  " R error when run with devtools package
 set errorformat+=%m\ at\ %f:%l        " R testthat error
-set errorformat+=Error\ in\ %f\ (line\ %l)      " Matlab    Note that it requires that the Matlab output be filtered first in order to add the .m extension to the file.
+set errorformat+=%m\ in\ %f\ (line\ %l\\,\ column\ %c) " BiocCheck error
+set errorformat+=%m\ (%f\\,\ line\ %l):\ %.%#  " BiocCheck error
+set errorformat+=%f\ (line\ %l\\,\ column\ %c) " BiocCheck error
+set errorformat+=%f\ (line\ %l) " BiocCheck error
+set errorformat+=%f:%l\ %m " BiocCheck error
+
 set errorformat+=%m\ at\ %f\ line\ %l.          " Perl
+
+" Java
 set errorformat+=[%.%#WARNING%.%#]\ %f:[%l\\,%c]\ %m    " Maven warning message. `%.%#` is here to catch color codes.
 set errorformat+=[%.%#ERROR%.%#]\ %f:[%l\\,%c]\ %m      " Maven error message. `%.%#` is here to catch color codes.
 "set errorformat-=%f\\|%l\\|\ %m
