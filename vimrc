@@ -154,6 +154,8 @@ set errorformat+=%f:%l\ %m " BiocCheck error
 
 set errorformat+=%m\ at\ %f\ line\ %l.          " Perl
 
+set errorformat+=%f:%l:\ %m " Custom file read with cfile
+
 " Java
 set errorformat+=[%.%#WARNING%.%#]\ %f:[%l\\,%c]\ %m    " Maven warning message. `%.%#` is here to catch color codes.
 set errorformat+=[%.%#ERROR%.%#]\ %f:[%l\\,%c]\ %m      " Maven error message. `%.%#` is here to catch color codes.
