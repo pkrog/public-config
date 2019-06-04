@@ -12,3 +12,5 @@
 	excludesFile = ~/.gitignore
 [include]
 	path = ~/.gitlinux
+[http]
+	sslVerify = false
