@@ -41,7 +41,7 @@ bind L screen links https://lite.qwant.com/
 bind M screen mutt
 bind P screen python3
 # bind p    --> set to "previous window".
-bind R screen R
+bind R screen R --save --restore
 # bind S    --> set to "split".
 bind T screen top
 bind V screen vim
