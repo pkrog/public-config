@@ -2,47 +2,47 @@
 	path = tmux-plugins/tmux-battery
 	url = https://github.com/tmux-plugins/tmux-battery
 [submodule "vim/bundle/vim-tmux"]
-	path = vim/bundle/vim-tmux
+	path = vim/pack/myplugins/start/vim-tmux
 	url = https://github.com/tmux-plugins/vim-tmux
 [submodule "vim/bundle/plantuml-syntax"]
-	path = vim/bundle/plantuml-syntax
+	path = vim/pack/myplugins/start/plantuml-syntax
 	url = https://github.com/aklt/plantuml-syntax
 [submodule "vim/bundle/vim-markdown"]
-	path = vim/bundle/vim-markdown
+	path = vim/pack/myplugins/start/vim-markdown
 	url = https://github.com/pkrog/vim-markdown
 [submodule "vim/bundle/Smart-Tabs"]
-	path = vim/bundle/Smart-Tabs
+	path = vim/pack/myplugins/start/Smart-Tabs
 	url = https://github.com/vim-scripts/Smart-Tabs
 [submodule "vim/bundle/keepcase.vim"]
-	path = vim/bundle/keepcase.vim
+	path = vim/pack/myplugins/start/keepcase.vim
 	url = https://github.com/vim-scripts/keepcase.vim
 [submodule "vim/bundle/vim-surround"]
-	path = vim/bundle/vim-surround
+	path = vim/pack/myplugins/start/vim-surround
 	url = https://github.com/tpope/vim-surround
 [submodule "vim/bundle/vim-bbye"]
-	path = vim/bundle/vim-bbye
+	path = vim/pack/myplugins/start/vim-bbye
 	url = https://github.com/moll/vim-bbye
 [submodule "vim/bundle/git-vim"]
-	path = vim/bundle/git-vim
+	path = vim/pack/myplugins/start/git-vim
 	url = https://github.com/motemen/git-vim
 [submodule "vim/bundle/vim-perl6"]
-	path = vim/bundle/vim-perl6
+	path = vim/pack/myplugins/start/vim-perl6
 	url = https://github.com/vim-perl/vim-perl6
 [submodule "vim/bundle/taboo.vim"]
-	path = vim/bundle/taboo.vim
+	path = vim/pack/myplugins/start/taboo.vim
 	url = https://github.com/gcmt/taboo.vim
 [submodule "vim/bundle/SyntaxRange"]
-	path = vim/bundle/SyntaxRange
+	path = vim/pack/myplugins/start/SyntaxRange
 	url = https://github.com/vim-scripts/SyntaxRange
 [submodule "vim/bundle/vim-perl"]
-	path = vim/bundle/vim-perl
+	path = vim/pack/myplugins/start/vim-perl
 	url = https://github.com/vim-perl/vim-perl
 [submodule "vim/bundle/vim-markdown-folding"]
-	path = vim/bundle/vim-markdown-folding
+	path = vim/pack/myplugins/start/vim-markdown-folding
 	url = https://github.com/pkrog/vim-markdown-folding
 [submodule "vim/bundle/html5"]
-	path = vim/bundle/html5
+	path = vim/pack/myplugins/start/html5
 	url = https://github.com/othree/html5.vim
 [submodule "vim/bundle/SyntaxAttr"]
-	path = vim/bundle/SyntaxAttr
+	path = vim/pack/myplugins/start/SyntaxAttr
 	url = https://github.com/vim-scripts/SyntaxAttr.vim

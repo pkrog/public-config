@@ -12,25 +12,14 @@ set tabstop=4
 set cindent
 set cinoptions=(0,u0,U0)
 
-" Plugins loaded with pathogen {{{1
+
+" Markdown plugin {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Must go first, otherwise markdown-folding plugin won't work.
 if has("autocmd")
 	filetype plugin indent on
 endif
-
-" Disable some plug-ins
-let g:pathogen_disabled = []
-"call add(g:pathogen_disabled, 'Smart-Tabs')
-
-" Enable loading of plugins stored inside ~/.vim/bundle folder.
-execute pathogen#infect()
-
-" Do not run help tags generation, because it creates tag files in each bundle directory `bundle/<module>/doc/ctags`
-" execute pathogen#helptags()
-
-" Markdown {{{2
 
 let g:markdown_fenced_languages = ['apache', 'awk', 'bash=sh', 'basic', 'c', 'cheetah', 'cpp', 'cmake', 'crontab', 'css', 'cuda', 'dosbatch', 'go', 'html', 'java', 'json', 'linux-config=config', 'mail', 'mailcap', 'make', 'matlab', 'muttrc', 'mysql', 'objc', 'perl', 'perl6', 'php', 'pov', 'python', 'r', 'ruby', 'sql', 'svg', 'tmux', 'vb', 'vcard', 'vim', 'xml', 'yaml']
 let g:markdown_fold_style = 'nested'
