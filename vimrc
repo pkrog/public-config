@@ -115,11 +115,13 @@ endfunction
 " Display syntax highlighting group in status bar
 "set statusline+=%{SyntaxItem()}
 
-" Auto-comment {{{1
+" Autocmd {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Disable auto-comment for all file types
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+"autocmd BufRead,BufNewFile *.R setlocal fdm=marker ts=4 et cc=80 tw=80
 
 " Error formats {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
