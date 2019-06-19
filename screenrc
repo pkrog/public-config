@@ -59,3 +59,8 @@ caption string "%?%F%{= ${SCREEN_BG_COLOR}${SCREEN_FG_COLOR}}%:%?%Lw%-= ${HOSTNA
 
 # Set default scrollback size
 defscrollback 100000
+
+# Open windows
+screen vim
+screen mutt
+screen
