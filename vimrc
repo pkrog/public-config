@@ -21,7 +21,7 @@ if has("autocmd")
 	filetype plugin indent on
 endif
 
-let g:markdown_fenced_languages = ['apache', 'awk', 'bash=sh', 'basic', 'c', 'cheetah', 'cpp', 'cmake', 'crontab', 'css', 'cuda', 'dosbatch', 'go', 'html', 'java', 'json', 'linux-config=config', 'mail', 'mailcap', 'make', 'matlab', 'muttrc', 'mysql', 'objc', 'perl', 'perl6', 'php', 'pov', 'python', 'r', 'ruby', 'sql', 'svg', 'tmux', 'vb', 'vcard', 'vim', 'xml', 'yaml']
+let g:markdown_fenced_languages = ['apache', 'awk', 'bash=sh', 'basic', 'c', 'cheetah', 'cpp', 'cmake', 'crontab', 'css', 'cuda', 'dosbatch', 'go', 'html', 'java', 'json', 'linux-config=config', 'mail', 'mailcap', 'make', 'matlab', 'muttrc', 'mysql', 'objc', 'perl', 'perl6', 'php', 'pov', 'python', 'r', 'ruby', 'sql', 'svg', 'tex', 'tmux', 'vb', 'vcard', 'vim', 'xml', 'yaml']
 let g:markdown_fold_style = 'nested'
 
 " Syntax highlighting {{{1
@@ -55,9 +55,8 @@ autocmd Syntax sh call SyntaxRange#Include('^.*@@@BEGIN_PYTHON@@@.*$', '^.*@@@EN
 
 " FIXME When splitting a window, the highlighting disappears.
 if has("autocmd")
-  " Highlight TODO, FIXME, XXX, NOTE, INFO, IDEA, URGENT, DEPRECATED etc everywhere (not only in comments)
   if v:version > 701
-    autocmd Syntax * call matchadd('Todo',  '\W\zs\(TODO\|FIXME\|XXX\)')
+    autocmd Syntax * call matchadd('Todo',  '\W\zs\(TODO\|FIXME\|XXX\|TOREAD\|TO READ\)')
     autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\)')
     autocmd Syntax * call matchadd('Error', '\W\zs\(URGENT\|DEPRECATED\|BUG\|ERROR\|IMPORTANT\)')
   endif
