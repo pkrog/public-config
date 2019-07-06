@@ -22,7 +22,7 @@ fi
 
 if [[ $PLATFORM == Darwin ]] ; then
 	charge=$(pmset -g batt | grep InternalBattery | sed -E 's/^.*[[:space:]]([[:digit:]]+%).*$/\1/')
-	plugged=$(pmset -g batt | grep InternalBattery | sed -E -e 's/^.*InternalBattery[^;]*; *([^;]*) *;.*$/\1/' -e 's/discharging/v/' -e 's/charging|AC attached/^/' -e 's/charged/=/')
+	plugged=$(pmset -g batt | grep InternalBattery | sed -E -e 's/^.*InternalBattery[^;]*; *([^;]*) *;.*$/\1/' -e 's/discharging/v/' -e 's/charging|AC attached/^/' -e 's/charged//')
 elif [[ $PLATFORM == Linux ]] && which acpi >/dev/null 2>/dev/null ; then
 	charge=$(acpi -b | sed 's/^.* \([0-9]\+%\).*$/\1/')
 	plugged=$(acpi -a | sed -e 's/^.* \(on\|off\)-line$/\1/' -e 's/on/^/' -e 's/off/v/')
