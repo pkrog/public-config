@@ -29,7 +29,6 @@ bind -c movewindow 9 number 9
 bind - split
 bind | split -v
 bind = command -c movewindow
-bind ^b eval "chdir $HOME/dev/biodb" "screen -t vim-biodb vim" "screen -t biodb"
 # bind c    --> set to "new screen".
 bind j focus down
 bind k focus up
@@ -43,10 +42,12 @@ bind M screen mutt
 bind P screen -t python bpython
 # bind p    --> set to "previous window".
 bind R screen R --save --restore
-bind ^r eval "chdir $HOME/dev/ratp_line3" "screen -t vim-ratp vim" "screen -t ratp"
 # bind S    --> set to "split".
 bind T screen top
 bind V screen vim
+bind ^b eval "chdir $HOME/dev/biodb" "screen -t vim-biodb vim" "screen -t biodb"
+bind ^h eval "chdir $HOME/dev/rhelpers" "screen -t vim-rhelpers vim" "screen -t helpers"
+bind ^r eval "chdir $HOME/dev/ratp_line3" "screen -t vim-ratp vim" "screen -t ratp"
 
 # Status bar
 hardstatus ignore
