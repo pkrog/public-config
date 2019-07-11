@@ -103,3 +103,11 @@ fi
 
 # Define another key for beginning-of-line (originally C-a), so it doesn't conflict with `screen`. C-b was backward-char (i.e.: cursor left).
 bind '"\C-b":beginning-of-line'
+
+# Conda {{{1
+################################################################################
+
+conda_cfg=/etc/profile.d/conda.sh
+if [[ -f $conda_cfg ]] ; then
+	. $conda_cfg
+fi
