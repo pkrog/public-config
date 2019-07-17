@@ -20,4 +20,5 @@ tools/batch_correction
 tools/isa-extractor
 tools/isatools-galaxy
 tools/nmrml2isa-galaxy
+tools/mineMS2
 venv
