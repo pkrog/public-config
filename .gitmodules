@@ -46,3 +46,6 @@
 [submodule "vim-SyntaxAttr"]
 	path = vim/pack/myplugins/start/SyntaxAttr
 	url = https://github.com/vim-scripts/SyntaxAttr.vim
+[submodule "vim/pack/myplugins/start/Nvim-R"]
+	path = vim/pack/myplugins/start/Nvim-R
+	url = https://github.com/jalvesaq/Nvim-R

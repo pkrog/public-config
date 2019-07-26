@@ -1,5 +1,9 @@
 " vi: fdm=marker
 
+" Coloring R output
+let g:rout_follow_colorscheme = 1
+let g:Rout_more_colors = 1
+
 " Indentation {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
