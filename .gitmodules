@@ -49,3 +49,15 @@
 [submodule "vim/pack/myplugins/start/Nvim-R"]
 	path = vim/pack/myplugins/start/Nvim-R
 	url = https://github.com/jalvesaq/Nvim-R
+[submodule "vim/pack/myplugins/start/vim-fugitive"]
+	path = vim/pack/myplugins/start/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive
+[submodule "vim/pack/myplugins/start/SimpylFold"]
+	path = vim/pack/myplugins/start/SimpylFold
+	url = https://github.com/tmhedberg/SimpylFold
+[submodule "vim/pack/myplugins/start/YouCompleteMe"]
+	path = vim/pack/myplugins/start/YouCompleteMe
+	url = https://github.com/ycm-core/YouCompleteMe
+[submodule "vim/pack/myplugins/start/vimteractive"]
+	path = vim/pack/myplugins/start/vimteractive
+	url = https://github.com/williamjameshandley/vimteractive

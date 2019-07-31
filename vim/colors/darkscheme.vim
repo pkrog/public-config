@@ -58,11 +58,11 @@ hi StatusLineNC             term=reverse    ctermfg=0   ctermbg=245 cterm=NONE
 hi Directory                term=NONE       ctermfg=69              cterm=NONE 
 hi NonText                  term=NONE       ctermfg=57              cterm=NONE
 hi Visual                   term=reverse    ctermfg=0   ctermbg=240 cterm=NONE
-hi ModeMsg                  term=NONE       ctermfg=150             cterm=NONE
-hi ErrorMsg                 term=NONE       ctermfg=1               cterm=NONE
-hi WarningMsg               term=NONE       ctermfg=130             cterm=NONE
-hi LineNr                   term=NONE       ctermfg=255             cterm=NONE
-hi Question                 term=NONE       ctermfg=171             cterm=NONE
+hi ModeMsg                  term=NONE       ctermfg=150 ctermbg=0   cterm=NONE
+hi ErrorMsg                 term=NONE       ctermfg=1   ctermbg=0   cterm=NONE
+hi WarningMsg               term=NONE       ctermfg=130 ctermbg=0   cterm=NONE
+hi LineNr                   term=NONE       ctermfg=255 ctermbg=0   cterm=NONE
+hi Question                 term=NONE       ctermfg=171 ctermbg=0   cterm=NONE
 hi Search                   term=reverse    ctermfg=0   ctermbg=220 cterm=NONE
 hi IncSearch                term=reverse    ctermfg=0   ctermbg=220 cterm=NONE
 

@@ -1,12 +1,15 @@
 " vi: fdm=marker
 
-" Coloring R output
-let g:rout_follow_colorscheme = 1
-let g:Rout_more_colors = 1
+" General settings {{{1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Indentation {{{1
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set encoding=utf-8
+set clipboard=unnamed
+syntax on
+colorscheme darkscheme
+set hlsearch " highlight search
 
+" Indentation
 set noexpandtab
 set copyindent
 set preserveindent
@@ -15,7 +18,6 @@ set shiftwidth=4
 set tabstop=4
 set cindent
 set cinoptions=(0,u0,U0)
-
 
 " Markdown plugin {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -28,13 +30,8 @@ endif
 let g:markdown_fenced_languages = ['apache', 'awk', 'bash=sh', 'basic', 'c', 'cheetah', 'cpp', 'cmake', 'crontab', 'css', 'cuda', 'dosbatch', 'go', 'html', 'java', 'json', 'linux-config=config', 'mail', 'mailcap', 'make', 'matlab', 'muttrc', 'mysql', 'objc', 'perl', 'perl6', 'php', 'pov', 'python', 'r', 'ruby', 'sql', 'svg', 'tex', 'tmux', 'vb', 'vcard', 'vim', 'xml', 'yaml']
 let g:markdown_fold_style = 'nested'
 
-" Syntax highlighting {{{1
+" Tabs and whitespaces highlighting {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-syntax on
-" TODO put the following inside dedicated file
-au BufRead,BufNewFile *.prd set filetype=parse_recdescent
-colorscheme darkscheme
 
 " Print tabs
 set listchars=tab:\|\ 
@@ -42,7 +39,11 @@ set list
 " Override Make filetype definition:
 autocmd FileType make set listchars=tab:\|\ 
 
-" Included syntax highlighting {{{2
+" Whitespaces at end of line
+au BufRead,BufNewFile * match Error /\s\+$/
+
+" Included syntax highlighting {{{1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 autocmd Syntax xml call SyntaxRange#Include('^.*@@@BEGIN_RST@@@.*$', '^.*@@@END_RST@@@.*$', 'rst', 'NonText') " reStructuredText
 autocmd Syntax xml call SyntaxRange#Include('^.*@@@BEGIN_CHEETAH@@@.*$', '^.*@@@END_CHEETAH@@@.*$', 'cheetah', 'NonText')
@@ -66,10 +67,6 @@ if has("autocmd")
   endif
 endif
 
-" Search & replace {{{1
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-set hlsearch
 
 " Make {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -77,6 +74,25 @@ set hlsearch
 autocmd syntax make set list
 autocmd syntax make set listchars=tab:\ \ 
 set autowrite
+
+" Python {{{1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+au BufNewFile,BufRead *.py setl tabstop=4 softtabstop=4 shiftwidth=4 textwidth=80 colorcolumn=80 expandtab autoindent fileformat=unix foldmethod=indent
+
+" R {{{1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Coloring R output
+let g:rout_follow_colorscheme = 1
+let g:Rout_more_colors = 1
+
+au BufRead,BufNewFile *.R setlocal foldmethod=marker tabstop=4 expandtab colorcolumn=80 textwidth=80
+
+" RecDescent parsing {{{1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+au BufRead,BufNewFile *.prd set filetype=parse_recdescent
 
 " File autocompletion {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -106,9 +122,17 @@ set modelines=5
 set backspace=2 "enable backspace
 set guioptions=
 
+
 " Status line (bottom bar)
 set laststatus=2
-set statusline=%n:%<%f%m%=%{getcwd()},%l,%c-%P%Y%R
+set t_Co=256
+if executable("powerline")
+	python3 from powerline.vim import setup as powerline_setup
+	python3 powerline_setup()
+	python3 del powerline_setup
+else
+	set statusline=%n:%<%f%m%=%{getcwd()},%l,%c-%P%Y%R
+endif
 
 function! SyntaxItem()
 "	  return synIDattr(synID(line("."),col("."),1),"name")
@@ -124,7 +148,6 @@ endfunction
 " Disable auto-comment for all file types
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-"autocmd BufRead,BufNewFile *.R setlocal fdm=marker ts=4 et cc=80 tw=80
 
 " Error formats {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -139,6 +162,11 @@ set errorformat+=Error\ in\ %f\ (line\ %l)      " Matlab    Note that it require
 " R
 "set errorformat^=%.%#[exec]%.%#\ %f:%l:%c:\ %m    " R error when run with devtools package
 "set errorformat+=%.%#(from\ %f#%l)%m  " R error when run with devtools package
+
+" R testthat
+" ── 1. Error: annotateMzValues() works correctly. (@BiodbCompounddbConn.R#121)  ─
+set errorformat+=%.%#.\ Error:\ %m\ (@%f#%l)\ %.%#
+
 set errorformat+=%m\ at\ %f:%l        " R testthat error
 set errorformat+=%m\ in\ %f\ (line\ %l\\,\ column\ %c) " BiocCheck error
 set errorformat+=%m\ (%f\\,\ line\ %l):\ %.%#  " BiocCheck error

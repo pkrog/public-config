@@ -1,5 +1,7 @@
 # vi: ft=sh fdm=marker
 
+stty -ixon # Disable CTRL-S shortcut for freezing terminal.
+
 # Source profile {{{1
 ################################################################
 
