@@ -8,6 +8,7 @@ set clipboard=unnamed
 syntax on
 colorscheme darkscheme
 set hlsearch " highlight search
+set fileformat=unix
 
 " Indentation
 set noexpandtab
@@ -19,16 +20,13 @@ set tabstop=4
 set cindent
 set cinoptions=(0,u0,U0)
 
-" Markdown plugin {{{1
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Swap files
+set directory^=~/tmp/vim.swp//
+set backupdir^=~/tmp/vim.bkp//
 
-" Must go first, otherwise markdown-folding plugin won't work.
-if has("autocmd")
-	filetype plugin indent on
-endif
-
-let g:markdown_fenced_languages = ['apache', 'awk', 'bash=sh', 'basic', 'c', 'cheetah', 'cpp', 'cmake', 'crontab', 'css', 'cuda', 'dosbatch', 'go', 'html', 'java', 'json', 'linux-config=config', 'mail', 'mailcap', 'make', 'matlab', 'muttrc', 'mysql', 'objc', 'perl', 'perl6', 'php', 'pov', 'python', 'r', 'ruby', 'sql', 'svg', 'tex', 'tmux', 'vb', 'vcard', 'vim', 'xml', 'yaml']
-let g:markdown_fold_style = 'nested'
+" Paths
+set path+=~/dev/public-notes
+set path+=~/dev/private-notes
 
 " Tabs and whitespaces highlighting {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -70,15 +68,27 @@ endif
 
 " Make {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
- 
+
 autocmd syntax make set list
 autocmd syntax make set listchars=tab:\ \ 
 set autowrite
 
+" Markdown {{{1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Enable markdown plugin foldmethod
+filetype plugin indent on
+
+let g:markdown_fenced_languages = ['apache', 'awk', 'bash=sh', 'basic', 'c', 'cheetah', 'cpp', 'cmake', 'crontab', 'css', 'cuda', 'dosbatch', 'go', 'html', 'java', 'json', 'linux-config=config', 'mail', 'mailcap', 'make', 'matlab', 'muttrc', 'mysql', 'objc', 'perl', 'perl6', 'php', 'pov', 'python', 'r', 'ruby', 'sql', 'svg', 'tex', 'tmux', 'vb', 'vcard', 'vim', 'xml', 'yaml']
+let g:markdown_fold_style = 'nested'
+
+au BufNewFile,BufRead *.md setl textwidth=80 autoindent fileformat=unix formatoptions+=ct
+
 " Python {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-au BufNewFile,BufRead *.py setl tabstop=4 softtabstop=4 shiftwidth=4 textwidth=80 colorcolumn=80 expandtab autoindent fileformat=unix foldmethod=indent
+au BufNewFile,BufRead *.py setl tabstop=4 softtabstop=4 shiftwidth=4 textwidth=0 colorcolumn=80 expandtab autoindent fileformat=unix foldmethod=marker
+" TODO How to enable foldmethod=indent in Python?
 
 " R {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -87,7 +97,7 @@ au BufNewFile,BufRead *.py setl tabstop=4 softtabstop=4 shiftwidth=4 textwidth=8
 let g:rout_follow_colorscheme = 1
 let g:Rout_more_colors = 1
 
-au BufRead,BufNewFile *.R setlocal foldmethod=marker tabstop=4 expandtab colorcolumn=80 textwidth=80
+au BufRead,BufNewFile *.R setlocal foldmethod=marker tabstop=4 expandtab colorcolumn=80 textwidth=0
 
 " RecDescent parsing {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -104,11 +114,6 @@ set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
 set wildignore+=.DS_Store,.git,.hg,.svn
 set wildignore+=*~,*.swp,*.tmp
 
-" Encoding and file format {{{1
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-set enc=utf-8
-set fileformat=unix
 
 " Miscellaneous {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -141,13 +146,6 @@ endfunction
 
 " Display syntax highlighting group in status bar
 "set statusline+=%{SyntaxItem()}
-
-" Autocmd {{{1
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Disable auto-comment for all file types
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-
 
 " Error formats {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -207,6 +205,7 @@ command! -nargs=1 SpellCheck setlocal spelllang=<args> | set spell
 
 " " Complete line {{{1
 " """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" " Copy same character from cursor pos up to colorcolumn value (why not textwidth?)
 " " Gives trouble with file system explorer netrw.
 " 
 " function CompleteLine(c)
@@ -261,14 +260,4 @@ nmap zT :TabooRename
 " Format: `some/path/to/a/file.txt#chapter1`.
 " Use isfname to know which character are allowed in a filename.
 
-" Paths {{{1
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-set path+=~/dev/public-notes
-set path+=~/dev/private-notes
-
-" Swap files {{{1
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-set directory^=~/tmp/vim.swp//
-set backupdir^=~/tmp/vim.bkp//
