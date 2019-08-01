@@ -49,9 +49,6 @@
 [submodule "vim/pack/myplugins/start/Nvim-R"]
 	path = vim/pack/myplugins/start/Nvim-R
 	url = https://github.com/jalvesaq/Nvim-R
-[submodule "vim/pack/myplugins/start/vim-fugitive"]
-	path = vim/pack/myplugins/start/vim-fugitive
-	url = https://github.com/tpope/vim-fugitive
 [submodule "vim/pack/myplugins/start/SimpylFold"]
 	path = vim/pack/myplugins/start/SimpylFold
 	url = https://github.com/tmhedberg/SimpylFold
