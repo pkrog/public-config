@@ -64,4 +64,3 @@ defscrollback 100000
 # Open windows
 screen vim
 screen mutt
-screen
