@@ -38,7 +38,7 @@ set list
 autocmd FileType make set listchars=tab:\|\ 
 
 " Whitespaces at end of line
-au BufRead,BufNewFile * match Error /\s\+$/
+au BufRead,BufNewFile * match Debug /\s\+$/
 
 " Included syntax highlighting {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
