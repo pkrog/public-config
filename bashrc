@@ -37,7 +37,11 @@ alias lock='/System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resour
 #alias vscreen="cd $HOME/dev && screen vim private-notes/todo.md && cd -"
 #alias vtmux="cd $HOME/dev && tmux new-session vim private-notes/todo.md && cd -"
 alias xterm="xterm -bg black -cr white -fg white"
-alias ls="ls -Fh"
+if [[ $TERM == xterm-256color || $TERM == xterm || $TERM == screen-256color ]] ; then
+	alias ls="ls --color"
+else
+	alias ls="ls -F"
+fi
 alias today='date "+%a %b %e %k:%M %Z W%V"'
 alias wakeupshermy='wakeonlan 00:26:bb:60:51:16'
 alias wakeupschroeder='wakeonlan 3c:07:54:69:be:c0'
