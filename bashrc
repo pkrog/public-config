@@ -30,6 +30,79 @@ if [[ -x $file_merge ]] ; then
 	}
 fi
 
+# Terminal color {{{1
+################################################################
+
+if [[ $COLORTERM == xfce4-terminal || $TERM == xterm-256color-italic || $TERM == screen.xterm-256color ]] ; then
+	TERM=xterm-256color
+fi
+
+# ls command {{{1
+################################################################
+
+if [[ $TERM == xterm-256color || $TERM == xterm || $TERM == screen-256color ]] ; then
+	alias ls="ls --color"
+
+	# Set colors here, since when logging inside Linux console (so before starting X), TERM will be set to "linux" when parsing "~/.profile".
+		eval $(dircolors - <<EOF
+# @@@BEGIN_DIRCOLORS@@@
+DIR 38;5;45 # Directories
+.mk 38;5;92
+*Makefile 38;5;92
+*CMakeLists.txt 38;5;92
+*DESCRIPTION 38;5;208
+*LICENSE 38;5;208
+*NAMESPACE 38;5;208
+*README 38;5;208
+*README.md 38;5;208
+*.Rmd 38;5;208
+*.md 38;5;208
+.R  38;5;130
+.py 38;5;76
+.c  38;5;213
+.dockerfile 38;5;39
+*Dockerfile 38;5;39
+*Vagranfile 38;5;39
+EXEC 38;5;226;48;5;237
+.o 38;5;226;48;5;237
+.tar 38;5;220
+.tar.gz 38;5;220
+.tgz 38;5;220
+.zip 38;5;220
+.log 38;5;11
+.tsv 38;5;43
+.csv 38;5;43
+.json 38;5;114
+.yml 38;5;112
+.yaml 38;5;112
+.h5 38;5;200
+.mat 38;5;200
+.html 38;5;217
+.pdf 38;5;219
+.xls 38;5;255;48;5;160
+.doc 38;5;255;48;5;160
+.ppt 38;5;255;48;5;160
+.odt 38;5;202
+.xlsx 38;5;202
+.odp 38;5;202
+.dia 38;5;136
+.docx 38;5;203
+.xlsx 38;5;203
+.pptx 38;5;203
+.jpg  38;5;226
+.png  38;5;226
+.gif  38;5;226
+.tif  38;5;226
+.tiff 38;5;226
+.svg  38;5;221
+.xcf  38;5;223
+# @@@END_DIRCOLORS@@@
+EOF
+		)
+else
+	alias ls="ls -F"
+fi
+
 # Alias {{{1
 ################################################################
 
@@ -37,11 +110,6 @@ alias lock='/System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resour
 #alias vscreen="cd $HOME/dev && screen vim private-notes/todo.md && cd -"
 #alias vtmux="cd $HOME/dev && tmux new-session vim private-notes/todo.md && cd -"
 alias xterm="xterm -bg black -cr white -fg white"
-if [[ $TERM == xterm-256color || $TERM == xterm || $TERM == screen-256color ]] ; then
-	alias ls="ls --color"
-else
-	alias ls="ls -F"
-fi
 alias today='date "+%a %b %e %k:%M %Z W%V"'
 alias wakeupshermy='wakeonlan 00:26:bb:60:51:16'
 alias wakeupschroeder='wakeonlan 3c:07:54:69:be:c0'
@@ -94,13 +162,6 @@ function ps1_host {
 }
 
 export PS1="\u@$(ps1_host):\W$ "
-
-# Terminal color {{{1
-################################################################
-
-if [[ $COLORTERM == xfce4-terminal || $TERM == xterm-256color-italic ]] ; then
-	TERM=xterm-256color
-fi
 
 # Keyboard shortcuts {{{1
 ################################################################
