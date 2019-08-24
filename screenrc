@@ -11,7 +11,7 @@ defutf8 on
 
 # Colors
 attrcolor b ".I"    # allow bold colors
-term "screen-256color"
+#term "screen-256color"
 
 # Commands
 bind -c movewindow 0 number 0
@@ -64,4 +64,3 @@ defscrollback 100000
 # Open windows
 screen vim
 screen mutt
-screen

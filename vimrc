@@ -9,6 +9,17 @@ syntax on
 colorscheme darkscheme
 set hlsearch " highlight search
 set fileformat=unix
+set backspace=2 " Enable backspace.
+set guioptions=
+
+" Modeline
+set modeline " Enable modeline.
+set modelines=5 " Number of lines checked.
+
+" 256 colors
+if !has('gui_running')
+	set t_Co=256
+endif
 
 " Indentation
 set noexpandtab
@@ -28,6 +39,11 @@ set backupdir^=~/tmp/vim.bkp//
 set path+=~/dev/public-notes
 set path+=~/dev/private-notes
 
+" Function for getting syntax highlithing group at current cursor place.
+function! SyntaxItem()
+  return join(map(synstack(line("."), col(".")), 'synIDattr(v:val, "name")'))
+endfunction
+
 " Tabs and whitespaces highlighting {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -38,7 +54,7 @@ set list
 autocmd FileType make set listchars=tab:\|\ 
 
 " Whitespaces at end of line
-au BufRead,BufNewFile * match Error /\s\+$/
+au BufRead,BufNewFile * match Debug /\s\+$/
 
 " Included syntax highlighting {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -48,13 +64,14 @@ autocmd Syntax xml call SyntaxRange#Include('^.*@@@BEGIN_CHEETAH@@@.*$', '^.*@@@
 autocmd Syntax sh call SyntaxRange#Include('^.*@@@BEGIN_SQL@@@.*$', '^.*@@@END_SQL@@@.*$', 'sql', 'NonText')
 autocmd Syntax sh call SyntaxRange#Include('^.*@@@BEGIN_PYTHON@@@.*$', '^.*@@@END_PYTHON@@@.*$', 'python', 'NonText')
 autocmd Syntax r call SyntaxRange#Include('^.*@@@BEGIN_CPP@@@.*$', '^.*@@@END_CPP@@@.*$', 'cpp', 'NonText')
+autocmd Syntax sh call SyntaxRange#Include('^.*@@@BEGIN_DIRCOLORS@@@.*$', '^.*@@@END_DIRCOLORS@@@.*$', 'dircolors', 'NonText')
 " Commented out Markdown syntax highlighting inside XML, because it clashes with reStructuredText:
 "     Error detected while processing /usr/local/Cellar/vim/8.0.1200/share/vim/vim80/syntax/vim.vim:
 "     line  791:
 "     E403: syntax sync: line continuations pattern specified twice
 "autocmd Syntax xml call SyntaxRange#Include('^.*@@@BEGIN_MARKDOWN@@@.*$', '^.*@@@END_MARKDOWN@@@.*$', 'markdown', 'NonText')
 
-" TODO & co highlighting {{{2
+" TODO & co highlighting {{{1
 
 " FIXME When splitting a window, the highlighting disappears.
 if has("autocmd")
@@ -229,15 +246,15 @@ for lang in ['fr', 'en', 'it']
 endfor
 command! -nargs=1 SpellCheck setlocal spelllang=<args> | set spell
 
-" " Complete line {{{1
-" """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" " Copy same character from cursor pos up to colorcolumn value (why not textwidth?)
-" " Gives trouble with file system explorer netrw.
-" 
+" Complete line {{{1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Copy same character from cursor pos up to colorcolumn value (why not textwidth?)
+" Gives trouble with file system explorer netrw.
+
 " function CompleteLine(c)
 " 	exec 'normal '.(&cc - strlen(getline('.'))).'A'.nr2char(a:c)
 " endfunction
-" 
+
 " nnoremap <expr> m ':call CompleteLine('.getchar().")\<CR>"
 
 " Key bindings {{{1
