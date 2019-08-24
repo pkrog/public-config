@@ -40,7 +40,7 @@ fi
 # ls command {{{1
 ################################################################
 
-if [[ $TERM == xterm-256color || $TERM == xterm || $TERM == screen-256color ]] ; then
+if [[ $(uname) == 'Linux' && ( $TERM == xterm-256color || $TERM == xterm || $TERM == screen-256color ) ]] ; then
 	alias ls="ls --color"
 
 	# Set colors here, since when logging inside Linux console (so before starting X), TERM will be set to "linux" when parsing "~/.profile".
