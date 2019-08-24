@@ -22,9 +22,6 @@
 [submodule "vim-bbye"]
 	path = vim/pack/myplugins/start/vim-bbye
 	url = https://github.com/moll/vim-bbye
-[submodule "vim-git"]
-	path = vim/pack/myplugins/start/git-vim
-	url = https://github.com/motemen/git-vim
 [submodule "vim-perl6"]
 	path = vim/pack/myplugins/start/vim-perl6
 	url = https://github.com/vim-perl/vim-perl6
@@ -58,3 +55,9 @@
 [submodule "vim/pack/myplugins/start/vimteractive"]
 	path = vim/pack/myplugins/start/vimteractive
 	url = https://github.com/williamjameshandley/vimteractive
+[submodule "vim/pack/plugins/start/lightline"]
+	path = vim/pack/myplugins/start/lightline
+	url = https://github.com/itchyny/lightline.vim
+[submodule "vim/pack/myplugins/start/vim-fugitive"]
+	path = vim/pack/myplugins/start/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive

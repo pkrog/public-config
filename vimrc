@@ -120,6 +120,11 @@ set wildignore+=.DS_Store,.git,.hg,.svn
 set wildignore+=*~,*.swp,*.tmp
 
 
+" Loading packages earlier {{{1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+packloadall
+
 " Miscellaneous {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -132,11 +137,27 @@ set modelines=5
 set backspace=2 "enable backspace
 set guioptions=
 
-
 " Status line (bottom bar)
 set laststatus=2
-set t_Co=256
-if executable("powerline")
+if ! has('gui_running')
+	set t_Co=256
+endif
+if exists('g:loaded_lightline')
+	" Use Light line plugin.
+	" See https://github.com/itchyny/lightline.vim.
+	if exists('g:loaded_fugitive')
+		let g:lightline = {
+		      \ 'colorscheme': 'powerline',
+		      \ 'active': {
+		      \   'left': [ [ 'mode', 'paste' ],
+		      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+		      \ },
+		      \ 'component_function': {
+		      \   'gitbranch': 'fugitive#head'
+		      \ },
+		      \ }
+	endif
+elseif executable("powerline")
 	python3 from powerline.vim import setup as powerline_setup
 	python3 powerline_setup()
 	python3 del powerline_setup
