@@ -93,7 +93,7 @@ set autowrite
 " Mail {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-autocmd syntax mail setl formatoptions+=a
+"autocmd syntax mail setl formatoptions+=a
 
 " Markdown {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
