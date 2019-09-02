@@ -123,6 +123,10 @@ alias mkdsh-tun='ssh -gNL 30000:192.168.99.100:30000'
 alias mkglx-tun='ssh -gNL 30700:192.168.99.100:30700'
 alias glx-tun='ssh -gNL 8080:localhost:8080'
 
+# Clusters
+alias ssh_cluster='ssh pr228844@is227470.intra.cea.fr'
+alias ssh_factoryia='ssh proger@132.167.191.33'
+
 # Top {{{2
 if [ "$PLATFORM" = "Linux" ] ; then
 	alias top='top'
