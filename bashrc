@@ -58,6 +58,7 @@ DIR 38;5;45 # Directories
 *.md 38;5;208
 .R  38;5;130
 .py 38;5;76
+.cfg 38;5;118 # Like setup.cfg for Python.
 .c  38;5;213
 .dockerfile 38;5;39
 *Dockerfile 38;5;39
