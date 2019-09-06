@@ -60,6 +60,8 @@ DIR 38;5;45 # Directories
 .py 38;5;76
 .cfg 38;5;118 # Like setup.cfg for Python.
 .c  38;5;213
+.sh 38;5;197
+.slurm 38;5;13
 .dockerfile 38;5;39
 *Dockerfile 38;5;39
 *Vagranfile 38;5;39
