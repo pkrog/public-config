@@ -140,7 +140,9 @@ set wildignore+=*~,*.swp,*.tmp
 " Loading packages earlier {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-packloadall
+if v:version >= 800
+	packloadall
+endif
 
 " Miscellaneous {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
