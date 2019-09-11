@@ -71,7 +71,7 @@ autocmd Syntax sh call SyntaxRange#Include('^.*@@@BEGIN_DIRCOLORS@@@.*$', '^.*@@
 "     E403: syntax sync: line continuations pattern specified twice
 "autocmd Syntax xml call SyntaxRange#Include('^.*@@@BEGIN_MARKDOWN@@@.*$', '^.*@@@END_MARKDOWN@@@.*$', 'markdown', 'NonText')
 
-" TODO & co highlighting {{{1
+" Highlighting of TODO, URGENT, NOTE, etc {{{1
 
 " FIXME When splitting a window, the highlighting disappears.
 if has("autocmd")
@@ -118,6 +118,7 @@ au BufNewFile,BufRead *.py setl tabstop=4 softtabstop=4 shiftwidth=4 textwidth=0
 " Coloring R output
 let g:rout_follow_colorscheme = 1
 let g:Rout_more_colors = 1
+let g:R_assign = 0 " Disable replacement of "_" by " <- ".
 
 au BufRead,BufNewFile *.R setlocal foldmethod=marker tabstop=4 expandtab colorcolumn=80 textwidth=0
 
