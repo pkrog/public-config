@@ -32,8 +32,8 @@ set cindent
 set cinoptions=(0,u0,U0)
 
 " Swap files
-set directory^=~/tmp/vim.swp//
-set backupdir^=~/tmp/vim.bkp//
+set directory^=~/.vim/swp//
+set backupdir^=~/.vim/bkp//
 
 " Paths
 set path+=~/dev/public-notes
