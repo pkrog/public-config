@@ -76,8 +76,8 @@ autocmd Syntax sh call SyntaxRange#Include('^.*@@@BEGIN_DIRCOLORS@@@.*$', '^.*@@
 " FIXME When splitting a window, the highlighting disappears.
 if has("autocmd")
   if v:version > 701
-    autocmd Syntax * call matchadd('Todo',  '\W\zs\(TODO\|FIXME\|XXX\|TOREAD\|TO READ\)')
     autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\)')
+    autocmd Syntax * call matchadd('Todo',  '\W\zs\(TODO\|FIXME\|XXX\|TOREAD\|TO READ\|REFACTOR\|TO \?REMOVE\)')
     autocmd Syntax * call matchadd('Error', '\W\zs\(URGENT\|DEPRECATED\|BUG\|ERROR\|IMPORTANT\)')
   endif
 endif
