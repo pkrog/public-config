@@ -120,7 +120,14 @@ let g:rout_follow_colorscheme = 1
 let g:Rout_more_colors = 1
 let g:R_assign = 0 " Disable replacement of "_" by " <- ".
 
-au BufRead,BufNewFile *.R setlocal foldmethod=marker tabstop=4 expandtab colorcolumn=80 textwidth=0
+if has("autocmd")
+  if v:version > 701
+	au BufRead,BufNewFile *.R setlocal foldmethod=marker tabstop=4 expandtab colorcolumn=80 textwidth=0
+
+	" Override syntax default highlighting of numbers. Numbers ([0-9]+) are float in R, not integers.
+	au Syntax r hi! def link rNumber Float
+  endif
+endif
 
 " RecDescent parsing {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
