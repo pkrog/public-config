@@ -72,7 +72,7 @@ DIR 38;5;45 # Directories
 .slurm 38;5;13
 .dockerfile 38;5;39
 *Dockerfile 38;5;39
-*Vagranfile 38;5;39
+*Vagrantfile 38;5;39
 EXEC 38;5;226;48;5;237
 .o 38;5;226;48;5;237
 .tar 38;5;220
