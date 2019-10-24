@@ -104,7 +104,7 @@ filetype plugin indent on
 let g:markdown_fenced_languages = ['apache', 'awk', 'bash=sh', 'basic', 'c', 'cheetah', 'cpp', 'cmake', 'crontab', 'css', 'cuda', 'dosbatch', 'go', 'html', 'java', 'json', 'linux-config=config', 'mail', 'mailcap', 'make', 'matlab', 'muttrc', 'mysql', 'objc', 'perl', 'perl6', 'php', 'pov', 'python', 'r', 'ruby', 'sql', 'svg', 'tex', 'tmux', 'vb', 'vcard', 'vim', 'xml', 'yaml']
 let g:markdown_fold_style = 'nested'
 
-au BufNewFile,BufRead *.md setl textwidth=80 autoindent nocindent fileformat=unix formatoptions+=ct
+au BufNewFile,BufRead *.md setl textwidth=0 autoindent nocindent fileformat=unix formatoptions+=ct
 
 " Python {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
