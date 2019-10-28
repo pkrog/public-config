@@ -38,6 +38,7 @@ set backupdir^=~/.vim/bkp//
 " Paths
 set path+=~/dev/public-notes
 set path+=~/dev/private-notes
+set path+=~/dev/pierricks_notes
 
 " Function for getting syntax highlithing group at current cursor place.
 function! SyntaxItem()
