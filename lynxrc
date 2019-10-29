@@ -4,4 +4,4 @@ SET_COOKIES=TRUE
 PERSISTENT_COOKIES=TRUE
 cookie_file=~/.lynx_cookies
 cookie_save_file=~/.lynx_cookies
-show_color=never
+show_color=always

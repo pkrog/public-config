@@ -108,16 +108,25 @@ endif
 # Web {{{1
 ################################################################
 
-office: $(HOME)/.lynxrc $(HOME)/.links/bookmarks.html
+office: $(HOME)/.lynxrc $(HOME)/.lynx/bookmarks.html $(HOME)/.lynx/lynx.cfg $(HOME)/.links/bookmarks.html
+
+$(HOME)/.lynxrc: lynxrc
+	ln -sf $(CURDIR)/$< $@
+
+$(HOME)/.lynx/lynx.cfg: lynx.cfg $(HOME)/.lynx
+	ln -sf $(CURDIR)/$< $@
+
+$(HOME)/.lynx/bookmarks.html: lynx_bookmarks.html $(HOME)/.lynx
+	ln -sf $(CURDIR)/$< $@
 
 $(HOME)/.links/bookmarks.html: links_bookmarks.html $(HOME)/.links
 	ln -sf $(CURDIR)/$< $@
 
-$(HOME)/.links:
+$(HOME)/.lynx:
 	mkdir -p "$@"
 
-$(HOME)/.lynxrc: lynxrc
-	ln -sf $(CURDIR)/$< $@
+$(HOME)/.links:
+	mkdir -p "$@"
 
 # Development {{{1
 ################################################################
