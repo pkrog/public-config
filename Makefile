@@ -1,13 +1,16 @@
 # -*- Makefile-gmake -*-
 # vi: fdm=marker
 
+BINARIES=view_csv view_tsv get-battery-charge
+ROOT_CFG=signature screenrc tmux.conf tmux-plugins bashrc profile bash_profile xsessionrc
+
 # Constants {{{1
 ################################################################
 
-# OS type {{{2
+# OS type
 PLATFORM=$(shell uname)
 
-# Host name {{{2
+# Host name
 HOSTNAME=$(shell hostname | sed 's/[-.].*$$//')
 
 # Host picture {{{2
@@ -36,21 +39,22 @@ all:
 # Install {{{1
 ################################################################
 
-install: office versioning dev screen shell imgbg $(HOME)/.mplayer/config $(HOME)/.signature $(HOME)/.config/redshift.conf x11
+install: office versioning dev imgbg $(HOME)/.mplayer/config $(HOME)/.config/redshift.conf x11 $(addprefix $(HOME)/.,$(ROOT_CFG)) $(addprefix $(HOME)/bin/,$(BINARIES))
 
-$(HOME)/.mplayer/config: mplayer.conf $(HOME)/.mplayer
-	ln -sf "$(CURDIR)/$<" "$@"
-
-$(HOME)/.mplayer:
+# Folders
+$(addprefix $(HOME)/,.mplayer .config bin):
 	mkdir -p "$@"
-
-$(HOME)/.config:
-	mkdir "$@"
 
 $(HOME)/.%: %
 	ln -sf "$(CURDIR)/$<" "$@"
 
 $(HOME)/.config/%: % $(HOME)/.config
+	ln -sf "$(CURDIR)/$<" "$@"
+
+$(HOME)/bin/%: % $(HOME)/bin
+	ln -sf "$(CURDIR)/$<" $@
+
+$(HOME)/.mplayer/config: mplayer.conf $(HOME)/.mplayer
 	ln -sf "$(CURDIR)/$<" "$@"
 
 # Uninstall, test and clean {{{1
@@ -59,42 +63,6 @@ $(HOME)/.config/%: % $(HOME)/.config
 uninstall:
 	# TODO clean all config files ($(HOME)/.*)
 
-# Shell {{{1
-################################################################
-
-shell: $(HOME)/.bashrc $(HOME)/.profile $(HOME)/.bash_profile $(HOME)/.xsessionrc
-
-$(HOME)/.profile: profile
-	ln -sf $(CURDIR)/$< $@
-
-$(HOME)/.bash_profile: bash_profile
-	ln -sf $(CURDIR)/$< $@
-
-$(HOME)/.xsessionrc: xsessionrc
-	ln -sf $(CURDIR)/$< $@
-
-$(HOME)/.bashrc: bashrc
-	ln -sf $(CURDIR)/$< $@
-
-# Screen {{{1
-################################################################
-
-screen: $(HOME)/.screenrc $(HOME)/.tmux.conf $(HOME)/.tmux-plugins $(HOME)/bin/get-battery-charge
-
-$(HOME)/.screenrc: screenrc
-	ln -sf $(CURDIR)/$< $@
-
-$(HOME)/.tmux.conf: tmux.conf
-	ln -sf $(CURDIR)/$< $@
-
-$(HOME)/.tmux-plugins: tmux-plugins
-	ln -sf $(CURDIR)/$< $@
-
-$(HOME)/bin/get-battery-charge: get-battery-charge $(HOME)/bin
-	ln -sf $(CURDIR)/$< $@
-
-$(HOME)/bin:
-	mkdir "$@"
 
 # Versioning {{{1
 ################################################################
