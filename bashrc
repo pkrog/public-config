@@ -1,5 +1,10 @@
 # vi: fdm=marker
 
+# Constants {{{1
+################################################################
+
+PLATFORM=$(uname)
+
 # Load /etc/bashrc {{{1
 ################################################################
 
@@ -118,7 +123,7 @@ fi
 # Alias {{{1
 ################################################################
 
-alias lock='/System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resources/CGSession -suspend'
+[[ $PLATFORM == Darwin ]] && alias lock='/System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resources/CGSession -suspend'
 #alias vscreen="cd $HOME/dev && screen vim private-notes/todo.md && cd -"
 #alias vtmux="cd $HOME/dev && tmux new-session vim private-notes/todo.md && cd -"
 alias xterm="xterm -bg black -cr white -fg white"
