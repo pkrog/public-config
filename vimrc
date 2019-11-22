@@ -274,7 +274,7 @@ command! -nargs=1 SpellCheck setlocal spelllang=<args> | set spell
 " Correct ambiguous abbreviation on schroeder installation of vim (ambiguity between ELP and Explore).
 cabbrev E Explore 
 
-" Key bindings
+" Normal mode
 "    a  append
 "    A  append at end of line
 "nmap e  :tabedit 
@@ -309,6 +309,9 @@ nmap zs :source $MYVIMRC<CR>
 "    zt Put cursor line at top
 nmap zT :TabooRename 
 "    zz center cursor line
+"    C-a increment number
+nmap <C-z> <C-a>
+"    C-x decrement number
 
 " TODO create a key binding for editing file under cursor and jumping to first occurence of a specified word.
 " Format: `some/path/to/a/file.txt#chapter1`.
