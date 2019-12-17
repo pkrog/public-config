@@ -1,7 +1,7 @@
 # -*- Makefile-gmake -*-
 # vi: fdm=marker
 
-BINARIES=view_csv view_tsv get-battery-charge
+BINARIES=view_csv view_tsv get-battery-charge view_vcal
 ROOT_CFG=signature screenrc tmux.conf tmux-plugins bashrc profile bash_profile xsessionrc
 
 # Constants {{{1
