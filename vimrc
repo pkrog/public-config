@@ -5,7 +5,6 @@
 
 set encoding=utf-8
 set clipboard=unnamed
-syntax on
 colorscheme darkscheme
 set hlsearch " highlight search
 set fileformat=unix
@@ -129,6 +128,7 @@ if has("autocmd")
 	au Syntax r hi! def link rNumber Float
   endif
 endif
+
 
 " RecDescent parsing {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -317,4 +317,7 @@ nmap <C-z> <C-a>
 " Format: `some/path/to/a/file.txt#chapter1`.
 " Use isfname to know which character are allowed in a filename.
 
+" SYNTAX ON {{{1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+syntax on " Set last because of csv.vim plugin

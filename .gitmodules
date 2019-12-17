@@ -67,3 +67,6 @@
 [submodule "vim/pack/myplugins/start/phpfolding.vim"]
 	path = vim/pack/myplugins/start/phpfolding.vim
 	url = https://github.com/rayburgemeestre/phpfolding.vim
+[submodule "vim/pack/myplugins/start/csv.vim"]
+	path = vim/pack/myplugins/start/csv.vim
+	url = https://github.com/chrisbra/csv.vim
