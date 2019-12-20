@@ -64,7 +64,7 @@ hi WarningMsg               term=NONE       ctermfg=130 ctermbg=0   cterm=NONE
 hi LineNr                   term=NONE       ctermfg=255 ctermbg=0   cterm=NONE
 hi Question                 term=NONE       ctermfg=171 ctermbg=0   cterm=NONE
 hi Search                   term=reverse    ctermfg=0   ctermbg=220 cterm=NONE
-hi IncSearch                term=reverse    ctermfg=0   ctermbg=220 cterm=NONE
+hi IncSearch                term=reverse    ctermfg=0   ctermbg=76  cterm=NONE
 
 hi SpellBad                 term=reverse    ctermfg=0   ctermbg=9   cterm=NONE
 hi SpellLocal               term=reverse    ctermfg=0   ctermbg=120 cterm=NONE
