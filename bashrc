@@ -171,7 +171,7 @@ function ps1_host {
 
 	case $host in
 		schroeder|schroeder.*|schroeder-*)  color=99  ; host=schroeder ;;
-		shermy|shermy-*)                    color=136 ; host=shermy ;;
+		shermy|shermy.*|shermy-*)                    color=136 ; host=shermy ;;
 		patty|patty.*|patty-*)              color=124 ; host=patty ;;
 		marcie|marcie.*|marcie-*)           color=220 ; host=marcie ;;
 		rat|rat.*|rat-*)                    color=249 ; host=rat ;;
@@ -179,7 +179,7 @@ function ps1_host {
 		is*)                                color=160 ; host=$(hostname | sed 's/\.intra\.cea\.fr$//') ;;
 		*)                                  color=255 ;;
 	esac
-	
+
 	echo \\[$'\e[38;5;'$color'm'\\]$host\\[$'\e[0m'\\]
 }
 
