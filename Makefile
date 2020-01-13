@@ -2,7 +2,7 @@
 # vi: fdm=marker
 
 BINARIES=view_csv view_tsv get-battery-charge view_vcal
-ROOT_CFG=signature screenrc tmux.conf tmux-plugins bashrc profile bash_profile xsessionrc
+ROOT_CFG=signature screenrc tmux.conf tmux-plugins bashrc zshrc profile bash_profile zprofile xsessionrc
 
 # Constants {{{1
 ################################################################
@@ -46,6 +46,18 @@ $(addprefix $(HOME)/,.mplayer .config bin):
 	mkdir -p "$@"
 
 $(HOME)/.%: %
+	ln -sf "$(CURDIR)/$<" "$@"
+
+$(HOME)/.bashrc: shellrc
+	ln -sf "$(CURDIR)/$<" "$@"
+
+$(HOME)/.zshrc: shellrc
+	ln -sf "$(CURDIR)/$<" "$@"
+
+$(HOME)/.bash_profile: profile 
+	ln -sf "$(CURDIR)/$<" "$@"
+
+$(HOME)/.zprofile: profile 
 	ln -sf "$(CURDIR)/$<" "$@"
 
 $(HOME)/.config/%: % $(HOME)/.config
