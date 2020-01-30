@@ -159,6 +159,7 @@ endif
 " Redefine what is selected under cursor when calling `gx`.
 "let g:netrw_gx="<cWORD>"
 "let g:netrw_browsex_viewer="open"
+let g:netrw_special_syntax=1
 
 set modeline
 set modelines=5
