@@ -73,15 +73,11 @@ autocmd Syntax sh call SyntaxRange#Include('^.*@@@BEGIN_DIRCOLORS@@@.*$', '^.*@@
 
 " Highlighting of TODO, URGENT, NOTE, etc {{{1
 
-" FIXME When splitting a window, the highlighting disappears.
 if has("autocmd")
-  if v:version > 701
-    autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\)')
-    autocmd Syntax * call matchadd('Todo',  '\W\zs\(TODO\|FIXME\|XXX\|TOREAD\|TO READ\|REFACTOR\|TO \?REMOVE\)')
-    autocmd Syntax * call matchadd('Error', '\W\zs\(URGENT\|DEPRECATED\|BUG\|ERROR\|IMPORTANT\)')
-  endif
+	au BufWinEnter * let w:m1=matchadd('Error', 'BROKEN\|BUG\|URGENT\|IMPORTANT\|ERROR\|DEPRECATED', -1)
+	au BufWinEnter * let w:m1=matchadd('Debug', 'NOTE\|INFO\|IDEA', -1)
+	au BufWinEnter * let w:m1=matchadd('Todo', 'HACK\|TO \?READ\|EXPLAIN\|TO \?REMOVE\|REFACTOR\|REVIEW\|FIXME\|XXX\|TODO', -1)
 endif
-
 
 " Make {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -101,7 +97,7 @@ set autowrite
 " Enable markdown plugin foldmethod
 filetype plugin indent on
 
-let g:markdown_fenced_languages = ['apache', 'awk', 'bash=sh', 'basic', 'c', 'cheetah', 'cpp', 'cmake', 'crontab', 'css', 'cuda', 'dosbatch', 'go', 'html', 'java', 'json', 'linux-config=config', 'mail', 'mailcap', 'make', 'matlab', 'muttrc', 'mysql', 'objc', 'perl', 'perl6', 'php', 'pov', 'python', 'r', 'ruby', 'sql', 'svg', 'tex', 'tmux', 'vb', 'vcard', 'vim', 'xml', 'yaml']
+let g:markdown_fenced_languages = ['apache', 'awk', 'bash=sh', 'basic', 'c', 'cfg', 'cheetah', 'cpp', 'cmake', 'crontab', 'css', 'cuda', 'dosbatch', 'go', 'html', 'java', 'json', 'linux-config=config', 'mail', 'mailcap', 'make', 'matlab', 'muttrc', 'mysql', 'objc', 'perl', 'perl6', 'php', 'pov', 'python', 'r', 'ruby', 'sql', 'svg', 'tex', 'tmux', 'vb', 'vcard', 'vim', 'xml', 'yaml']
 let g:markdown_fold_style = 'nested'
 
 au BufNewFile,BufRead *.md setl textwidth=0 autoindent nocindent fileformat=unix formatoptions+=ct
@@ -109,7 +105,7 @@ au BufNewFile,BufRead *.md setl textwidth=0 autoindent nocindent fileformat=unix
 " Python {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-au BufNewFile,BufRead *.py setl tabstop=4 softtabstop=4 shiftwidth=4 textwidth=0 colorcolumn=80 expandtab autoindent fileformat=unix foldmethod=marker
+au BufNewFile,BufRead *.py setl tabstop=4 softtabstop=4 shiftwidth=4 textwidth=0 colorcolumn=80 expandtab autoindent fileformat=unix
 " TODO How to enable foldmethod=indent in Python?
 
 " R {{{1
