@@ -84,12 +84,6 @@ if has('autocmd')
 	filetype plugin indent on
 endif
 
-"let g:vim_markdown_fenced_languages = ['apache', 'awk', 'bash=sh', 'basic', 'c', 'cfg', 'cheetah', 'cpp', 'cmake', 'crontab', 'css', 'cuda', 'dosbatch', 'go', 'html', 'java', 'json', 'linux-config=config', 'mail', 'mailcap', 'make', 'matlab', 'muttrc', 'mysql', 'objc', 'perl', 'perl6', 'php', 'pov', 'python', 'r', 'ruby', 'sql', 'svg', 'tex', 'tmux', 'vb', 'vcard', 'vim', 'xml', 'yaml']
-"let g:vim_markdown_fenced_languages = ['bash=sh']
-"let g:markdown_fold_style = 'nested'
-
-"au BufNewFile,BufRead *.md setl textwidth=0 autoindent nocindent fileformat=unix formatoptions+=ct
-
 " Perl {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -321,10 +315,6 @@ autocmd Syntax sh call SyntaxRange#Include('^.*@@@BEGIN_SQL@@@.*$', '^.*@@@END_S
 autocmd Syntax sh call SyntaxRange#Include('^.*@@@BEGIN_PYTHON@@@.*$', '^.*@@@END_PYTHON@@@.*$', 'python', 'NonText')
 autocmd Syntax r call SyntaxRange#Include('^.*@@@BEGIN_CPP@@@.*$', '^.*@@@END_CPP@@@.*$', 'cpp', 'NonText')
 autocmd Syntax sh call SyntaxRange#Include('^.*@@@BEGIN_DIRCOLORS@@@.*$', '^.*@@@END_DIRCOLORS@@@.*$', 'dircolors', 'NonText')
-"autocmd Syntax markdown call SyntaxRange#Include('^```bash$', '^```$', 'sh', 'NonText')
-"autocmd Syntax markdown call SyntaxRange#Include('^```python$', '^```$', 'python', 'NonText')
-"autocmd Syntax markdown call SyntaxRange#Include('^```perl6\?$', '^```$', 'perl', 'NonText')
-"autocmd Syntax markdown call SyntaxRange#Include('^```php\?$', '^```$', 'php', 'NonText')
 " Commented out Markdown syntax highlighting inside XML, because it clashes with reStructuredText:
 "     Error detected while processing /usr/local/Cellar/vim/8.0.1200/share/vim/vim80/syntax/vim.vim:
 "     line  791:
