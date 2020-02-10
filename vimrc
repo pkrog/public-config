@@ -56,21 +56,6 @@ autocmd FileType make set listchars=tab:\|\
 " Whitespaces at end of line
 au BufRead,BufNewFile * match Debug /\s\+$/
 
-" Included syntax highlighting {{{1
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-autocmd Syntax xml call SyntaxRange#Include('^.*@@@BEGIN_RST@@@.*$', '^.*@@@END_RST@@@.*$', 'rst', 'NonText') " reStructuredText
-autocmd Syntax xml call SyntaxRange#Include('^.*@@@BEGIN_CHEETAH@@@.*$', '^.*@@@END_CHEETAH@@@.*$', 'cheetah', 'NonText')
-autocmd Syntax sh call SyntaxRange#Include('^.*@@@BEGIN_SQL@@@.*$', '^.*@@@END_SQL@@@.*$', 'sql', 'NonText')
-autocmd Syntax sh call SyntaxRange#Include('^.*@@@BEGIN_PYTHON@@@.*$', '^.*@@@END_PYTHON@@@.*$', 'python', 'NonText')
-autocmd Syntax r call SyntaxRange#Include('^.*@@@BEGIN_CPP@@@.*$', '^.*@@@END_CPP@@@.*$', 'cpp', 'NonText')
-autocmd Syntax sh call SyntaxRange#Include('^.*@@@BEGIN_DIRCOLORS@@@.*$', '^.*@@@END_DIRCOLORS@@@.*$', 'dircolors', 'NonText')
-" Commented out Markdown syntax highlighting inside XML, because it clashes with reStructuredText:
-"     Error detected while processing /usr/local/Cellar/vim/8.0.1200/share/vim/vim80/syntax/vim.vim:
-"     line  791:
-"     E403: syntax sync: line continuations pattern specified twice
-"autocmd Syntax xml call SyntaxRange#Include('^.*@@@BEGIN_MARKDOWN@@@.*$', '^.*@@@END_MARKDOWN@@@.*$', 'markdown', 'NonText')
-
 " Highlighting of TODO, URGENT, NOTE, etc {{{1
 
 if has("autocmd")
@@ -95,12 +80,20 @@ set autowrite
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Enable markdown plugin foldmethod
-filetype plugin indent on
+if has('autocmd')
+	filetype plugin indent on
+endif
 
-let g:markdown_fenced_languages = ['apache', 'awk', 'bash=sh', 'basic', 'c', 'cfg', 'cheetah', 'cpp', 'cmake', 'crontab', 'css', 'cuda', 'dosbatch', 'go', 'html', 'java', 'json', 'linux-config=config', 'mail', 'mailcap', 'make', 'matlab', 'muttrc', 'mysql', 'objc', 'perl', 'perl6', 'php', 'pov', 'python', 'r', 'ruby', 'sql', 'svg', 'tex', 'tmux', 'vb', 'vcard', 'vim', 'xml', 'yaml']
-let g:markdown_fold_style = 'nested'
+"let g:vim_markdown_fenced_languages = ['apache', 'awk', 'bash=sh', 'basic', 'c', 'cfg', 'cheetah', 'cpp', 'cmake', 'crontab', 'css', 'cuda', 'dosbatch', 'go', 'html', 'java', 'json', 'linux-config=config', 'mail', 'mailcap', 'make', 'matlab', 'muttrc', 'mysql', 'objc', 'perl', 'perl6', 'php', 'pov', 'python', 'r', 'ruby', 'sql', 'svg', 'tex', 'tmux', 'vb', 'vcard', 'vim', 'xml', 'yaml']
+"let g:vim_markdown_fenced_languages = ['bash=sh']
+"let g:markdown_fold_style = 'nested'
 
-au BufNewFile,BufRead *.md setl textwidth=0 autoindent nocindent fileformat=unix formatoptions+=ct
+"au BufNewFile,BufRead *.md setl textwidth=0 autoindent nocindent fileformat=unix formatoptions+=ct
+
+" Perl {{{1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:perl_fold = 1
 
 " Python {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -318,3 +311,23 @@ nmap <C-z> <C-a>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 syntax on " Set last because of csv.vim plugin
+
+" Included syntax highlighting {{{1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+autocmd Syntax xml call SyntaxRange#Include('^.*@@@BEGIN_RST@@@.*$', '^.*@@@END_RST@@@.*$', 'rst', 'NonText') " reStructuredText
+autocmd Syntax xml call SyntaxRange#Include('^.*@@@BEGIN_CHEETAH@@@.*$', '^.*@@@END_CHEETAH@@@.*$', 'cheetah', 'NonText')
+autocmd Syntax sh call SyntaxRange#Include('^.*@@@BEGIN_SQL@@@.*$', '^.*@@@END_SQL@@@.*$', 'sql', 'NonText')
+autocmd Syntax sh call SyntaxRange#Include('^.*@@@BEGIN_PYTHON@@@.*$', '^.*@@@END_PYTHON@@@.*$', 'python', 'NonText')
+autocmd Syntax r call SyntaxRange#Include('^.*@@@BEGIN_CPP@@@.*$', '^.*@@@END_CPP@@@.*$', 'cpp', 'NonText')
+autocmd Syntax sh call SyntaxRange#Include('^.*@@@BEGIN_DIRCOLORS@@@.*$', '^.*@@@END_DIRCOLORS@@@.*$', 'dircolors', 'NonText')
+"autocmd Syntax markdown call SyntaxRange#Include('^```bash$', '^```$', 'sh', 'NonText')
+"autocmd Syntax markdown call SyntaxRange#Include('^```python$', '^```$', 'python', 'NonText')
+"autocmd Syntax markdown call SyntaxRange#Include('^```perl6\?$', '^```$', 'perl', 'NonText')
+"autocmd Syntax markdown call SyntaxRange#Include('^```php\?$', '^```$', 'php', 'NonText')
+" Commented out Markdown syntax highlighting inside XML, because it clashes with reStructuredText:
+"     Error detected while processing /usr/local/Cellar/vim/8.0.1200/share/vim/vim80/syntax/vim.vim:
+"     line  791:
+"     E403: syntax sync: line continuations pattern specified twice
+"autocmd Syntax xml call SyntaxRange#Include('^.*@@@BEGIN_MARKDOWN@@@.*$', '^.*@@@END_MARKDOWN@@@.*$', 'markdown', 'NonText')
+
