@@ -315,6 +315,15 @@ autocmd Syntax sh call SyntaxRange#Include('^.*@@@BEGIN_SQL@@@.*$', '^.*@@@END_S
 autocmd Syntax sh call SyntaxRange#Include('^.*@@@BEGIN_PYTHON@@@.*$', '^.*@@@END_PYTHON@@@.*$', 'python', 'NonText')
 autocmd Syntax r call SyntaxRange#Include('^.*@@@BEGIN_CPP@@@.*$', '^.*@@@END_CPP@@@.*$', 'cpp', 'NonText')
 autocmd Syntax sh call SyntaxRange#Include('^.*@@@BEGIN_DIRCOLORS@@@.*$', '^.*@@@END_DIRCOLORS@@@.*$', 'dircolors', 'NonText')
+autocmd Syntax markdown call SyntaxRange#Include('^```\(ba\)\?sh$', '^```$', 'sh', 'NonText')
+autocmd Syntax markdown call SyntaxRange#Include('^```\(cfg\|conf\)$', '^```$', 'conf', 'NonText')
+autocmd Syntax markdown call SyntaxRange#Include('^```css$', '^```$', 'css', 'NonText')
+autocmd Syntax markdown call SyntaxRange#Include('^```html$', '^```$', 'html', 'NonText')
+autocmd Syntax markdown call SyntaxRange#Include('^```\(js\|javascript\)$', '^```$', 'javascript', 'NonText')
+autocmd Syntax markdown call SyntaxRange#Include('^```perl6\?$', '^```$', 'perl', 'NonText')
+autocmd Syntax markdown call SyntaxRange#Include('^```php$', '^```$', 'php', 'NonText')
+autocmd Syntax markdown call SyntaxRange#Include('^```python$', '^```$', 'python', 'NonText')
+autocmd Syntax markdown call SyntaxRange#Include('^```sql$', '^```$', 'sql', 'NonText')
 " Commented out Markdown syntax highlighting inside XML, because it clashes with reStructuredText:
 "     Error detected while processing /usr/local/Cellar/vim/8.0.1200/share/vim/vim80/syntax/vim.vim:
 "     line  791:
