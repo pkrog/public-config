@@ -56,7 +56,7 @@ hi Error                    term=reverse    ctermfg=255 ctermbg=9   cterm=NONE
 hi StatusLine               term=reverse    ctermfg=0   ctermbg=153 cterm=NONE
 hi StatusLineNC             term=reverse    ctermfg=0   ctermbg=245 cterm=NONE
 hi Directory                term=NONE       ctermfg=69              cterm=NONE 
-hi NonText                  term=NONE       ctermfg=57              cterm=NONE
+hi NonText                  term=NONE       ctermfg=99              cterm=NONE
 hi Visual                   term=reverse    ctermfg=0   ctermbg=240 cterm=NONE
 hi ModeMsg                  term=NONE       ctermfg=150 ctermbg=0   cterm=NONE
 hi ErrorMsg                 term=NONE       ctermfg=1   ctermbg=0   cterm=NONE

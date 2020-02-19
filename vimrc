@@ -103,9 +103,12 @@ let g:rout_follow_colorscheme = 1
 let g:Rout_more_colors = 1
 let g:R_assign = 0 " Disable replacement of "_" by " <- ".
 
+" Enable auto syntax folding
+let r_syntax_folding = 1
+
 if has("autocmd")
   if v:version > 701
-	au BufRead,BufNewFile *.R setlocal foldmethod=marker tabstop=4 expandtab colorcolumn=80 textwidth=0
+	au BufRead,BufNewFile *.R setlocal tabstop=4 expandtab colorcolumn=80 textwidth=0
 
 	" Override syntax default highlighting of numbers. Numbers ([0-9]+) are float in R, not integers.
 	au Syntax r hi! def link rNumber Float
@@ -324,6 +327,7 @@ autocmd Syntax markdown call SyntaxRange#Include('^```perl6\?$', '^```$', 'perl'
 autocmd Syntax markdown call SyntaxRange#Include('^```php$', '^```$', 'php', 'NonText')
 autocmd Syntax markdown call SyntaxRange#Include('^```python$', '^```$', 'python', 'NonText')
 autocmd Syntax markdown call SyntaxRange#Include('^```sql$', '^```$', 'sql', 'NonText')
+autocmd Syntax markdown call SyntaxRange#Include('^```yaml$', '^```$', 'yaml', 'NonText')
 " Commented out Markdown syntax highlighting inside XML, because it clashes with reStructuredText:
 "     Error detected while processing /usr/local/Cellar/vim/8.0.1200/share/vim/vim80/syntax/vim.vim:
 "     line  791:
