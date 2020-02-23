@@ -59,9 +59,10 @@ au BufRead,BufNewFile * match Debug /\s\+$/
 " Highlighting of TODO, URGENT, NOTE, etc {{{1
 
 if has("autocmd")
-	au BufWinEnter * let w:m1=matchadd('Error', 'BROKEN\|BUG\|URGENT\|IMPORTANT\|ERROR\|DEPRECATED', -1)
-	au BufWinEnter * let w:m1=matchadd('Debug', 'NOTE\|INFO\|IDEA', -1)
-	au BufWinEnter * let w:m1=matchadd('Todo', 'HACK\|TO \?READ\|EXPLAIN\|TO \?REMOVE\|REFACTOR\|REVIEW\|FIXME\|XXX\|TODO', -1)
+	au BufWinEnter * let w:m1=matchadd('Error', 'TODO \(BROKEN\|BUG\|URGENT\|IMPORTANT\|ERROR\|DEPRECATED\|HACK\|FIXME\)', -1)
+	au BufWinEnter * let w:m1=matchadd('Debug', 'NOTE\|INFO\|IDEA\|XXX', -1)
+	au BufWinEnter * let w:m1=matchadd('Todo', '\(TODO \(READ\|EXPLAIN\|REMOVE\|REFACTOR\|REVIEW\)\)\|TODO', -1)
+	" Test: TODO, TODO REMOVE, TODO URGENT, NOTE, TODO ERROR, TODO REFACTOR
 endif
 
 " Make {{{1
@@ -197,6 +198,14 @@ set errorformat+=%-G[%.%#INFO%.%#]%.%#                  " Maven info message. We
 set errorformat+=%A\ %#[javac]\ %f:%l:\ %m,%-Z\ %#[javac]\ %p^,%-C%.%# " Ant/Java. Put at beginning of list, otherwise another takes precedence.
 
 set errorformat+=Error\ in\ %f\ (line\ %l)      " Matlab    Note that it requires that the Matlab output be filtered first in order to add the .m extension to the file.
+
+" PHP
+" 1) DbAccessTest::test_01_resetDb
+" ParseError: syntax error, unexpected ';', expecting ']'
+" 
+" /home/pr228844/dev/exhalobase/site/src/ExhalobaseAccess.php:152
+" /home/pr228844/dev/exhalobase/tests/20_DbAccessTest.php:44
+set errorformat+=%f:%l
 
 " R
 "set errorformat^=%.%#[exec]%.%#\ %f:%l:%c:\ %m    " R error when run with devtools package
