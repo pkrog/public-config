@@ -335,6 +335,7 @@ autocmd Syntax markdown call SyntaxRange#Include('^```\(js\|javascript\)$', '^``
 autocmd Syntax markdown call SyntaxRange#Include('^```perl6\?$', '^```$', 'perl', 'NonText')
 autocmd Syntax markdown call SyntaxRange#Include('^```php$', '^```$', 'php', 'NonText')
 autocmd Syntax markdown call SyntaxRange#Include('^```python$', '^```$', 'python', 'NonText')
+autocmd Syntax markdown call SyntaxRange#Include('^```ruby$', '^```$', 'ruby', 'NonText')
 autocmd Syntax markdown call SyntaxRange#Include('^```sql$', '^```$', 'sql', 'NonText')
 autocmd Syntax markdown call SyntaxRange#Include('^```yaml$', '^```$', 'yaml', 'NonText')
 " Commented out Markdown syntax highlighting inside XML, because it clashes with reStructuredText:
