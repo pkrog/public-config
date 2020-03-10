@@ -67,3 +67,6 @@
 [submodule "vim/pack/myplugins/start/vim-markdown-folding"]
 	path = vim/pack/myplugins/start/vim-markdown-folding
 	url = https://github.com/masukomi/vim-markdown-folding
+[submodule "vim/pack/myplugins/start/vim-commentary"]
+	path = vim/pack/myplugins/start/vim-commentary
+	url = https://github.com/tpope/vim-commentary
