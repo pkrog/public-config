@@ -57,12 +57,13 @@ autocmd FileType make set listchars=tab:\|\
 au BufRead,BufNewFile * match Debug /\s\+$/
 
 " Highlighting of TODO, URGENT, NOTE, etc {{{1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 if has("autocmd")
 	au BufWinEnter * let w:m1=matchadd('Error', 'TODO \(BROKEN\|BUG\|URGENT\|IMPORTANT\|ERROR\|DEPRECATED\|HACK\|FIXME\)', -1)
 	au BufWinEnter * let w:m1=matchadd('Debug', 'NOTE\|INFO\|IDEA\|XXX', -1)
 	au BufWinEnter * let w:m1=matchadd('Todo', '\(TODO \(READ\|EXPLAIN\|REMOVE\|REFACTOR\|REVIEW\)\)\|TODO', -1)
-	" Test: TODO, TODO REMOVE, TODO URGENT, NOTE, TODO ERROR, TODO REFACTOR
+	" Test: TODO, TODO READ, TODO URGENT, TODO ERROR, TODO REFACTOR, NOTE
 endif
 
 " Make {{{1
@@ -76,14 +77,6 @@ set autowrite
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "autocmd syntax mail setl formatoptions+=a
-
-" Markdown {{{1
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Enable markdown plugin foldmethod
-if has('autocmd')
-	filetype plugin indent on
-endif
 
 " Perl {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -313,7 +306,7 @@ nmap <C-z> <C-a>
 " Format: `some/path/to/a/file.txt#chapter1`.
 " Use isfname to know which character are allowed in a filename.
 
-" SYNTAX ON {{{1
+" Syntax on {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 syntax on " Set last because of csv.vim plugin
@@ -327,23 +320,34 @@ autocmd Syntax sh call SyntaxRange#Include('^.*@@@BEGIN_SQL@@@.*$', '^.*@@@END_S
 autocmd Syntax sh call SyntaxRange#Include('^.*@@@BEGIN_PYTHON@@@.*$', '^.*@@@END_PYTHON@@@.*$', 'python', 'NonText')
 autocmd Syntax r call SyntaxRange#Include('^.*@@@BEGIN_CPP@@@.*$', '^.*@@@END_CPP@@@.*$', 'cpp', 'NonText')
 autocmd Syntax sh call SyntaxRange#Include('^.*@@@BEGIN_DIRCOLORS@@@.*$', '^.*@@@END_DIRCOLORS@@@.*$', 'dircolors', 'NonText')
-autocmd Syntax markdown call SyntaxRange#Include('^```\(ba\)\?sh$', '^```$', 'sh', 'NonText')
-autocmd Syntax markdown call SyntaxRange#Include('^```c$', '^```$', 'c', 'NonText')
-autocmd Syntax markdown call SyntaxRange#Include('^```cpp$', '^```$', 'cpp', 'NonText')
-autocmd Syntax markdown call SyntaxRange#Include('^```\(cfg\|conf\)$', '^```$', 'conf', 'NonText')
-autocmd Syntax markdown call SyntaxRange#Include('^```css$', '^```$', 'css', 'NonText')
-autocmd Syntax markdown call SyntaxRange#Include('^```html$', '^```$', 'html', 'NonText')
-autocmd Syntax markdown call SyntaxRange#Include('^```\(js\|javascript\)$', '^```$', 'javascript', 'NonText')
-autocmd Syntax markdown call SyntaxRange#Include('^```perl6\?$', '^```$', 'perl', 'NonText')
-autocmd Syntax markdown call SyntaxRange#Include('^```php$', '^```$', 'php', 'NonText')
-autocmd Syntax markdown call SyntaxRange#Include('^```python$', '^```$', 'python', 'NonText')
-autocmd Syntax markdown call SyntaxRange#Include('^```r$', '^```$', 'r', 'NonText')
-autocmd Syntax markdown call SyntaxRange#Include('^```ruby$', '^```$', 'ruby', 'NonText')
-autocmd Syntax markdown call SyntaxRange#Include('^```sql$', '^```$', 'sql', 'NonText')
-autocmd Syntax markdown call SyntaxRange#Include('^```yaml$', '^```$', 'yaml', 'NonText')
+"autocmd Syntax markdown call SyntaxRange#Include('^```\(ba\)\?sh$', '^```$', 'sh', 'NonText')
+"autocmd Syntax markdown call SyntaxRange#Include('^```c$', '^```$', 'c', 'NonText')
+"autocmd Syntax markdown call SyntaxRange#Include('^```cpp$', '^```$', 'cpp', 'NonText')
+"autocmd Syntax markdown call SyntaxRange#Include('^```\(cfg\|conf\)$', '^```$', 'conf', 'NonText')
+"autocmd Syntax markdown call SyntaxRange#Include('^```css$', '^```$', 'css', 'NonText')
+"autocmd Syntax markdown call SyntaxRange#Include('^```html$', '^```$', 'html', 'NonText')
+"autocmd Syntax markdown call SyntaxRange#Include('^```\(js\|javascript\)$', '^```$', 'javascript', 'NonText')
+"autocmd Syntax markdown call SyntaxRange#Include('^```perl6\?$', '^```$', 'perl', 'NonText')
+"autocmd Syntax markdown call SyntaxRange#Include('^```php$', '^```$', 'php', 'NonText')
+"autocmd Syntax markdown call SyntaxRange#Include('^```python$', '^```$', 'python', 'NonText')
+"autocmd Syntax markdown call SyntaxRange#Include('^```r$', '^```$', 'r', 'NonText')
+"autocmd Syntax markdown call SyntaxRange#Include('^```ruby$', '^```$', 'ruby', 'NonText')
+"autocmd Syntax markdown call SyntaxRange#Include('^```sql$', '^```$', 'sql', 'NonText')
+"autocmd Syntax markdown call SyntaxRange#Include('^```yaml$', '^```$', 'yaml', 'NonText')
+
 " Commented out Markdown syntax highlighting inside XML, because it clashes with reStructuredText:
 "     Error detected while processing /usr/local/Cellar/vim/8.0.1200/share/vim/vim80/syntax/vim.vim:
 "     line  791:
 "     E403: syntax sync: line continuations pattern specified twice
 "autocmd Syntax xml call SyntaxRange#Include('^.*@@@BEGIN_MARKDOWN@@@.*$', '^.*@@@END_MARKDOWN@@@.*$', 'markdown', 'NonText')
+
+" Markdown {{{1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Enable markdown plugin foldmethod
+"set nocompatible
+"if has('autocmd')
+"	filetype plugin indent on
+"	autocmd FileType markdown set foldexpr=NestedMarkdownFolds()
+"endif
 
