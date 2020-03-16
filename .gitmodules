@@ -67,3 +67,6 @@
 [submodule "vim/pack/myplugins/start/vim-commentary"]
 	path = vim/pack/myplugins/start/vim-commentary
 	url = https://github.com/tpope/vim-commentary
+[submodule "vim/pack/myplugins/start/vim-markdown"]
+	path = vim/pack/myplugins/start/vim-markdown
+	url = https://github.com/plasticboy/vim-markdown
