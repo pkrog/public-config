@@ -126,6 +126,20 @@ set wildignore+=.DS_Store,.git,.hg,.svn
 set wildignore+=*~,*.swp,*.tmp
 
 
+" Pandoc / Markdown {{{1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:pandoc#filetypes#handled = ["pandoc", "markdown"]
+let g:pandoc#filetypes#pandoc_markdown = 1
+let g:pandoc#syntax#codeblocks#embeds#langs = ['vim', 'bash=sh', 'r']
+
+" Enable markdown plugin foldmethod
+"set nocompatible
+"if has('autocmd')
+"	filetype plugin indent on
+"	autocmd FileType markdown set foldexpr=NestedMarkdownFolds()
+"endif
+
 " Loading packages earlier {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -340,14 +354,4 @@ autocmd Syntax sh call SyntaxRange#Include('^.*@@@BEGIN_DIRCOLORS@@@.*$', '^.*@@
 "     line  791:
 "     E403: syntax sync: line continuations pattern specified twice
 "autocmd Syntax xml call SyntaxRange#Include('^.*@@@BEGIN_MARKDOWN@@@.*$', '^.*@@@END_MARKDOWN@@@.*$', 'markdown', 'NonText')
-
-" Markdown {{{1
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Enable markdown plugin foldmethod
-"set nocompatible
-"if has('autocmd')
-"	filetype plugin indent on
-"	autocmd FileType markdown set foldexpr=NestedMarkdownFolds()
-"endif
 
