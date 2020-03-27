@@ -61,7 +61,7 @@ au BufRead,BufNewFile * match Debug /\s\+$/
 
 if has("autocmd")
 	au BufWinEnter * let w:m1=matchadd('Error', 'TODO \(BROKEN\|BUG\|URGENT\|IMPORTANT\|ERROR\|DEPRECATED\|HACK\|FIXME\)', -1)
-	au BufWinEnter * let w:m1=matchadd('Debug', 'NOTE\|INFO\|IDEA\|XXX', -1)
+	au BufWinEnter * let w:m1=matchadd('Debug', 'NOTE\|INFO\|IDEA\|XXX\|DONE', -1)
 	au BufWinEnter * let w:m1=matchadd('Todo', '\(TODO \(READ\|EXPLAIN\|REMOVE\|REFACTOR\|REVIEW\)\)\|TODO', -1)
 	" Test: TODO, TODO READ, TODO URGENT, TODO ERROR, TODO REFACTOR, NOTE
 endif
@@ -131,7 +131,7 @@ set wildignore+=*~,*.swp,*.tmp
 
 let g:pandoc#filetypes#handled = ["pandoc", "markdown"]
 let g:pandoc#filetypes#pandoc_markdown = 1
-let g:pandoc#syntax#codeblocks#embeds#langs = ['vim', 'bash=sh', 'r']
+let g:pandoc#syntax#codeblocks#embeds#langs = ['vim', 'bash=sh', 'perl', 'r']
 
 " Enable markdown plugin foldmethod
 "set nocompatible

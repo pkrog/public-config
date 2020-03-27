@@ -19,9 +19,6 @@
 [submodule "vim-bbye"]
 	path = vim/pack/myplugins/start/vim-bbye
 	url = https://github.com/moll/vim-bbye
-[submodule "vim-perl6"]
-	path = vim/pack/myplugins/start/vim-perl6
-	url = https://github.com/vim-perl/vim-perl6
 [submodule "vim-taboo"]
 	path = vim/pack/myplugins/start/taboo.vim
 	url = https://github.com/gcmt/taboo.vim
@@ -44,7 +41,7 @@
 	path = vim/pack/myplugins/start/SimpylFold
 	url = https://github.com/tmhedberg/SimpylFold
 [submodule "vim/pack/myplugins/start/YouCompleteMe"]
-	path = vim/pack/myplugins/start/YouCompleteMe
+	path = vim/pack/myplugins/opt/YouCompleteMe
 	url = https://github.com/ycm-core/YouCompleteMe
 [submodule "vim/pack/myplugins/start/vimteractive"]
 	path = vim/pack/myplugins/start/vimteractive
@@ -58,9 +55,6 @@
 [submodule "vim/pack/myplugins/start/php.vim"]
 	path = vim/pack/myplugins/start/php.vim
 	url = https://github.com/StanAngeloff/php.vim
-[submodule "vim/pack/myplugins/start/phpfolding.vim"]
-	path = vim/pack/myplugins/start/phpfolding.vim
-	url = https://github.com/rayburgemeestre/phpfolding.vim
 [submodule "vim/pack/myplugins/start/csv.vim"]
 	path = vim/pack/myplugins/start/csv.vim
 	url = https://github.com/chrisbra/csv.vim
@@ -68,8 +62,11 @@
 	path = vim/pack/myplugins/start/vim-commentary
 	url = https://github.com/tpope/vim-commentary
 [submodule "vim/pack/myplugins/start/vim-pandoc"]
-	path = vim/pack/myplugins/start/vim-pandoc
+	path = vim/pack/myplugins/opt/vim-pandoc
 	url = https://github.com/vim-pandoc/vim-pandoc
 [submodule "vim/pack/myplugins/start/vim-pandoc-syntax"]
-	path = vim/pack/myplugins/start/vim-pandoc-syntax
+	path = vim/pack/myplugins/opt/vim-pandoc-syntax
 	url = https://github.com/vim-pandoc/vim-pandoc-syntax
+[submodule "vim/pack/myplugins/start/php-foldexpr.vim"]
+	path = vim/pack/myplugins/start/php-foldexpr.vim
+	url = https://github.com/swekaj/php-foldexpr.vim
