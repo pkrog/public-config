@@ -70,3 +70,9 @@
 [submodule "vim/pack/myplugins/start/php-foldexpr.vim"]
 	path = vim/pack/myplugins/start/php-foldexpr.vim
 	url = https://github.com/swekaj/php-foldexpr.vim
+[submodule "vim/pack/myplugins/opt/vim-markdown-folding"]
+	path = vim/pack/myplugins/opt/vim-markdown-folding
+	url = https://github.com/masukomi/vim-markdown-folding
+[submodule "vim/pack/myplugins/opt/vim-markdown"]
+	path = vim/pack/myplugins/start/vim-markdown
+	url = https://github.com/plasticboy/vim-markdown

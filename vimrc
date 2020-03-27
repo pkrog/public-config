@@ -3,6 +3,8 @@
 " General settings {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+filetype plugin on " Enable loading of ftplugin/* files.
+
 set encoding=utf-8
 set clipboard=unnamed
 colorscheme darkscheme
@@ -126,19 +128,20 @@ set wildignore+=.DS_Store,.git,.hg,.svn
 set wildignore+=*~,*.swp,*.tmp
 
 
-" Pandoc / Markdown {{{1
+" Markdown / Pandoc {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:pandoc#filetypes#handled = ["pandoc", "markdown"]
-let g:pandoc#filetypes#pandoc_markdown = 1
-let g:pandoc#syntax#codeblocks#embeds#langs = ['vim', 'bash=sh', 'perl', 'r']
+" https://github.com/vim-pandoc/vim-pandoc
+" let g:pandoc#filetypes#handled = ["pandoc", "markdown"]
+" let g:pandoc#filetypes#pandoc_markdown = 1
+" let g:pandoc#syntax#codeblocks#embeds#langs = ['vim', 'bash=sh', 'perl', 'r']
 
-" Enable markdown plugin foldmethod
-"set nocompatible
-"if has('autocmd')
-"	filetype plugin indent on
-"	autocmd FileType markdown set foldexpr=NestedMarkdownFolds()
-"endif
+" https://github.com/masukomi/vim-markdown-folding
+" if has('autocmd')
+" 	autocmd FileType markdown set foldexpr=NestedMarkdownFolds()
+" endif
+
+" https://github.com/plasticboy/vim-markdown
 
 " Loading packages earlier {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
