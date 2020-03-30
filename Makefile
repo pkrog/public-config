@@ -2,7 +2,8 @@
 # vi: fdm=marker
 
 BINARIES=view_csv view_tsv get-battery-charge view_vcal
-ROOT_CFG=signature screenrc tmux.conf tmux-plugins bashrc zshrc profile bash_profile zprofile xsessionrc
+ROOT_CFG=signature screenrc tmux.conf tmux-plugins bashrc zshrc profile bash_profile zprofile xsessionrc newsboat
+CONFIG_DIR=redshift.conf canto
 
 # Constants {{{1
 ################################################################
@@ -39,7 +40,7 @@ all:
 # Install {{{1
 ################################################################
 
-install: office versioning dev imgbg $(HOME)/.mplayer/config $(HOME)/.config/redshift.conf x11 $(addprefix $(HOME)/.,$(ROOT_CFG)) $(addprefix $(HOME)/bin/,$(BINARIES))
+install: office versioning dev imgbg x11 $(HOME)/.mplayer/config $(addprefix $(HOME)/.config/,$(CONFIG_DIR)) $(addprefix $(HOME)/.,$(ROOT_CFG)) $(addprefix $(HOME)/bin/,$(BINARIES))
 
 # Folders
 $(addprefix $(HOME)/,.mplayer .config bin):
@@ -54,10 +55,10 @@ $(HOME)/.bashrc: shellrc
 $(HOME)/.zshrc: shellrc
 	ln -sf "$(CURDIR)/$<" "$@"
 
-$(HOME)/.bash_profile: profile 
+$(HOME)/.bash_profile: profile
 	ln -sf "$(CURDIR)/$<" "$@"
 
-$(HOME)/.zprofile: profile 
+$(HOME)/.zprofile: profile
 	ln -sf "$(CURDIR)/$<" "$@"
 
 $(HOME)/.config/%: % $(HOME)/.config

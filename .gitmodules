@@ -74,5 +74,5 @@
 	path = vim/pack/myplugins/opt/vim-markdown-folding
 	url = https://github.com/masukomi/vim-markdown-folding
 [submodule "vim/pack/myplugins/opt/vim-markdown"]
-	path = vim/pack/myplugins/start/vim-markdown
+	path = vim/pack/myplugins/opt/vim-markdown
 	url = https://github.com/plasticboy/vim-markdown

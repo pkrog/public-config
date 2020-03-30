@@ -3,7 +3,8 @@
 " General settings {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-filetype plugin on " Enable loading of ftplugin/* files.
+set nocompatible " Necessary in order to set `filetype on`
+filetype plugin indent on " Enable loading of ftplugin/* files.
 
 set encoding=utf-8
 set clipboard=unnamed
@@ -137,9 +138,9 @@ set wildignore+=*~,*.swp,*.tmp
 " let g:pandoc#syntax#codeblocks#embeds#langs = ['vim', 'bash=sh', 'perl', 'r']
 
 " https://github.com/masukomi/vim-markdown-folding
-" if has('autocmd')
-" 	autocmd FileType markdown set foldexpr=NestedMarkdownFolds()
-" endif
+"if has('autocmd')
+"	autocmd FileType markdown set foldexpr=NestedMarkdownFolds()
+"endif
 
 " https://github.com/plasticboy/vim-markdown
 
@@ -274,17 +275,31 @@ command! -nargs=1 SpellCheck setlocal spelllang=<args> | set spell
 
 " nnoremap <expr> m ':call CompleteLine('.getchar().")\<CR>"
 
-" Key bindings {{{1
+" Key mappings {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Correct ambiguous abbreviation on schroeder installation of vim (ambiguity between ELP and Explore).
-cabbrev E Explore 
+cabbrev E Explore
+
+let mapleader = "-"
+let maplocalleader = "\\"
+
+" Edit and source .vimrc
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" Remove white spaces at end of line
+nnoremap <leader>dw V:s/[[:space:]]\+$//<cr>
+
+inoremap jk <esc>
+inoremap jj <esc>:w<cr>
+"inoremap <esc> <nop>
 
 " Normal mode
 "    a  append
 "    A  append at end of line
-"nmap e  :tabedit 
-"nmap f  :tabfind 
+"nmap e  :tabedit
+"nmap f  :tabfind
 "    h  cursor left
 "    i  insert mode
 "    I  go to start of text in the current line and enter insert mode.
@@ -296,24 +311,24 @@ cabbrev E Explore
 "    r  replace current character
 "    R  replace mode
 "    s  DISABLED delete current character and go into insert mode.
-nmap se :SpellCheck en<CR>
-nmap sf :SpellCheck fr<CR>
-nmap si :SpellCheck it<CR>
-nmap sn :se nospell<CR>
+nmap se :SpellCheck en<cr>
+nmap sf :SpellCheck fr<cr>
+nmap si :SpellCheck it<cr>
+nmap sn :se nospell<cr>
 "    S  delete current line and go into insert mode.
 nmap t  gt
 nmap T  gT
 "    x  cut
 "    zb Put cursor line at bottom
 "    zc Close a fold.
-nmap zh :noh<CR>
-nmap zj :%!python -m json.tool<CR>
+nmap zh :noh<cr>
+nmap zj :%!python -m json.tool<cr>
 "    zm Close all folds by one level.
 "    zo Open a fold.
 "    zr Open all folds by one level.
-nmap zs :source $MYVIMRC<CR>
+nmap zs :source $MYVIMRC<cr>
 "    zt Put cursor line at top
-nmap zT :TabooRename 
+nmap zT :TabooRename
 "    zz center cursor line
 "    C-a increment number
 nmap <C-z> <C-a>
@@ -337,6 +352,8 @@ autocmd Syntax sh call SyntaxRange#Include('^.*@@@BEGIN_SQL@@@.*$', '^.*@@@END_S
 autocmd Syntax sh call SyntaxRange#Include('^.*@@@BEGIN_PYTHON@@@.*$', '^.*@@@END_PYTHON@@@.*$', 'python', 'NonText')
 autocmd Syntax r call SyntaxRange#Include('^.*@@@BEGIN_CPP@@@.*$', '^.*@@@END_CPP@@@.*$', 'cpp', 'NonText')
 autocmd Syntax sh call SyntaxRange#Include('^.*@@@BEGIN_DIRCOLORS@@@.*$', '^.*@@@END_DIRCOLORS@@@.*$', 'dircolors', 'NonText')
+" TODO BUG SyntaxRange changes foldmethod to 'syntax' in markdown file, preventing
+" vim-markdown-folding to work properly since it needs 'expr' foldmethod.
 "autocmd Syntax markdown call SyntaxRange#Include('^```\(ba\)\?sh$', '^```$', 'sh', 'NonText')
 "autocmd Syntax markdown call SyntaxRange#Include('^```c$', '^```$', 'c', 'NonText')
 "autocmd Syntax markdown call SyntaxRange#Include('^```cpp$', '^```$', 'cpp', 'NonText')
@@ -351,6 +368,7 @@ autocmd Syntax sh call SyntaxRange#Include('^.*@@@BEGIN_DIRCOLORS@@@.*$', '^.*@@
 "autocmd Syntax markdown call SyntaxRange#Include('^```ruby$', '^```$', 'ruby', 'NonText')
 "autocmd Syntax markdown call SyntaxRange#Include('^```sql$', '^```$', 'sql', 'NonText')
 "autocmd Syntax markdown call SyntaxRange#Include('^```yaml$', '^```$', 'yaml', 'NonText')
+"autocmd Syntax markdown call SyntaxRange#Include('^```vim$', '^```$', 'vim', 'NonText')
 
 " Commented out Markdown syntax highlighting inside XML, because it clashes with reStructuredText:
 "     Error detected while processing /usr/local/Cellar/vim/8.0.1200/share/vim/vim80/syntax/vim.vim:

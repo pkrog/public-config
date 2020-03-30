@@ -1,1 +1,6 @@
 vim/.netrwhist
+canto/*
+!canto/conf
+newsboat/*
+!newsboat/urls
+!newsboat/config

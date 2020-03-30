@@ -1,0 +1,53 @@
+{
+    "CantoCurses": {
+        "browser": {
+            "path": "lynx",
+            "text": true
+        }
+    },
+    "defaults": {
+        "global_transform": "filter_read",
+        "keep_time": 86400,
+        "keep_unread": false,
+        "rate": 10
+    },
+    "feeds": [
+        {
+            "name": "Le Monde.fr - Actualités et Infos en France et dans le monde",
+            "url": "https://www.lemonde.fr/rss/une.xml"
+        },
+        {
+            "name": "Liberation - A la une sur Libération",
+            "url": "http://rss.liberation.fr/rss/latest/"
+        },
+        {
+            "name": "France Culture - Actualité politique et culturelle - Programmes, radio en direct et podcast",
+            "url": "https://www.franceculture.fr/rss"
+        },
+        {
+            "name": "Le Figaro - Actualité en direct et informations en continu",
+            "url": "https://www.lefigaro.fr/rss/figaro_actualites.xml"
+        },
+        {
+            "name": "BBC News - Home",
+            "url": "http://feeds.bbci.co.uk/news/rss.xml"
+        }
+    ],
+    "tags": {
+        "maintag:BBC News - Home": {
+            "collapsed": true
+        },
+        "maintag:France Culture - Actualité politique et culturelle - Programmes, radio en direct et podcast": {
+            "collapsed": true
+        },
+        "maintag:Le Figaro - Actualité en direct et informations en continu": {
+            "collapsed": true
+        },
+        "maintag:Le Monde.fr - Actualités et Infos en France et dans le monde": {
+            "collapsed": true
+        },
+        "maintag:Liberation - A la une sur Libération": {
+            "collapsed": true
+        }
+    }
+}
