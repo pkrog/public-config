@@ -4,3 +4,4 @@ canto/*
 newsboat/*
 !newsboat/urls
 !newsboat/config
+links/links.his

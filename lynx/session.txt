@@ -1,0 +1,116 @@
+# lynx session
+/ syntax
+g https://www.lesechos.fr/industrie-services/pharmacie-sante/0603042648391-masques-la-filiere-textile-enclenche-la-production-a-grande-vitesse-2338854.php#xtor=RSS-153
+g file://localhost/home/pr228844/.lynx/bookmarks.html
+g https://www.bbc.co.uk/sport/52169835
+g https://www.lefigaro.fr/sciences/coronavirus-vers-un-port-generalise-du-masque-20200404
+g https://www.lemonde.fr/idees/article/2020/04/04/ursula-von-der-leyen-cette-solidarite-est-au-c-ur-meme-de-l-europe-et-c-est-ce-qui-va-lui-permettre-de-renaitre_6035513_3232.html
+g https://www.lefigaro.fr/sciences/le-groupe-sanguin-o-mieux-arme-contre-le-covid-19-20200403
+g https://www.bbc.co.uk/news/entertainment-arts-52149055
+g https://learnvimscriptthehardway.stevelosh.com/
+g https://lite.qwant.com/
+g https://www.liberation.fr/checknews/2020/04/03/la-france-a-t-elle-intercepte-des-masques-a-destination-de-la-suede_1784053?xtor=rss-450
+g https://www.lemonde.fr/economie/article/2020/04/03/disney-joue-un-tour-infernal-a-ses-intermittents-du-spectacle_6035486_3234.html
+g https://www.lemonde.fr/international/article/2020/04/04/coronavirus-le-limogeage-controverse-d-un-commandant-de-porte-avions-devenu-lanceur-d-alerte_6035514_3210.html
+g http://sport24.lefigaro.fr/scan-sport/actualites/harcelement-moral-et-blagues-douteuses-une-ex-journaliste-de-france-tv-denonce-998590
+g https://www.lemonde.fr/planete/article/2020/04/05/coronavirus-paris-repense-sa-strategie-de-resistance-aux-crises_6035609_3244.html
+g https://www.bbc.co.uk/news/uk-52170053
+g https://www.lefigaro.fr/international/coronavirus-le-plan-de-l-italie-pour-sortir-graduellement-de-la-pandemie-20200405
+h 1 0 https://lite.qwant.com/	Qwant Lite
+h 1 4 file://localhost/home/pr228844/.lynx/bookmarks.html	Bookmark file
+h 1 0 https://www.20minutes.fr/	Municipales 2020
+h 1 0 https://lite.qwant.com/	Qwant Lite
+h 1 2 file://localhost/home/pr228844/.lynx/bookmarks.html	Bookmark file
+h 37 23 https://learnvimscriptthehardway.stevelosh.com/	Learn Vimscript the Hard Way
+h 1 6 file://localhost/home/pr228844/.lynx/bookmarks.html	Bookmark file
+h 37 25 https://learnvimscriptthehardway.stevelosh.com/	Learn Vimscript the Hard Way
+h 1 0 https://learnvimscriptthehardway.stevelosh.com/chapters/32.html	Case Study: Grep Operator, Part One / Learn Vimscript the Hard Way
+h 1 0 https://scout.wisc.edu/	Internet Scout
+h 1 6 file://localhost/home/pr228844/.lynx/bookmarks.html	Bookmark file
+h 37 25 https://learnvimscriptthehardway.stevelosh.com/	Learn Vimscript the Hard Way
+h 145 1 https://learnvimscriptthehardway.stevelosh.com/chapters/32.html	Case Study: Grep Operator, Part One / Learn Vimscript the Hard Way
+h 1 0 https://learnvimscriptthehardway.stevelosh.com/chapters/33.html	Case Study: Grep Operator, Part Two / Learn Vimscript the Hard Way
+h 1 11 https://learnvimscriptthehardway.stevelosh.com/	Learn Vimscript the Hard Way
+h 1 0 https://learnvimscriptthehardway.stevelosh.com/chapters/02.html	Setting Options / Learn Vimscript the Hard Way
+h 37 4 https://learnvimscriptthehardway.stevelosh.com/	Learn Vimscript the Hard Way
+h 1 6 file://localhost/home/pr228844/.lynx/bookmarks.html	Bookmark file
+h 37 7 https://learnvimscriptthehardway.stevelosh.com/	Learn Vimscript the Hard Way
+h 1 6 file://localhost/home/pr228844/.lynx/bookmarks.html	Bookmark file
+h 37 26 https://learnvimscriptthehardway.stevelosh.com/	Learn Vimscript the Hard Way
+h 73 -1 https://learnvimscriptthehardway.stevelosh.com/chapters/12.html	Autocommands / Learn Vimscript the Hard Way
+h 1 0 https://learnvimscriptthehardway.stevelosh.com/chapters/13.html	Buffer-Local Abbreviations / Learn Vimscript the Hard Way
+h 1 6 file://localhost/home/pr228844/.lynx/bookmarks.html	Bookmark file
+h 37 28 https://learnvimscriptthehardway.stevelosh.com/	Learn Vimscript the Hard Way
+h 109 1 https://learnvimscriptthehardway.stevelosh.com/chapters/35.html	Lists / Learn Vimscript the Hard Way
+h 37 1 https://learnvimscriptthehardway.stevelosh.com/chapters/36.html	Looping / Learn Vimscript the Hard Way
+h 1 6 file://localhost/home/pr228844/.lynx/bookmarks.html	Bookmark file
+h 37 30 https://learnvimscriptthehardway.stevelosh.com/	Learn Vimscript the Hard Way
+h 109 1 https://learnvimscriptthehardway.stevelosh.com/chapters/37.html	Dictionaries / Learn Vimscript the Hard Way
+h 145 1 https://learnvimscriptthehardway.stevelosh.com/chapters/38.html	Toggling / Learn Vimscript the Hard Way
+h 181 1 https://learnvimscriptthehardway.stevelosh.com/chapters/39.html	Functional Programming / Learn Vimscript the Hard Way
+h 37 1 https://learnvimscriptthehardway.stevelosh.com/chapters/40.html	Paths / Learn Vimscript the Hard Way
+h 37 3 https://learnvimscriptthehardway.stevelosh.com/chapters/41.html	Creating a Full Plugin / Learn Vimscript the Hard Way
+h 109 1 https://learnvimscriptthehardway.stevelosh.com/chapters/42.html	Plugin Layout in the Dark Ages / Learn Vimscript the Hard Way
+h 73 2 https://learnvimscriptthehardway.stevelosh.com/chapters/43.html	A New Hope: Plugin Layout with Pathogen / Learn Vimscript the Hard Way
+h 73 1 https://learnvimscriptthehardway.stevelosh.com/chapters/44.html	Detecting Filetypes / Learn Vimscript the Hard Way
+h 73 1 https://learnvimscriptthehardway.stevelosh.com/chapters/45.html	Basic Syntax Highlighting / Learn Vimscript the Hard Way
+h 73 1 https://learnvimscriptthehardway.stevelosh.com/chapters/46.html	Advanced Syntax Highlighting / Learn Vimscript the Hard Way
+h 37 1 https://learnvimscriptthehardway.stevelosh.com/chapters/47.html	Even More Advanced Syntax Highlighting / Learn Vimscript the Hard Way
+h 109 1 https://learnvimscriptthehardway.stevelosh.com/chapters/48.html	Basic Folding / Learn Vimscript the Hard Way
+h 577 1 https://learnvimscriptthehardway.stevelosh.com/chapters/49.html	Advanced Folding / Learn Vimscript the Hard Way
+h 73 1 https://learnvimscriptthehardway.stevelosh.com/chapters/50.html	Section Movement Theory / Learn Vimscript the Hard Way
+h 281 1 https://learnvimscriptthehardway.stevelosh.com/chapters/51.html	Potion Section Movement / Learn Vimscript the Hard Way
+h 253 1 https://learnvimscriptthehardway.stevelosh.com/chapters/52.html	External Commands / Learn Vimscript the Hard Way
+h 181 1 https://learnvimscriptthehardway.stevelosh.com/chapters/53.html	Autoloading / Learn Vimscript the Hard Way
+h 217 1 https://learnvimscriptthehardway.stevelosh.com/chapters/54.html	Documentation / Learn Vimscript the Hard Way
+h 37 4 https://learnvimscriptthehardway.stevelosh.com/chapters/55.html	Distribution / Learn Vimscript the Hard Way
+h 37 0 https://learnvimscriptthehardway.stevelosh.com/chapters/54.html	Documentation / Learn Vimscript the Hard Way
+V 0 https://lite.qwant.com/	Qwant Lite
+V 1 file://localhost/home/pr228844/.lynx/bookmarks.html	Bookmark file
+V 2 https://www.20minutes.fr/	Municipales 2020
+V 2 https://learnvimscriptthehardway.stevelosh.com/	Learn Vimscript the Hard Way
+V 3 https://learnvimscriptthehardway.stevelosh.com/chapters/30.html	Execute Normal! / Learn Vimscript the Hard Way
+V 4 https://www.liberation.fr/checknews/2020/04/03/la-france-a-t-elle-intercepte-des-masques-a-destination-de-la-suede_1784053?xtor=rss-450	voyage
+V 5 https://www.bbc.co.uk/news/entertainment-arts-52149055	The Gruffalo author Julia Donaldson shows her characters social distancing - BBC News
+V 6 https://www.lemonde.fr/economie/article/2020/04/03/disney-joue-un-tour-infernal-a-ses-intermittents-du-spectacle_6035486_3234.html	Disney joue un tour infernal à ses intermittents du spectacle
+V 7 https://www.lefigaro.fr/sciences/le-groupe-sanguin-o-mieux-arme-contre-le-covid-19-20200403	Ouvrir le panneau
+V 8 https://www.lemonde.fr/international/article/2020/04/04/coronavirus-le-limogeage-controverse-d-un-commandant-de-porte-avions-devenu-lanceur-d-alerte_6035514_3210.html	Coronavirus : aux Etats-Unis, le limogeage controversé d’un commandant de porte-avions devenu lanceur d’alerte
+V 9 https://www.lemonde.fr/idees/article/2020/04/04/ursula-von-der-leyen-cette-solidarite-est-au-c-ur-meme-de-l-europe-et-c-est-ce-qui-va-lui-permettre-de-renaitre_6035513_3232.html	Ursula von der Leyen : « Cette solidarité est au cœur même de l’Europe et c’est ce qui va lui permettre de renaître »
+V 10 https://sport24.lefigaro.fr/scan-sport/actualites/harcelement-moral-et-blagues-douteuses-une-ex-journaliste-de-france-tv-denonce-998590	Harcèlement moral et blagues douteuses: une ex-journaliste de France TV dénonce  - Scan Sport
+V 11 https://www.lefigaro.fr/sciences/coronavirus-vers-un-port-generalise-du-masque-20200404	Ouvrir le panneau
+V 12 https://www.lemonde.fr/planete/article/2020/04/05/coronavirus-paris-repense-sa-strategie-de-resistance-aux-crises_6035609_3244.html	Coronavirus : Paris repense sa stratégie de résistance aux crises
+V 13 https://www.bbc.co.uk/sport/52169835	BBC Sport's five things to do today - BBC Sport
+V 14 https://www.bbc.co.uk/news/uk-52170053	Coronavirus: Morning update - BBC News
+V 3 https://learnvimscriptthehardway.stevelosh.com/chapters/32.html	Case Study: Grep Operator, Part One / Learn Vimscript the Hard Way
+V 4 https://scout.wisc.edu/	Internet Scout
+V 4 https://learnvimscriptthehardway.stevelosh.com/chapters/33.html	Case Study: Grep Operator, Part Two / Learn Vimscript the Hard Way
+V 5 https://learnvimscriptthehardway.stevelosh.com/chapters/34.html	Case Study: Grep Operator, Part Three / Learn Vimscript the Hard Way
+V 6 https://learnvimscriptthehardway.stevelosh.com/chapters/35.html	Lists / Learn Vimscript the Hard Way
+V 3 https://learnvimscriptthehardway.stevelosh.com/chapters/02.html	Setting Options / Learn Vimscript the Hard Way
+V 3 https://learnvimscriptthehardway.stevelosh.com/chapters/11.html	Buffer-Local Options and Mappings / Learn Vimscript the Hard Way
+V 3 https://learnvimscriptthehardway.stevelosh.com/chapters/14.html	Autocommand Groups / Learn Vimscript the Hard Way
+V 3 https://learnvimscriptthehardway.stevelosh.com/chapters/12.html	Autocommands / Learn Vimscript the Hard Way
+V 4 https://learnvimscriptthehardway.stevelosh.com/chapters/13.html	Buffer-Local Abbreviations / Learn Vimscript the Hard Way
+V 3 https://learnvimscriptthehardway.stevelosh.com/chapters/54.html	Documentation / Learn Vimscript the Hard Way
+V 7 https://learnvimscriptthehardway.stevelosh.com/chapters/36.html	Looping / Learn Vimscript the Hard Way
+V 8 https://learnvimscriptthehardway.stevelosh.com/chapters/37.html	Dictionaries / Learn Vimscript the Hard Way
+V 9 https://learnvimscriptthehardway.stevelosh.com/chapters/38.html	Toggling / Learn Vimscript the Hard Way
+V 10 https://learnvimscriptthehardway.stevelosh.com/chapters/39.html	Functional Programming / Learn Vimscript the Hard Way
+V 11 https://learnvimscriptthehardway.stevelosh.com/chapters/40.html	Paths / Learn Vimscript the Hard Way
+V 12 https://learnvimscriptthehardway.stevelosh.com/chapters/41.html	Creating a Full Plugin / Learn Vimscript the Hard Way
+V 13 https://learnvimscriptthehardway.stevelosh.com/chapters/42.html	Plugin Layout in the Dark Ages / Learn Vimscript the Hard Way
+V 14 https://learnvimscriptthehardway.stevelosh.com/chapters/43.html	A New Hope: Plugin Layout with Pathogen / Learn Vimscript the Hard Way
+V 15 https://learnvimscriptthehardway.stevelosh.com/chapters/44.html	Detecting Filetypes / Learn Vimscript the Hard Way
+V 16 https://learnvimscriptthehardway.stevelosh.com/chapters/45.html	Basic Syntax Highlighting / Learn Vimscript the Hard Way
+V 17 https://learnvimscriptthehardway.stevelosh.com/chapters/46.html	Advanced Syntax Highlighting / Learn Vimscript the Hard Way
+V 18 https://learnvimscriptthehardway.stevelosh.com/chapters/47.html	Even More Advanced Syntax Highlighting / Learn Vimscript the Hard Way
+V 19 https://learnvimscriptthehardway.stevelosh.com/chapters/48.html	Basic Folding / Learn Vimscript the Hard Way
+V 20 https://learnvimscriptthehardway.stevelosh.com/chapters/49.html	Advanced Folding / Learn Vimscript the Hard Way
+V 21 https://learnvimscriptthehardway.stevelosh.com/chapters/50.html	Section Movement Theory / Learn Vimscript the Hard Way
+V 22 https://learnvimscriptthehardway.stevelosh.com/chapters/51.html	Potion Section Movement / Learn Vimscript the Hard Way
+V 23 https://learnvimscriptthehardway.stevelosh.com/chapters/52.html	External Commands / Learn Vimscript the Hard Way
+V 24 https://learnvimscriptthehardway.stevelosh.com/chapters/53.html	Autoloading / Learn Vimscript the Hard Way
+V 4 https://learnvimscriptthehardway.stevelosh.com/chapters/55.html	Distribution / Learn Vimscript the Hard Way
+V 5 https://learnvimscriptthehardway.stevelosh.com/chapters/56.html	What Now? / Learn Vimscript the Hard Way
+V 6 https://www.lefigaro.fr/international/coronavirus-le-plan-de-l-italie-pour-sortir-graduellement-de-la-pandemie-20200405	Ouvrir le panneau
+V 7 https://www.lesechos.fr/industrie-services/pharmacie-sante/masques-la-filiere-textile-enclenche-la-production-a-grande-vitesse-1192226#xtor=RSS-153	Masques : la filière textile enclenche la production à grande vitesse | Les Echos

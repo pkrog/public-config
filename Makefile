@@ -2,7 +2,7 @@
 # vi: fdm=marker
 
 BINARIES=view_csv view_tsv get-battery-charge view_vcal
-ROOT_CFG=signature screenrc tmux.conf tmux-plugins bashrc zshrc profile bash_profile zprofile xsessionrc newsboat
+ROOT_CFG=signature screenrc tmux.conf tmux-plugins bashrc zshrc profile bash_profile zprofile xsessionrc newsboat links lynx lynxrc
 CONFIG_DIR=redshift.conf canto
 
 # Constants {{{1
@@ -40,7 +40,7 @@ all:
 # Install {{{1
 ################################################################
 
-install: office versioning dev imgbg x11 $(HOME)/.mplayer/config $(addprefix $(HOME)/.config/,$(CONFIG_DIR)) $(addprefix $(HOME)/.,$(ROOT_CFG)) $(addprefix $(HOME)/bin/,$(BINARIES))
+install: versioning dev imgbg x11 $(HOME)/.mplayer/config $(addprefix $(HOME)/.config/,$(CONFIG_DIR)) $(addprefix $(HOME)/.,$(ROOT_CFG)) $(addprefix $(HOME)/bin/,$(BINARIES))
 
 # Folders
 $(addprefix $(HOME)/,.mplayer .config bin):
@@ -86,28 +86,6 @@ else
 versioning: $(HOME)/.gitconfig $(HOME)/.gitignore
 endif
 
-# Web {{{1
-################################################################
-
-office: $(HOME)/.lynxrc $(HOME)/.lynx/bookmarks.html $(HOME)/.lynx/lynx.cfg $(HOME)/.links/bookmarks.html
-
-$(HOME)/.lynxrc: lynxrc
-	ln -sf $(CURDIR)/$< $@
-
-$(HOME)/.lynx/lynx.cfg: lynx.cfg $(HOME)/.lynx
-	ln -sf $(CURDIR)/$< $@
-
-$(HOME)/.lynx/bookmarks.html: lynx_bookmarks.html $(HOME)/.lynx
-	ln -sf $(CURDIR)/$< $@
-
-$(HOME)/.links/bookmarks.html: links_bookmarks.html $(HOME)/.links
-	ln -sf $(CURDIR)/$< $@
-
-$(HOME)/.lynx:
-	mkdir -p "$@"
-
-$(HOME)/.links:
-	mkdir -p "$@"
 
 # Development {{{1
 ################################################################

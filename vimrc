@@ -1,5 +1,3 @@
-" vi: fdm=marker
-
 " General settings {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -10,6 +8,7 @@ set encoding=utf-8
 set clipboard=unnamed
 colorscheme darkscheme
 set hlsearch " highlight search
+set incsearch " use incremental search
 set fileformat=unix
 set backspace=2 " Enable backspace.
 set guioptions=
@@ -89,7 +88,7 @@ let g:perl_fold = 1
 " Python {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-au BufNewFile,BufRead *.py setl tabstop=4 softtabstop=4 shiftwidth=4 textwidth=0 colorcolumn=80 expandtab autoindent fileformat=unix
+au BufNewFile,BufRead *.py setlocal tabstop=4 softtabstop=4 shiftwidth=4 textwidth=0 colorcolumn=80 expandtab autoindent fileformat=unix
 " TODO How to enable foldmethod=indent in Python?
 
 " R {{{1
@@ -127,7 +126,6 @@ set wildignore+=*.a,*.o
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
 set wildignore+=.DS_Store,.git,.hg,.svn
 set wildignore+=*~,*.swp,*.tmp
-
 
 " Markdown / Pandoc {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -217,6 +215,9 @@ set errorformat+=Error\ in\ %f\ (line\ %l)      " Matlab    Note that it require
 " /home/pr228844/dev/exhalobase/site/src/ExhalobaseAccess.php:152
 " /home/pr228844/dev/exhalobase/tests/20_DbAccessTest.php:44
 set errorformat+=%f:%l
+" .PHP Fatal error:  Constant expression contains invalid operations in
+" /home/pr228844/dev/exhalobase/site/src/DbAcqFile.php on line 37
+set errorformat+=.PHP\ Fatal\ error:\ %#%m\ in\ %f\ on\ line\ %l
 
 " R
 "set errorformat^=%.%#[exec]%.%#\ %f:%l:%c:\ %m    " R error when run with devtools package
@@ -281,15 +282,26 @@ command! -nargs=1 SpellCheck setlocal spelllang=<args> | set spell
 " Correct ambiguous abbreviation on schroeder installation of vim (ambiguity between ELP and Explore).
 cabbrev E Explore
 
-let mapleader = "-"
+let mapleader = ","
 let maplocalleader = "\\"
 
 " Edit and source .vimrc
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>ev :rightbelow vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
+
+"nnoremap <leader>wh :!lynx
+"http://us2.php.net/^R^W\#function.^R^W<cr>
 
 " Remove white spaces at end of line
 nnoremap <leader>dw V:s/[[:space:]]\+$//<cr>
+
+" Quote current word in normal mode
+nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
+
+" Open Lynx
+nnoremap <leader>ol :execute "!tmux new-window lynx"<cr><cr>
+" select link under cursor:
+" l?http<cr>:nohlsearch<cr>v/[^ )]<cr>
 
 inoremap jk <esc>
 inoremap jj <esc>:w<cr>
@@ -342,6 +354,14 @@ nmap <C-z> <C-a>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 syntax on " Set last because of csv.vim plugin
+
+" Vimscript file settings {{{1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+augroup filetype_vim
+	autocmd!
+	autocmd FileType vim setlocal foldmethod=marker
+augroup END
 
 " Included syntax highlighting {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
