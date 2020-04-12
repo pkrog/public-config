@@ -12,6 +12,9 @@ set incsearch " use incremental search
 set fileformat=unix
 set backspace=2 " Enable backspace.
 set guioptions=
+set autowrite
+set splitright
+set splitbelow
 
 " Modeline
 set modeline " Enable modeline.
@@ -93,6 +96,9 @@ au BufNewFile,BufRead *.py setlocal tabstop=4 softtabstop=4 shiftwidth=4 textwid
 
 " R {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" TODO IMPORTANT How to highlight `<-` in other languages so when I get
+" confused between `=` and R `<-`.
 
 " Coloring R output
 let g:rout_follow_colorscheme = 1
@@ -218,6 +224,7 @@ set errorformat+=%f:%l
 " .PHP Fatal error:  Constant expression contains invalid operations in
 " /home/pr228844/dev/exhalobase/site/src/DbAcqFile.php on line 37
 set errorformat+=.PHP\ Fatal\ error:\ %#%m\ in\ %f\ on\ line\ %l
+set errorformat+=PHP\ Parse\ error:\ %#%m\ in\ %f\ on\ line\ %l
 
 " R
 "set errorformat^=%.%#[exec]%.%#\ %f:%l:%c:\ %m    " R error when run with devtools package
@@ -289,6 +296,9 @@ let maplocalleader = "\\"
 nnoremap <leader>ev :rightbelow vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
+" Run tests
+nnoremap <leader>mt :make test<cr><cr>:copen<cr>
+
 "nnoremap <leader>wh :!lynx
 "http://us2.php.net/^R^W\#function.^R^W<cr>
 
@@ -297,11 +307,6 @@ nnoremap <leader>dw V:s/[[:space:]]\+$//<cr>
 
 " Quote current word in normal mode
 nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
-
-" Open Lynx
-nnoremap <leader>ol :execute "!tmux new-window lynx"<cr><cr>
-" select link under cursor:
-" l?http<cr>:nohlsearch<cr>v/[^ )]<cr>
 
 inoremap jk <esc>
 inoremap jj <esc>:w<cr>

@@ -1,7 +1,10 @@
 # lynx session
 / syntax
+g file://localhost/tmp/mutt.html
+g https://www.lemonde.fr/planete/article/2020/04/10/coronavirus-en-france-plus-de-12-000-morts-un-week-end-de-paques-sous-haute-surveillance_6036173_3244.html
+g https://www.lefigaro.fr/international/chine-chats-et-chiens-echappent-a-la-liste-des-animaux-comestibles-20200409
+g http://www.marmiton.org/recettes/recette_gateau-au-yaourt_12719.aspx
 g https://www.lesechos.fr/industrie-services/pharmacie-sante/0603042648391-masques-la-filiere-textile-enclenche-la-production-a-grande-vitesse-2338854.php#xtor=RSS-153
-g file://localhost/home/pr228844/.lynx/bookmarks.html
 g https://www.bbc.co.uk/sport/52169835
 g https://www.lefigaro.fr/sciences/coronavirus-vers-un-port-generalise-du-masque-20200404
 g https://www.lemonde.fr/idees/article/2020/04/04/ursula-von-der-leyen-cette-solidarite-est-au-c-ur-meme-de-l-europe-et-c-est-ce-qui-va-lui-permettre-de-renaitre_6035513_3232.html
@@ -16,6 +19,10 @@ g http://sport24.lefigaro.fr/scan-sport/actualites/harcelement-moral-et-blagues-
 g https://www.lemonde.fr/planete/article/2020/04/05/coronavirus-paris-repense-sa-strategie-de-resistance-aux-crises_6035609_3244.html
 g https://www.bbc.co.uk/news/uk-52170053
 g https://www.lefigaro.fr/international/coronavirus-le-plan-de-l-italie-pour-sortir-graduellement-de-la-pandemie-20200405
+g file://localhost/home/pr228844/.lynx/bookmarks.html
+g https://www.lemonde.fr/economie/article/2020/04/09/coronavirus-en-allemagne-face-a-l-ampleur-de-la-recession-la-pression-monte-pour-une-levee-du-confinement_6036099_3234.html
+g https://www.lemonde.fr/economie/article/2020/04/10/coronavirus-les-europeens-s-entendent-sur-un-plan-de-soutien-a-plus-de-500-milliards-d-euros_6036171_3234.html
+g https://www.lemonde.fr/international/article/2020/04/10/la-crise-du-coronavirus-fait-emerger-des-dissensions-au-sein-du-pouvoir-chinois_6036211_3210.html
 h 1 0 https://lite.qwant.com/	Qwant Lite
 h 1 4 file://localhost/home/pr228844/.lynx/bookmarks.html	Bookmark file
 h 1 0 https://www.20minutes.fr/	Municipales 2020
@@ -65,6 +72,36 @@ h 181 1 https://learnvimscriptthehardway.stevelosh.com/chapters/53.html	Autoload
 h 217 1 https://learnvimscriptthehardway.stevelosh.com/chapters/54.html	Documentation / Learn Vimscript the Hard Way
 h 37 4 https://learnvimscriptthehardway.stevelosh.com/chapters/55.html	Distribution / Learn Vimscript the Hard Way
 h 37 0 https://learnvimscriptthehardway.stevelosh.com/chapters/54.html	Documentation / Learn Vimscript the Hard Way
+h 1 0 file://localhost/home/pr228844/.lynx/bookmarks.html	Bookmark file
+h 1 15 https://lite.qwant.com/?l=en	Qwant Lite
+h 37 4 https://lite.qwant.com/?l=en&q=syntax+of+css+file&t=web	syntax of css file | Qwant lite
+h 1 17 https://developer.mozilla.org/en-US/docs/Web/CSS/Comments	Comments - CSS: Cascading Style Sheets | MDN
+h 109 3 https://developer.mozilla.org/en-US/docs/Web/CSS	CSS: Cascading Style Sheets | MDN
+h 109 0 https://developer.mozilla.org/en-US/docs/Web/CSS/Syntax	Syntax - CSS: Cascading Style Sheets | MDN
+h 1 12 https://lynx.invisible-island.net/lynx_help/lynx_help_main.html	The Lynx Help Page â quick-links and detailed documentation
+h 73 0 https://lynx.invisible-island.net/lynx_help/keystrokes/keystroke_help.html	Help on Lynx Keystroke Commands
+h 1 0 file://localhost/tmp/lynxXXXXKGYZ3A/L598918-5233TMP.html	Information about the current document
+h 1 0 file://localhost/home/pr228844/.lynx/bookmarks.html	Bookmark file
+h 1 15 https://lite.qwant.com/?l=en	Qwant Lite
+h 1 23 https://lite.qwant.com/?l=en&q=CSS+declaration+ruleset+block&t=web	CSS declaration ruleset block | Qwant lite
+h 109 1 https://developer.mozilla.org/en-US/docs/Web/CSS/Syntax	Syntax - CSS: Cascading Style Sheets | MDN
+h 145 4 https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors	CSS selectors - CSS: Cascading Style Sheets | MDN
+h 150 0 https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes#Specifications	Pseudo-classes - CSS: Cascading Style Sheets | MDN
+h 1 0 file://localhost/tmp/lynxXXXXfLDOfN/L606988-7932TMP.html	Information about the current document
+h 1 0 file://localhost/home/pr228844/.lynx/bookmarks.html	Bookmark file
+h 1 15 https://lite.qwant.com/?l=en	Qwant Lite
+h 1 26 https://lite.qwant.com/?l=en&q=css+class&t=web	css class | Qwant lite
+h 145 0 https://way2tutorial.com/css/css_class.php	CSS class - Difference Between CSS class vs CSS ID
+h 1 0 file://localhost/home/pr228844/.lynx/bookmarks.html	Bookmark file
+h 1 15 https://lite.qwant.com/?l=en	Qwant Lite
+h 1 22 https://lite.qwant.com/?l=en&q=HTML+class+attribute&t=web	HTML class attribute | Qwant lite
+h 145 -1 https://lite.qwant.com/?l=pl	Qwant Lite
+h 1 0 https://www.marmiton.org/recettes/recette_gateau-au-yaourt_12719.aspx	Gâteau au yaourt : Recette de Gâteau au yaourt - Marmiton
+h 226 0 https://www.lemonde.fr/economie/article/2020/04/09/coronavirus-en-allemagne-face-a-l-ampleur-de-la-recession-la-pression-monte-pour-une-levee-du-confinement_6036099_3234.html	Coronavirus : en Allemagne, face à l’ampleur de la récession, la pression monte pour une levée du confinement
+h 109 0 https://www.lefigaro.fr/international/chine-chats-et-chiens-echappent-a-la-liste-des-animaux-comestibles-20200409	Ouvrir le panneau
+h 217 0 https://www.lemonde.fr/economie/article/2020/04/10/coronavirus-les-europeens-s-entendent-sur-un-plan-de-soutien-a-plus-de-500-milliards-d-euros_6036171_3234.html	Coronavirus : les Européens s’entendent sur un plan de soutien à plus de 500 milliards d’euros
+h 181 10 https://www.lemonde.fr/planete/article/2020/04/10/coronavirus-en-france-plus-de-12-000-morts-un-week-end-de-paques-sous-haute-surveillance_6036173_3244.html	Coronavirus : « On peut espérer un plateau, mais c’est un plateau très haut » : au moins 12 000 morts dans l’épidémie en France
+h 1 0 https://www.lemonde.fr/les-decodeurs/article/2020/03/20/coronavirus-la-france-pratique-t-elle-assez-de-tests_6033865_4355770.html	Coronavirus : la France pratique-t-elle assez de tests ?
 V 0 https://lite.qwant.com/	Qwant Lite
 V 1 file://localhost/home/pr228844/.lynx/bookmarks.html	Bookmark file
 V 2 https://www.20minutes.fr/	Municipales 2020
@@ -114,3 +151,30 @@ V 4 https://learnvimscriptthehardway.stevelosh.com/chapters/55.html	Distribution
 V 5 https://learnvimscriptthehardway.stevelosh.com/chapters/56.html	What Now? / Learn Vimscript the Hard Way
 V 6 https://www.lefigaro.fr/international/coronavirus-le-plan-de-l-italie-pour-sortir-graduellement-de-la-pandemie-20200405	Ouvrir le panneau
 V 7 https://www.lesechos.fr/industrie-services/pharmacie-sante/masques-la-filiere-textile-enclenche-la-production-a-grande-vitesse-1192226#xtor=RSS-153	Masques : la filière textile enclenche la production à grande vitesse | Les Echos
+V 2 https://lite.qwant.com/?l=en	Qwant Lite
+V 3 https://lite.qwant.com/?l=en&q=syntax+of+css+file&t=web	syntax of css file | Qwant lite
+V 4 https://www.w3schools.com/CSS/css_howto.asp	How to add CSS
+V 5 https://www.w3schools.com/cssref/default.asp	CSS Reference
+V 4 https://developer.mozilla.org/en-US/docs/Web/CSS/Comments	Comments - CSS: Cascading Style Sheets | MDN
+V 5 https://developer.mozilla.org/en-US/docs/Web/CSS	CSS: Cascading Style Sheets | MDN
+V 6 https://developer.mozilla.org/en-US/docs/Web/CSS/Syntax	Syntax - CSS: Cascading Style Sheets | MDN
+V 7 https://lynx.invisible-island.net/lynx_help/lynx_help_main.html	The Lynx Help Page â quick-links and detailed documentation
+V 8 https://lynx.invisible-island.net/lynx_help/keystrokes/keystroke_help.html	Help on Lynx Keystroke Commands
+V 3 https://lite.qwant.com/?l=en&q=CSS+declaration+ruleset+block&t=web	CSS declaration ruleset block | Qwant lite
+V 4 https://www.w3schools.com/Css/css_syntax.asp	CSS Syntax
+V 7 https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Cascade_and_inheritance	Cascade and inheritance - Learn web development | MDN
+V 7 https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors	CSS selectors - CSS: Cascading Style Sheets | MDN
+V 8 https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes#Specifications	Pseudo-classes - CSS: Cascading Style Sheets | MDN
+V 8 https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements#Specifications	Pseudo-elements - CSS: Cascading Style Sheets | MDN
+V 3 https://lite.qwant.com/?l=en&q=css+class&t=web	css class | Qwant lite
+V 4 https://way2tutorial.com/css/css_class.php	CSS class - Difference Between CSS class vs CSS ID
+V 3 https://lite.qwant.com/?l=en&q=HTML+class+attribute&t=web	HTML class attribute | Qwant lite
+V 4 https://lite.qwant.com/?l=pl	Qwant Lite
+V 4 https://www.w3schools.com/Tags/att_global_class.asp	HTML Global class Attribute
+V 5 https://www.marmiton.org/recettes/recette_gateau-au-yaourt_12719.aspx	Gâteau au yaourt : Recette de Gâteau au yaourt - Marmiton
+V 6 https://www.lemonde.fr/economie/article/2020/04/09/coronavirus-en-allemagne-face-a-l-ampleur-de-la-recession-la-pression-monte-pour-une-levee-du-confinement_6036099_3234.html	Coronavirus : en Allemagne, face à l’ampleur de la récession, la pression monte pour une levée du confinement
+V 7 https://www.lefigaro.fr/international/chine-chats-et-chiens-echappent-a-la-liste-des-animaux-comestibles-20200409	Ouvrir le panneau
+V 8 https://www.lemonde.fr/economie/article/2020/04/10/coronavirus-les-europeens-s-entendent-sur-un-plan-de-soutien-a-plus-de-500-milliards-d-euros_6036171_3234.html	Coronavirus : les Européens s’entendent sur un plan de soutien à plus de 500 milliards d’euros
+V 9 https://www.lemonde.fr/planete/article/2020/04/10/coronavirus-en-france-plus-de-12-000-morts-un-week-end-de-paques-sous-haute-surveillance_6036173_3244.html	Coronavirus : « On peut espérer un plateau, mais c’est un plateau très haut » : au moins 12 000 morts dans l’épidémie en France
+V 10 https://www.lemonde.fr/les-decodeurs/article/2020/03/20/coronavirus-la-france-pratique-t-elle-assez-de-tests_6033865_4355770.html	Coronavirus : la France pratique-t-elle assez de tests ?
+V 11 file://localhost/tmp/mutt.html	Entry into main screen

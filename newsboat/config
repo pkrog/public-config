@@ -7,3 +7,6 @@ color listnormal_unread color27  black
 color listfocus         color220 black
 color listfocus_unread  color196 black
 color article           color255 black
+browser "lynx %u"
+bind-key LEFT  quit
+bind-key RIGHT open

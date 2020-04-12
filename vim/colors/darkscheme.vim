@@ -45,9 +45,21 @@ hi Title                    term=bold       ctermfg=196             cterm=NONE
 hi Folded                   term=NONE       ctermfg=51  ctermbg=0   cterm=NONE
 hi fortranTab               term=NONE       ctermfg=255 ctermbg=236 cterm=NONE
 hi SpecialKey               term=NONE       ctermfg=31  ctermbg=0   cterm=NONE
+
 hi markdownCodeDelimiter    term=NONE       ctermfg=69              cterm=NONE
 hi markdownCode             term=NONE       ctermfg=69              cterm=NONE
 hi markdownCodeBlock        term=NONE       ctermfg=69              cterm=NONE
+
+hi LynxOutputHttpLink       term=underline  ctermfg=33              cterm=NONE
+hi LynxOutputLink           term=underline  ctermfg=220             cterm=NONE
+hi LynxOutputBulletStar     term=bold       ctermfg=154             cterm=NONE
+hi LynxOutputBulletPlus     term=NONE       ctermfg=208             cterm=NONE
+hi LynxOutputSharp          term=bold       ctermfg=196             cterm=NONE
+
+hi ManOutputTitle           term=underline  ctermfg=196             cterm=NONE
+hi ManOutputSection         term=underline  ctermfg=208             cterm=NONE
+hi ManOutputOption          term=underline  ctermfg=220             cterm=NONE
+hi ManOutputReference       term=underline  ctermfg=33              cterm=NONE
 
 hi Todo                     term=reverse    ctermfg=0   ctermbg=11  cterm=NONE
 hi Debug                    term=reverse    ctermfg=255 ctermbg=12  cterm=NONE
