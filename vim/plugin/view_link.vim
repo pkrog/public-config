@@ -1,14 +1,14 @@
 " Set default values for global variables
-if !exists("g:view_link_cmd")
+if ! exists("g:view_link_cmd")
 	let g:view_link_cmd = "lynx"
 endif
-if !exists("g:view_link_flags")
+if ! exists("g:view_link_flags")
 	let g:view_link_flags = "-dump -list_inline -width=1024"
 endif
-if !exists("g:view_link_filetype")
+if ! exists("g:view_link_filetype")
 	let g:view_link_filetype = "lynx_output"
 endif
-if !exists("g:view_link_chars")
+if ! exists("g:view_link_chars")
 	let g:view_link_chars = 'A-Za-z0-9_:/.?=-'
 endif
 
