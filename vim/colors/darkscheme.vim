@@ -50,6 +50,7 @@ hi markdownCodeDelimiter    term=NONE       ctermfg=69              cterm=NONE
 hi markdownCode             term=NONE       ctermfg=69              cterm=NONE
 hi markdownCodeBlock        term=NONE       ctermfg=69              cterm=NONE
 
+hi LynxOutputPageTitle      term=underline  ctermfg=196 ctermbg=220              cterm=NONE
 hi LynxOutputHttpLink       term=underline  ctermfg=33              cterm=NONE
 hi LynxOutputLink           term=underline  ctermfg=220             cterm=NONE
 hi LynxOutputBulletStar     term=bold       ctermfg=154             cterm=NONE

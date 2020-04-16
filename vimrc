@@ -9,7 +9,7 @@ set clipboard=unnamed
 colorscheme darkscheme
 set hlsearch " highlight search
 set incsearch " use incremental search
-set fileformat=unix
+"set fileformat=unix --> TODO set it on some file types ?
 set backspace=2 " Enable backspace.
 set guioptions=
 set autowrite
@@ -207,58 +207,59 @@ endfunction
 " Error formats {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"set errorformat& " Reset to default value
-set errorformat=%-GDEBUG%.%#                           " Ignore all debug messages, starting by DEBUG.
-set errorformat+=%-G[%.%#INFO%.%#]%.%#                  " Maven info message. We ignore all of them.
-set errorformat+=%A\ %#[javac]\ %f:%l:\ %m,%-Z\ %#[javac]\ %p^,%-C%.%# " Ant/Java. Put at beginning of list, otherwise another takes precedence.
+set errorformat=
 
-set errorformat+=Error\ in\ %f\ (line\ %l)      " Matlab    Note that it requires that the Matlab output be filtered first in order to add the .m extension to the file.
-
-" PHP
-" 1) DbAccessTest::test_01_resetDb
-" ParseError: syntax error, unexpected ';', expecting ']'
-" 
-" /home/pr228844/dev/exhalobase/site/src/ExhalobaseAccess.php:152
-" /home/pr228844/dev/exhalobase/tests/20_DbAccessTest.php:44
-set errorformat+=%f:%l
-" .PHP Fatal error:  Constant expression contains invalid operations in
-" /home/pr228844/dev/exhalobase/site/src/DbAcqFile.php on line 37
-set errorformat+=.PHP\ Fatal\ error:\ %#%m\ in\ %f\ on\ line\ %l
-set errorformat+=PHP\ Parse\ error:\ %#%m\ in\ %f\ on\ line\ %l
-
-" R
-"set errorformat^=%.%#[exec]%.%#\ %f:%l:%c:\ %m    " R error when run with devtools package
-"set errorformat+=%.%#(from\ %f#%l)%m  " R error when run with devtools package
-
-" R testthat
-" ── 1. Error: annotateMzValues() works correctly. (@BiodbCompounddbConn.R#121)  ─
-set errorformat+=%.%#.\ Error:\ %m\ (@%f#%l)\ %.%#
-
+set errorformat+=\ %#%n.\ %m\ %f:%l:%c%.%# " R testthat
+	"   8. .self$.parseDbLinks(parsed.content) R/KeggCompoundEntry.R:37:4
+set errorformat+=%.%#.\ Error:\ %m\ (@%f#%l)\ %.%# " R testthat
+	" ── 1. Error: annotateMzValues() works correctly. (@BiodbCompounddbConn.R#121)  ─
 set errorformat+=%m\ at\ %f:%l        " R testthat error
 set errorformat+=%m\ in\ %f\ (line\ %l\\,\ column\ %c) " BiocCheck error
 set errorformat+=%m\ (%f\\,\ line\ %l):\ %.%#  " BiocCheck error
 set errorformat+=%f\ (line\ %l\\,\ column\ %c) " BiocCheck error
 set errorformat+=%f\ (line\ %l) " BiocCheck error
+set errorformat+=.PHP\ Fatal\ error:\ %#%m\ in\ %f\ on\ line\ %l " PHP
+	" .PHP Fatal error:  Constant expression contains invalid operations in
+	" /home/pr228844/dev/exhalobase/site/src/DbAcqFile.php on line 37
+set errorformat+=PHP\ Parse\ error:\ %#%m\ in\ %f\ on\ line\ %l " PHP
+set errorformat+=%m\ at\ %f\ line\ %l. " Perl
+set errorformat+=%f:%l:\ %m " Custom file read with cfile
 set errorformat+=%f:%l\ %m " BiocCheck error
 
-set errorformat+=%m\ at\ %f\ line\ %l.          " Perl
+" set errorformat=%-GDEBUG%.%#                           " Ignore all debug messages, starting by DEBUG.
+"set errorformat+=%-G[%.%#INFO%.%#]%.%#                  " Maven info message. We ignore all of them.
+" set errorformat+=%A\ %#[javac]\ %f:%l:\ %m,%-Z\ %#[javac]\ %p^,%-C%.%# " Ant/Java. Put at beginning of list, otherwise another takes precedence.
+" 
+" set errorformat+=Error\ in\ %f\ (line\ %l)      " Matlab    Note that it requires that the Matlab output be filtered first in order to add the .m extension to the file.
 
-set errorformat+=%f:%l:\ %m " Custom file read with cfile
+" R
+"set errorformat^=%.%#[exec]%.%#\ %f:%l:%c:\ %m    " R error when run with devtools package
+"set errorformat+=%.%#(from\ %f#%l)%m  " R error when run with devtools package
 
-" Java
-set errorformat+=[%.%#WARNING%.%#]\ %f:[%l\\,%c]\ %m    " Maven warning message. `%.%#` is here to catch color codes.
-set errorformat+=[%.%#ERROR%.%#]\ %f:[%l\\,%c]\ %m      " Maven error message. `%.%#` is here to catch color codes.
-"set errorformat-=%f\\|%l\\|\ %m
-"set errorformat+=%.%#\ %f\\|%l\\|\ %m        " ant/Java
-"set errorformat+=%f\\|%l\\|\ %m
+"
+"
+"" Java
+"set errorformat+=[%.%#WARNING%.%#]\ %f:[%l\\,%c]\ %m    " Maven warning message. `%.%#` is here to catch color codes.
+"set errorformat+=[%.%#ERROR%.%#]\ %f:[%l\\,%c]\ %m      " Maven error message. `%.%#` is here to catch color codes.
+""set errorformat-=%f\\|%l\\|\ %m
+""set errorformat+=%.%#\ %f\\|%l\\|\ %m        " ant/Java
+""set errorformat+=%f\\|%l\\|\ %m
 
-" ant/Java
-"let fmt = '%A\ %#[javac]\ %f:%l:\ %m,'
-"	\ . '%A\ %#[aapt]\ %f:%l:\ %m,'
-"	\ . '%-Z\ %#[javac]\ %p^,'
-"	\ . '%C\ %#[javac]\ %m,'
-"	\ . '%-C%.%#'
-"execute 'set errorformat+=' . fmt
+"" PHP
+"" 1) DbAccessTest::test_01_resetDb
+"" ParseError: syntax error, unexpected ';', expecting ']'
+""
+"" /home/pr228844/dev/exhalobase/site/src/ExhalobaseAccess.php:152
+"" /home/pr228844/dev/exhalobase/tests/20_DbAccessTest.php:44
+"set errorformat+=%f:%l
+"
+"" ant/Java
+""let fmt = '%A\ %#[javac]\ %f:%l:\ %m,'
+""	\ . '%A\ %#[aapt]\ %f:%l:\ %m,'
+""	\ . '%-Z\ %#[javac]\ %p^,'
+""	\ . '%C\ %#[javac]\ %m,'
+""	\ . '%-C%.%#'
+""execute 'set errorformat+=' . fmt
 
 " Spell checking {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

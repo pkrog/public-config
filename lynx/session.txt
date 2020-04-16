@@ -1,28 +1,31 @@
 # lynx session
 / syntax
-g file://localhost/tmp/mutt.html
-g https://www.lemonde.fr/planete/article/2020/04/10/coronavirus-en-france-plus-de-12-000-morts-un-week-end-de-paques-sous-haute-surveillance_6036173_3244.html
-g https://www.lefigaro.fr/international/chine-chats-et-chiens-echappent-a-la-liste-des-animaux-comestibles-20200409
-g http://www.marmiton.org/recettes/recette_gateau-au-yaourt_12719.aspx
-g https://www.lesechos.fr/industrie-services/pharmacie-sante/0603042648391-masques-la-filiere-textile-enclenche-la-production-a-grande-vitesse-2338854.php#xtor=RSS-153
-g https://www.bbc.co.uk/sport/52169835
-g https://www.lefigaro.fr/sciences/coronavirus-vers-un-port-generalise-du-masque-20200404
-g https://www.lemonde.fr/idees/article/2020/04/04/ursula-von-der-leyen-cette-solidarite-est-au-c-ur-meme-de-l-europe-et-c-est-ce-qui-va-lui-permettre-de-renaitre_6035513_3232.html
-g https://www.lefigaro.fr/sciences/le-groupe-sanguin-o-mieux-arme-contre-le-covid-19-20200403
-g https://www.bbc.co.uk/news/entertainment-arts-52149055
-g https://learnvimscriptthehardway.stevelosh.com/
-g https://lite.qwant.com/
-g https://www.liberation.fr/checknews/2020/04/03/la-france-a-t-elle-intercepte-des-masques-a-destination-de-la-suede_1784053?xtor=rss-450
-g https://www.lemonde.fr/economie/article/2020/04/03/disney-joue-un-tour-infernal-a-ses-intermittents-du-spectacle_6035486_3234.html
-g https://www.lemonde.fr/international/article/2020/04/04/coronavirus-le-limogeage-controverse-d-un-commandant-de-porte-avions-devenu-lanceur-d-alerte_6035514_3210.html
-g http://sport24.lefigaro.fr/scan-sport/actualites/harcelement-moral-et-blagues-douteuses-une-ex-journaliste-de-france-tv-denonce-998590
-g https://www.lemonde.fr/planete/article/2020/04/05/coronavirus-paris-repense-sa-strategie-de-resistance-aux-crises_6035609_3244.html
-g https://www.bbc.co.uk/news/uk-52170053
-g https://www.lefigaro.fr/international/coronavirus-le-plan-de-l-italie-pour-sortir-graduellement-de-la-pandemie-20200405
-g file://localhost/home/pr228844/.lynx/bookmarks.html
-g https://www.lemonde.fr/economie/article/2020/04/09/coronavirus-en-allemagne-face-a-l-ampleur-de-la-recession-la-pression-monte-pour-une-levee-du-confinement_6036099_3234.html
-g https://www.lemonde.fr/economie/article/2020/04/10/coronavirus-les-europeens-s-entendent-sur-un-plan-de-soutien-a-plus-de-500-milliards-d-euros_6036171_3234.html
+g https://www.ouest-france.fr/sante/virus/coronavirus/coronavirus-dix-huit-millions-de-personnes-devraient-rester-confinees-apres-le-11-mai-6808901
+g https://www.lemonde.fr/idees/article/2020/04/13/coronavirus-le-confinement-ne-suffit-pas_6036423_3232.html
 g https://www.lemonde.fr/international/article/2020/04/10/la-crise-du-coronavirus-fait-emerger-des-dissensions-au-sein-du-pouvoir-chinois_6036211_3210.html
+g https://www.lemonde.fr/economie/article/2020/04/10/coronavirus-les-europeens-s-entendent-sur-un-plan-de-soutien-a-plus-de-500-milliards-d-euros_6036171_3234.html
+g https://www.lemonde.fr/economie/article/2020/04/09/coronavirus-en-allemagne-face-a-l-ampleur-de-la-recession-la-pression-monte-pour-une-levee-du-confinement_6036099_3234.html
+g file://localhost/home/pr228844/.lynx/bookmarks.html
+g https://www.lefigaro.fr/international/coronavirus-le-plan-de-l-italie-pour-sortir-graduellement-de-la-pandemie-20200405
+g https://www.bbc.co.uk/news/uk-52170053
+g https://www.lemonde.fr/planete/article/2020/04/05/coronavirus-paris-repense-sa-strategie-de-resistance-aux-crises_6035609_3244.html
+g http://sport24.lefigaro.fr/scan-sport/actualites/harcelement-moral-et-blagues-douteuses-une-ex-journaliste-de-france-tv-denonce-998590
+g https://www.lemonde.fr/international/article/2020/04/04/coronavirus-le-limogeage-controverse-d-un-commandant-de-porte-avions-devenu-lanceur-d-alerte_6035514_3210.html
+g https://www.lemonde.fr/economie/article/2020/04/03/disney-joue-un-tour-infernal-a-ses-intermittents-du-spectacle_6035486_3234.html
+g https://www.liberation.fr/checknews/2020/04/03/la-france-a-t-elle-intercepte-des-masques-a-destination-de-la-suede_1784053?xtor=rss-450
+g https://lite.qwant.com/
+g https://learnvimscriptthehardway.stevelosh.com/
+g https://www.bbc.co.uk/news/entertainment-arts-52149055
+g https://www.lefigaro.fr/sciences/le-groupe-sanguin-o-mieux-arme-contre-le-covid-19-20200403
+g https://www.lemonde.fr/idees/article/2020/04/04/ursula-von-der-leyen-cette-solidarite-est-au-c-ur-meme-de-l-europe-et-c-est-ce-qui-va-lui-permettre-de-renaitre_6035513_3232.html
+g https://www.lefigaro.fr/sciences/coronavirus-vers-un-port-generalise-du-masque-20200404
+g https://www.bbc.co.uk/sport/52169835
+g https://www.lesechos.fr/industrie-services/pharmacie-sante/0603042648391-masques-la-filiere-textile-enclenche-la-production-a-grande-vitesse-2338854.php#xtor=RSS-153
+g http://www.marmiton.org/recettes/recette_gateau-au-yaourt_12719.aspx
+g https://www.lefigaro.fr/international/chine-chats-et-chiens-echappent-a-la-liste-des-animaux-comestibles-20200409
+g https://www.lemonde.fr/planete/article/2020/04/10/coronavirus-en-france-plus-de-12-000-morts-un-week-end-de-paques-sous-haute-surveillance_6036173_3244.html
+g file://localhost/tmp/mutt.html
+g https://www.lemonde.fr/international/article/2020/04/15/coronavirus-paris-exprime-son-mecontentement-aupres-de-l-ambassadeur-de-chine_6036626_3210.html
 h 1 0 https://lite.qwant.com/	Qwant Lite
 h 1 4 file://localhost/home/pr228844/.lynx/bookmarks.html	Bookmark file
 h 1 0 https://www.20minutes.fr/	Municipales 2020
@@ -178,3 +181,6 @@ V 8 https://www.lemonde.fr/economie/article/2020/04/10/coronavirus-les-europeens
 V 9 https://www.lemonde.fr/planete/article/2020/04/10/coronavirus-en-france-plus-de-12-000-morts-un-week-end-de-paques-sous-haute-surveillance_6036173_3244.html	Coronavirus : « On peut espérer un plateau, mais c’est un plateau très haut » : au moins 12 000 morts dans l’épidémie en France
 V 10 https://www.lemonde.fr/les-decodeurs/article/2020/03/20/coronavirus-la-france-pratique-t-elle-assez-de-tests_6033865_4355770.html	Coronavirus : la France pratique-t-elle assez de tests ?
 V 11 file://localhost/tmp/mutt.html	Entry into main screen
+V 12 https://www.lemonde.fr/idees/article/2020/04/13/coronavirus-le-confinement-ne-suffit-pas_6036423_3232.html	Coronavirus : le confinement ne suffit pas
+V 13 https://www.lemonde.fr/international/article/2020/04/15/coronavirus-paris-exprime-son-mecontentement-aupres-de-l-ambassadeur-de-chine_6036626_3210.html	Coronavirus : la France convoque l’ambassadeur de Chine pour lui exprimer son mécontentement
+V 14 https://www.ouest-france.fr/sante/virus/coronavirus/coronavirus-dix-huit-millions-de-personnes-devraient-rester-confinees-apres-le-11-mai-6808901	Coronavirus. Dix-huit millions de personnes devraient rester confinées après le 11 mai
