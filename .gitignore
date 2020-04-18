@@ -5,3 +5,4 @@ newsboat/*
 !newsboat/urls
 !newsboat/config
 links/links.his
+lynx/session.txt
