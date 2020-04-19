@@ -1,7 +1,7 @@
 # -*- Makefile-gmake -*-
 # vi: fdm=marker
 
-BINARIES=view_csv view_tsv get-battery-charge view_vcal
+BINARIES=view_csv view_tsv get-battery-charge view_vcal termcolors
 ROOT_CFG=signature screenrc tmux.conf tmux-plugins bashrc zshrc profile bash_profile zprofile xsessionrc newsboat links lynx lynxrc
 CONFIG_DIR=redshift.conf canto
 
