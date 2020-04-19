@@ -1,12 +1,13 @@
+# vi: ft=newsboatcfg
 auto-reload yes
 reload-time 10
-color info              color118 black
-color background        color255 black
-color listnormal        color255 black
-color listnormal_unread color27  black
-color listfocus         color220 black
-color listfocus_unread  color196 black
-color article           color255 black
+color info              color154 color0
+color background        color255 color0
+color listnormal        color255 color0
+color listnormal_unread color75  color0
+color listfocus         color220 color0
+color listfocus_unread  color207 color0
+color article           color255 color0
 browser "lynx %u"
 bind-key LEFT  quit
 bind-key RIGHT open
