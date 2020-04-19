@@ -1,4 +1,4 @@
-" vi: tw=0 ts=4 sw=4 ft=colorvim
+" vi: tw=0 ts=4 sw=4
 " To reload: colorscheme darkscheme
 
 set background=dark
@@ -46,6 +46,20 @@ hi Folded                   term=NONE       ctermfg=51  ctermbg=0   cterm=NONE
 hi fortranTab               term=NONE       ctermfg=255 ctermbg=236 cterm=NONE
 hi SpecialKey               term=NONE       ctermfg=31  ctermbg=0   cterm=NONE
 
+hi netrwCompress    term=NONE       ctermfg=220             cterm=NONE
+hi netrwData        term=NONE       ctermfg=43              cterm=NONE
+hi netrwHdr         term=NONE       ctermfg=213             cterm=NONE
+hi netrwLex         term=NONE       ctermfg=213             cterm=NONE
+hi netrwYacc        term=NONE       ctermfg=213             cterm=NONE
+hi netrwLib         term=NONE       ctermfg=34              cterm=NONE
+hi netrwObj         term=NONE       ctermfg=34              cterm=NONE
+hi netrwTilde       term=NONE       ctermfg=34              cterm=NONE
+hi netrwTmp         term=NONE       ctermfg=34              cterm=NONE
+hi netrwTags        term=NONE       ctermfg=34              cterm=NONE
+hi netrwDoc         term=NONE       ctermfg=202             cterm=NONE
+hi netrwSymLink     term=NONE       ctermfg=154             cterm=NONE
+hi netrwMakefile    term=NONE       ctermfg=92              cterm=NONE
+
 hi markdownCodeDelimiter    term=NONE       ctermfg=34              cterm=NONE
 hi markdownCode             term=NONE       ctermfg=69              cterm=NONE
 hi markdownCodeBlock        term=NONE       ctermfg=69              cterm=NONE
@@ -92,6 +106,14 @@ hi CSVColumnHeaderEven      term=NONE       ctermfg=69  ctermbg=0   cterm=NONE
 hi CSVColumnHeaderOdd       term=reverse    ctermfg=9   ctermbg=0   cterm=NONE
 hi CSVColumnEven            term=NONE       ctermfg=69  ctermbg=0   cterm=NONE
 hi CSVColumnOdd             term=reverse    ctermfg=9   ctermbg=0   cterm=NONE
+
+for bgcol in range(255, 0, -1)
+	for fgcol in range(255, 0, -1)
+		if bgcol != fgcol && (fgcol == 0 || fgcol == 255 || bgcol == 0 || bgcol == 255)
+			exec 'hi ColorFg'.fgcol.'Bg'.bgcol.' term=NONE ctermfg='.fgcol.' ctermbg='.bgcol.' cterm=NONE'
+		endif
+	endfor
+endfor
 
 " DESCRIPTIONS
 " Directory     VIM. Directory inside Netrw file system explorer.
