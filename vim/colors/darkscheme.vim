@@ -102,10 +102,10 @@ hi Ignore                   term=reverse    ctermfg=0   ctermbg=100 cterm=NONE
 hi Cursor                   term=reverse    ctermfg=0   ctermbg=80  cterm=NONE
 hi MoreMsg                  term=reverse    ctermfg=0   ctermbg=30  cterm=NONE
 
-hi CSVColumnHeaderEven      term=NONE       ctermfg=69  ctermbg=0   cterm=NONE
-hi CSVColumnHeaderOdd       term=reverse    ctermfg=9   ctermbg=0   cterm=NONE
-hi CSVColumnEven            term=NONE       ctermfg=69  ctermbg=0   cterm=NONE
-hi CSVColumnOdd             term=reverse    ctermfg=9   ctermbg=0   cterm=NONE
+hi CSVColumnHeaderEven      term=NONE       ctermfg=40  ctermbg=0   cterm=NONE
+hi CSVColumnHeaderOdd       term=reverse    ctermfg=208 ctermbg=0   cterm=NONE
+hi CSVColumnEven            term=NONE       ctermfg=40  ctermbg=0   cterm=NONE
+hi CSVColumnOdd             term=reverse    ctermfg=208 ctermbg=0   cterm=NONE
 
 for bgcol in range(255, 0, -1)
 	for fgcol in range(255, 0, -1)

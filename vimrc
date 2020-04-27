@@ -59,7 +59,7 @@ set list
 autocmd FileType make set listchars=tab:\|\ 
 
 " Whitespaces at end of line
-au BufRead,BufNewFile * match Debug /\s\+$/
+"au BufRead,BufNewFile * match Debug /\s\+$/
 
 " Highlighting of TODO, URGENT, NOTE, etc {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
