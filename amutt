@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Rename tmux window name/title
-echo $'\ek'$(basename $0)$'\e\\'
+echo $'\ekapplemail\e\\'
 
 # Run mutt
 mutt -F ~/.apple.muttrc
