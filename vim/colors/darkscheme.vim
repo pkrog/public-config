@@ -1,4 +1,4 @@
-" vi: tw=0 ts=4 sw=4
+" vi: tw=0 ts=4 sw=4 ft=vim_colors
 " To reload: colorscheme darkscheme
 
 set background=dark

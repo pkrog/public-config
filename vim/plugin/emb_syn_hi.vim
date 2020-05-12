@@ -37,7 +37,7 @@ function! AddEmbeddedSyntaxHighlighting(filetype, start, end, textSnipHl) abort
 	endif
 
 	" Create syntax region
-	let syn_cmd = 'syntax region '.s:main_syntax.'Emb'.ft
+	let syn_cmd = 'syntax region '.l:main_syntax.'Emb'.ft
 	let syn_cmd .= ' matchgroup='.a:textSnipHl
 	let syn_cmd .= ' keepend'
 	let syn_cmd .= ' start="'.a:start.'" end="'.a:end.'"'
