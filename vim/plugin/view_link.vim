@@ -1,3 +1,7 @@
+" Usage
+" <leader>gw in visual mode for opening web page (selected link).
+" <leader>gw in normal mode to open link under cursor.
+
 " Set default values for global variables
 if ! exists("g:view_link_cmd")
 	let g:view_link_cmd = "lynx"
@@ -75,18 +79,16 @@ function! s:ViewLinkUnderCursor()
 	let saved_unnamed_register = @@
 	let saved_cursor = getcurpos()
 
-"	echom g:view_link_chars
-"	echom 'CHARS='.g:view_link_chars.'#'
+	" Select
 	execute "normal! ?\\vhttps\\?://\<cr>v/\\v[^".g:view_link_chars."]+\<cr>hy"
-"	echom 'CHARS='.g:view_link_chars.'#'
-"	echom 'SELECTION='.@@
 
+	" Restore cursor position
 	call setpos('.', saved_cursor)
 
 	" Print web page output
 	call s:DumpWebpage(@@)
 
-	" Restore values
+	" Restore unnamed register
 	let @@ = saved_unnamed_register
 
 endfunction
@@ -95,12 +97,13 @@ endfunction
 command! -nargs=1 ViewLink call <SID>DumpWebpage(<args>)
 
 " Operator for normal mode
-nnoremap <leader>wp :set operatorfunc=<SID>ViewLinkOperator<cr>g@
+"nnoremap <leader>gw :set operatorfunc=<SID>ViewLinkOperator<cr>g@
 
-" Operator for visual mode
-vnoremap <leader>wp :<c-u>call <SID>ViewLinkOperator(visualmode())<cr>
+" Operator for opening selected link in visual mode
+vnoremap <leader>gw :<c-u>call <SID>ViewLinkOperator(visualmode())<cr>
 
-nnoremap <leader>vl :call <SID>ViewLinkUnderCursor()<cr>
+" Operator for opening link under cursor in normal mode
+nnoremap <leader>gw :call <SID>ViewLinkUnderCursor()<cr>
 "nnoremap <leader>ol :execute "!tmux new-window lynx"<cr><cr>
 " select link under cursor:
 " l?http<cr>:nohlsearch<cr>v/[^ )]<cr>
