@@ -1,11 +1,28 @@
+" TODO Move to general script for all buffers
+" Read special modeline
+let modeline_number = search("vimvars:", "cn", 4)
+if modeline_number != 0
+	let line = getline(modeline_number)
+	let vars = []
+	call substitute(line, 'b:[a-z_]\+=[^ ]\+', '\=add(vars, submatch(0))', 'g')
+	for var in vars
+		execute "let " . var
+	endfor
+endif
+
 " Set default embedded syntax
 if ! exists("g:markdown_embedded_syntax")
 	" Keys are tags and values are syntax names
-	let g:markdown_embedded_syntax = {'apache':'', 'bash':'', 'c':'', 'cfg':'conf', 'conf':'', 'cpp':'', 'css':'', 'help':'', 'html':'', 'js':'javascript', 'javascript':'', 'muttrc':'', 'perl':'', 'php':'', 'python':'', 'r':'', 'ruby':'', 'sh':'bash', 'sql':'', 'vim':'', 'xml':'', 'yaml':''}
+	" ex.: {'apache':'', 'js':'javascript' }
+	let g:markdown_embedded_syntax = {}
+endif
+if ! exists("b:markdown_embedded_syntax")
+	let b:markdown_embedded_syntax = {}
 endif
 
-for ktag in keys(g:markdown_embedded_syntax)
-	let vsyn = g:markdown_embedded_syntax[ktag]
+let s:embedded_syntax = extend(g:markdown_embedded_syntax, b:markdown_embedded_syntax)
+for ktag in keys(s:embedded_syntax)
+	let vsyn = s:embedded_syntax[ktag]
 	if vsyn == ''
 		let vsyn = ktag
 	endif
