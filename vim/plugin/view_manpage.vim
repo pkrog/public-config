@@ -58,36 +58,11 @@ endfunction
 " View manpage under cursor
 function! s:ViewManpageUnderCursor()
 
-	let l:selected = 0
-
 	" Backup values
-	let saved_unnamed_register = @@
-	let saved_cursor = getcurpos()
+	let l:saved_unnamed_register = @@
 
-	let l:cur_char = matchstr(getline('.'), '\%' . col('.') . 'c.')
-	if l:cur_char =~? "^\\v[".g:view_manpage_chars."]$"
-		" Search backward for first good char
-		if col('.') != 1
-			let l:search_start = "?\\v(^|[^".g:view_manpage_chars."])\<cr>"
-			execute "normal! ".l:search_start
-		endif
-
-		" Search forward for first good char
-		let l:cur_char = matchstr(getline('.'), '\%' . col('.') . 'c.')
-		if l:cur_char !~? "^\\v[".g:view_manpage_chars."]$"
-			let l:search_first_good_char = "/\\v[".g:view_manpage_chars."]\<cr>"
-			execute "normal! ".l:search_first_good_char
-		endif
-
-		" Search for end
-		let l:search_end = "/\\v([^".g:view_manpage_chars."]+|$)\<cr>"
-		execute "normal! v".l:search_end."hy"
-
-		let l:selected = 1
-	endif
-
-	" Restore cursor position
-	call setpos('.', saved_cursor)
+	" Copy text under cursor
+	let l:selected = SelectAndCopyAtCursorPos(g:view_manpage_chars)
 
 	" View man page
 	if l:selected
@@ -95,7 +70,7 @@ function! s:ViewManpageUnderCursor()
 	endif
 
 	" Restore unnamed register
-	let @@ = saved_unnamed_register
+	let @@ = l:saved_unnamed_register
 
 endfunction
 
