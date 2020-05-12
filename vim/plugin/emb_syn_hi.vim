@@ -1,17 +1,20 @@
 function! AddEmbeddedSyntaxHighlighting(filetype, start, end, textSnipHl) abort
 
-	" Back up and disable current syntax definition.
-	" Some syntax files (e.g. cpp.vim) do nothing if b:current_syntax is defined.
+	" Back up some variables and options
 	if exists('b:current_syntax')
-		let s:main_syntax = b:current_syntax
-		let s:backed_up_syntax = b:current_syntax
+		" Some syntax files (e.g. cpp.vim) do nothing if b:current_syntax is defined.
+		let l:main_syntax = b:current_syntax
+		let l:backed_up_syntax = b:current_syntax
 		unlet b:current_syntax
 	else
-		let s:main_syntax = 'text'
+		let l:main_syntax = 'text'
+	endif
+	if exists('&l:foldmethod')
+		let l:foldmethod_bkp = &l:foldmethod
 	endif
 
 	let ft=toupper(a:filetype)
-	let group = s:main_syntax . 'Group'.ft
+	let group = l:main_syntax . 'Group'.ft
 
 	" Load syntax highlighting of language to embed
 	let syn_cmd = 'syntax include @'.group.' syntax/'.a:filetype.'.vim'
@@ -23,11 +26,14 @@ function! AddEmbeddedSyntaxHighlighting(filetype, start, end, textSnipHl) abort
 		" No after syntax file
 	endtry
 
-	" Restore backed up syntax
-	if exists('s:backed_up_syntax')
-		let b:current_syntax = s:backed_up_syntax
+	" Restore variables and options
+	if exists('l:backed_up_syntax')
+		let b:current_syntax = l:backed_up_syntax
 	else
 		unlet b:current_syntax
+	endif
+	if exists('l:foldmethod_bkp')
+		let &l:foldmethod = l:foldmethod_bkp
 	endif
 
 	" Create syntax region
