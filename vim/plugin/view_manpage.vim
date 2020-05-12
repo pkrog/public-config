@@ -83,5 +83,5 @@ command! -nargs=1 ViewManpage call <SID>DumpManpage(<args>)
 " Operator for opening selected manpage in visual mode
 vnoremap <leader>gm :<c-u>call <SID>ViewManpageOperator(visualmode())<cr>
 
-" Operator for opening manpage under cursor un normal node
+" Operator for opening manpage under cursor in normal node
 nnoremap <leader>gm :call <SID>ViewManpageUnderCursor()<cr>

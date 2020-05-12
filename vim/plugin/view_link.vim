@@ -32,7 +32,7 @@ function! s:ViewLinkOperator(type)
 	endif
 
 	" Print web page output
-	call s:DumpWebpage(@@)
+	call DumpWebpage(@@)
 
 	" Restore default register
 	let @@ = saved_unnamed_register
@@ -40,7 +40,7 @@ function! s:ViewLinkOperator(type)
 endfunction
 
 " Open window and write output of browser into it.
-function! s:DumpWebpage(link)
+function! DumpWebpage(link)
 
 	" Backup default register
 	let saved_unnamed_register = @@
@@ -86,7 +86,7 @@ function! s:ViewLinkUnderCursor()
 	call setpos('.', saved_cursor)
 
 	" Print web page output
-	call s:DumpWebpage(@@)
+	call DumpWebpage(@@)
 
 	" Restore unnamed register
 	let @@ = saved_unnamed_register
@@ -94,7 +94,7 @@ function! s:ViewLinkUnderCursor()
 endfunction
 
 " View link command
-command! -nargs=1 ViewLink call <SID>DumpWebpage(<args>)
+command! -nargs=1 ViewLink call DumpWebpage(<args>)
 
 " Operator for normal mode
 "nnoremap <leader>gw :set operatorfunc=<SID>ViewLinkOperator<cr>g@
