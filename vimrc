@@ -225,6 +225,8 @@ set errorformat+=PHP\ Parse\ error:\ %#%m\ in\ %f\ on\ line\ %l " PHP
 set errorformat+=%m\ at\ %f\ line\ %l. " Perl
 set errorformat+=%f:%l:\ %m " Custom file read with cfile
 set errorformat+=%f:%l\ %m " BiocCheck error
+set errorformat+=%m\ in\ %f\ on\ line\ %l " PHP syntax error
+set errorformat+=%f:%l " line error in PHP Unit stack print
 
 " set errorformat=%-GDEBUG%.%#                           " Ignore all debug messages, starting by DEBUG.
 "set errorformat+=%-G[%.%#INFO%.%#]%.%#                  " Maven info message. We ignore all of them.
