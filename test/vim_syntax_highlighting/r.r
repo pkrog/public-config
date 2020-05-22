@@ -1,5 +1,8 @@
 # vi: ft=r
 
+# TODO URGENT IDEA
+TODO <- 1
+
 library(getopt)  # 'library' -> PreProc
 
 #' @include TxtEntry.R

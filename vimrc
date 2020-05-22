@@ -42,7 +42,7 @@ set cinoptions=(0,u0,U0)
 " Paths
 set path+=~/dev/public-notes
 set path+=~/dev/private-notes
-set path+=~/dev/pierricks_notes
+set path+=~/dev/cea_notes
 
 " Function for getting syntax highlithing group at current cursor place.
 function! SyntaxItem()
@@ -60,16 +60,6 @@ autocmd FileType make set listchars=tab:\|\
 
 " Whitespaces at end of line
 "au BufRead,BufNewFile * match Debug /\s\+$/
-
-" Highlighting of TODO, URGENT, NOTE, etc {{{1
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-if has("autocmd")
-	au BufWinEnter * let w:m1=matchadd('Error', 'TODO \(BROKEN\|BUG\|URGENT\|IMPORTANT\|ERROR\|DEPRECATED\|HACK\|FIXME\)', -1)
-	au BufWinEnter * let w:m1=matchadd('Debug', 'NOTE\|INFO\|IDEA\|XXX\|DONE', -1)
-	au BufWinEnter * let w:m1=matchadd('Todo', '\(TODO \(READ\|EXPLAIN\|REMOVE\|REFACTOR\|REVIEW\)\)\|TODO', -1)
-	" Test: TODO, TODO READ, TODO URGENT, TODO ERROR, TODO REFACTOR, NOTE
-endif
 
 " Netrw {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -382,6 +372,19 @@ syntax on " Set last because of csv.vim plugin
 augroup filetype_vim
 	autocmd!
 	autocmd FileType vim setlocal foldmethod=marker
+augroup END
+
+" Highlighting of TODO, URGENT, NOTE, etc {{{1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+augroup syntax_notes
+	autocmd!
+	autocmd Syntax * syntax keyword allTodo TODO READ EXPLAIN REMOVE REFACTOR REVIEW containedin=.*Comment.* contained
+	autocmd Syntax * syntax keyword allNote NOTE INFO IDEA XXX DONE containedin=.*Comment.* contained
+	autocmd Syntax * syntax keyword allUrgent URGENT DEPRECATED BROKEN BUG IMPORTANT ERROR HACK FIXME containedin=.*Comment.* contained
+	autocmd Syntax * highlight link allTodo Todo
+	autocmd Syntax * highlight link allNote Debug
+	autocmd Syntax * highlight link allUrgent Error
 augroup END
 
 " Included syntax highlighting {{{1

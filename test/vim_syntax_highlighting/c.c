@@ -2,6 +2,23 @@
 #define ZAP "SOMETEXT"    /* '#define' --> Macro */
 #define N 100
 
+/* NOTE NOTES */
+/* URGENT */
+// URGENT blabla
+// URGENT
+// DEPRECATED
+// DEPRECATED A
+// URGENT_
+/* TODO */
+#define NOTE 1
+#define NOTE_1
+#define URGENT
+#define DEPRECATED
+#define URGENT A
+#define MYNOTE
+#define TODO 
+int URGENT = 1;
+
 typedef int size; /* 'typedef' --> Structure */
 
 /* Foo function */
