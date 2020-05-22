@@ -76,3 +76,6 @@
 [submodule "vim/pack/myplugins/opt/vim-markdown"]
 	path = vim/pack/myplugins/opt/vim-markdown
 	url = https://github.com/plasticboy/vim-markdown
+[submodule "vim/pack/myplugins/start/vim-cpp-modern"]
+	path = vim/pack/myplugins/start/vim-cpp-modern
+	url = https://github.com/bfrg/vim-cpp-modern
