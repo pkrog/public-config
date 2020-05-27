@@ -53,10 +53,6 @@ function! s:PhpSearchManualUnderCursor()
 
 endfunction
 
-" Define key mapping for searching in PHP manual
-" TODO
-" https://www.php.net/manual-lookup.php?pattern=TOSEARCH&scope=quickref
-
 " Operator for searching selected word in visual mode
 vnoremap <leader>sm :<c-u>call <SID>PhpSearchManualOperator(visualmode())<cr>
 

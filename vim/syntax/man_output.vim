@@ -8,10 +8,10 @@ syntax match manOutputShortOpt /\v[^A-Za-z0-9_-]-[A-Za-z0-9][^A-Za-z0-9_-]/hs=s+
 syntax match manOutputLongOpt   /\v[^A-Za-z0-9_-]--?[A-Za-z0-9_-]+/hs=s+1
 syntax match manOutputRef       /\v[a-z0-9_-]+\([0-9n]\)/
 
-highlight link manOutputTitle    ManOutputTitle
-highlight link manOutputSection  ManOutputSection
-highlight link manOutputShortOpt ManOutputOption
-highlight link manOutputLongOpt  ManOutputOption
-highlight link manOutputRef      ManOutputReference
+highlight link manOutputTitle    Title
+highlight link manOutputSection  Section
+highlight link manOutputShortOpt Option
+highlight link manOutputLongOpt  Option
+highlight link manOutputRef      Reference
 
 let b:current_syntax = "man_output"
