@@ -45,7 +45,18 @@ function! s:DumpManpage(word)
 	endif
 
 	" Insert man output
-	execute "read !man -P cat ".shellescape(a:word)
+	execute "silent read !man -P cat ".shellescape(a:word)
+	if v:shell_error != 0
+		execute "normal! 1GVGd"
+		execute "silent read !".shellescape(a:word)." --help"
+		if v:shell_error != 0
+			execute "normal! 1GVGd"
+			execute "silent read !".shellescape(a:word)." -h"
+			if v:shell_error != 0
+				execute "normal! 1GVGd"
+			endif
+		endif
+	endif
 
 	" Go to first line and remove it (empty line)
 	execute "normal! 1Gdd"
