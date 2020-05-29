@@ -1,6 +1,6 @@
 " Set default values for global variables
 if ! exists("g:r_search_chars")
-	let g:r_search_chars = 'A-Za-z0-9_'
+	let g:r_search_chars = 'A-Za-z0-9_\\.'
 endif
 
 " Open new window and write output of `R help` into it.
