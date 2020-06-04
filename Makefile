@@ -1,9 +1,9 @@
 # -*- Makefile-gmake -*-
 # vi: fdm=marker
 
-BINARIES=view_csv view_tsv get-battery-charge view_vcal termcolors amutt gmutt
-ROOT_CFG=signature screenrc tmux.conf tmux-plugins bashrc zshrc profile bash_profile zprofile xsessionrc newsboat links lynx lynxrc
-CONFIG_DIR=redshift.conf canto
+BINARIES=view_csv view_tsv get-battery-charge view_vcal termcolors amutt gmutt ctrlbright
+ROOT_CFG=signature screenrc tmux.conf tmux-plugins bashrc zshrc profile bash_profile zprofile xsessionrc xinitrc newsboat links lynx lynxrc i3status.conf
+CONFIG_DIR=redshift.conf canto i3
 
 # Constants {{{1
 ################################################################
