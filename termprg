@@ -1,0 +1,60 @@
+#!/usr/bin/bash
+
+X_PROGS=,openmw,
+NO_X_PROGS=,vim,
+
+debug() {
+	local m=$1
+
+	echo DEBUG $m >&2
+}
+
+is_xprg() {
+	local ret=1
+	
+	for prg in $* ; do
+
+		# Search in NO X personal list
+		is_not_xprg=$(echo $NO_X_PROGS | grep ",$prg,")
+		debug "is_not_xprg=$is_not_xprg"
+		[[ -n $is_not_xprg ]] && break
+
+		# Search in .desktop files
+		local is_xprg=$(cat /usr/share/applications/*.desktop | grep ^Exec= | sed 's/^Exec=\([^ ]*\).*/\1/' | sed 's!^.*/\([^/]*\)$!\1!' | sort | uniq | grep "^$prg$")
+		debug "is_xprg=$is_xprg"
+
+		# Search in X personal list
+		if [[ -z $is_xprg ]] ; then
+			is_xprg=$(echo $X_PROGS | grep ",$prg,")
+		fi
+		debug "is_xprg=$is_xprg"
+
+		# Return if is an X prog
+		if [[ -n $is_xprg ]] ; then
+			ret=0
+			break
+		fi
+	done
+	debug "ret=$ret"
+
+	return $ret
+}
+
+# Get choice
+prg=$(dmenu_path | dmenu)
+debug "prg=$prg"
+
+# Get real prog if sym link
+prg_path=$(which $prg)
+debug "prg_path=$prg_path"
+if [[ -L $prg_path ]] ; then
+	realprg=$(readlink $prg_path)
+fi
+debug "realprg=$realprg"
+
+# Execute
+if is_xprg $prg $realprg ; then
+	$prg
+else
+	xfce4-terminal -e "$prg"
+fi

@@ -1,0 +1,3 @@
+#!/usr/bin/bash
+
+XSESSION=$1 startx
