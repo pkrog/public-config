@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 X_PROGS=,openmw,
-NO_X_PROGS=,vim,
+NO_X_PROGS=,vim,R,
 
 debug() {
 	local m=$1
@@ -11,6 +11,7 @@ debug() {
 
 is_xprg() {
 	local ret=1
+	local prg=
 	
 	for prg in $* ; do
 
@@ -54,7 +55,10 @@ debug "realprg=$realprg"
 
 # Execute
 if is_xprg $prg $realprg ; then
+	debug "Run as X prog"
 	$prg
 else
-	xfce4-terminal -e "$prg"
+	debug "Run as term prog"
+	title=$(basename $(echo "$prg" | sed 's/ .*$//'))
+	xfce4-terminal -T "$title" -e "$prg"
 fi
