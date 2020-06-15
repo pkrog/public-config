@@ -41,6 +41,9 @@ set cinoptions=(0,u0,U0)
 
 " Paths
 set path+=~/dev/public-notes
+set path+=~/dev/public-notes/dev
+set path+=~/dev/public-notes/cuisine
+set path+=~/dev/public-notes/misc
 set path+=~/dev/private-notes
 set path+=~/dev/cea_notes
 
