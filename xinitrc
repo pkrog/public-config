@@ -1,5 +1,7 @@
 # vi: ft=sh
 
+xmodmap -e "keysym Alt_R = Multi_key"
+
 case "$XSESSION" in
 	i3|i3wm) XSESSION=i3;;
 	xmonad)  XSESSION=xmonad;;
