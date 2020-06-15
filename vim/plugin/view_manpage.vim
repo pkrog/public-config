@@ -3,7 +3,7 @@
 
 " Set default values for global variables
 if ! exists("g:view_manpage_chars")
-	let g:view_manpage_chars = 'A-Za-z0-9_'
+	let g:view_manpage_chars = 'A-Za-z0-9_-'
 endif
 
 " Operator
