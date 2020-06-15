@@ -5,4 +5,5 @@ if [ -r "$HOME/.profile" ] ; then
 fi
 
 # Configure compose key
-xmodmap -e "keysym Alt_R = Multi_key"
+# XXX Does not work. Had to put int inside .xinitrc
+# xmodmap -e "keysym Alt_R = Multi_key"
