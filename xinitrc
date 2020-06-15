@@ -1,5 +1,7 @@
 # vi: ft=sh
 
+xrdb -merge .Xresources
+
 # Set compose key
 xmodmap -e "keysym Alt_R = Multi_key"
 
