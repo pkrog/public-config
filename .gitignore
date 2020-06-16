@@ -6,3 +6,5 @@ newsboat/*
 !newsboat/config
 links/links.his
 lynx/session.txt
+vimb/*
+!vimb/bookmark

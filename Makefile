@@ -3,7 +3,7 @@
 
 BINARIES=view_csv view_tsv get-battery-charge view_vcal termcolors amutt gmutt ctrlbright runx termprg
 ROOT_CFG=signature screenrc tmux.conf tmux-plugins bashrc zshrc profile bash_profile zprofile xsessionrc xinitrc newsboat links lynx lynxrc i3status.conf Xmodmap Xresources
-CONFIG_DIR=redshift.conf canto i3
+CONFIG_DIR=redshift.conf canto i3 vimb
 
 # Constants {{{1
 ################################################################
