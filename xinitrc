@@ -1,5 +1,9 @@
 # vi: ft=sh
 
+# Set background
+feh --bg-fill -d --randomize ~/data/wallpapers/
+
+# Read X configuration (for urxvt, ...)
 xrdb -merge .Xresources
 
 # Set compose key
