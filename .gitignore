@@ -8,3 +8,7 @@ links/links.his
 lynx/session.txt
 vimb/*
 !vimb/bookmark
+*.errors
+*.hi
+*.o
+xmonad-x86_64-linux
