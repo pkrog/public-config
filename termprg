@@ -1,5 +1,14 @@
 #!/usr/bin/bash
 
+# Choose terminal
+for term in $TERMINAL urxvt xfce4-terminal xterm ; do
+	term_exists=$(which $term 2>/dev/null)
+	if [[ -n $term_exists ]] ; then
+		TERMINAL=$term
+		break
+	fi
+done
+
 X_PROGS=,openmw,
 NO_X_PROGS=,vim,R,
 
@@ -60,5 +69,5 @@ if is_xprg $prg $realprg ; then
 else
 	debug "Run as term prog"
 	title=$(basename $(echo "$prg" | sed 's/ .*$//'))
-	xfce4-terminal -T "$title" -e "$prg"
+	$TERMINAL -T "$title" -e "$prg"
 fi

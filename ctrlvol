@@ -15,5 +15,10 @@ elif [[ $1 == inc ]] ; then
 	pactl set-sink-volume @DEFAULT_SINK@ +10%
 else
 	# Print volume
-	pactl list sinks | grep -i volume | head -n 1 | sed 's/^.*[^0-9]\([0-9]\+%\).*$/\1/'
+	muted=$(pactl list sinks | grep -i 'mute: *yes')
+	if [[ -n $muted ]] ; then
+		echo muted
+	else
+		pactl list sinks | grep -i volume | head -n 1 | sed 's/^.*[^0-9]\([0-9]\+%\).*$/\1/'
+	fi
 fi

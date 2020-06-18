@@ -1,15 +1,25 @@
-Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
-       , bgColor = "black"
-       , fgColor = "grey"
-       , position = TopW L 90
-       , commands = [ Run Weather "EGPF" ["-t"," <tempF>F","-L","64","-H","77","--normal","green","--high","red","--low","lightblue"] 36000
-                   , Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10
-                   , Run Memory ["-t","Mem: <usedratio>%"] 10
-                   , Run Swap [] 10
-                   , Run Date "%a %b %_d %l:%M" "date" 10
-                   , Run StdinReader
-                    ]
+-- vi: ft=haskell
+-- See https://wiki.archlinux.org/index.php/Xmobar
+-- and https://github.com/jaor/xmobar
+Config {
+       -- apperance
+--       font       = "xft:Bitstream Vera Sans Mono:size=9:bold:antialias=true"
+         bgColor  = "black"
+       , fgColor  = "grey"
+       , position = Top
+
+       -- layout
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ %cpu% | %memory% * %swap%    <fc=#ee9a00>%date%</fc> | %EGPF%"
+       , template = "%StdinReader% }{ %cpu% | %memory% | %swap% | Vol: %vol% | <fc=#ee9a00>%date%</fc>"
+
+       -- plugins
+       -- Refresh rate is in tenths of second
+       , commands = [ Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10
+                   , Run Memory ["-t","Mem: <usedratio>%"] 10
+                   , Run Swap [] 10
+                   , Run Date "%a %d %b %H:%M" "date" 10
+                   , Run StdinReader
+                   , Run Com "ctrlvol" [] "vol" 10
+                    ]
        }
