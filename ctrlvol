@@ -1,0 +1,16 @@
+#!/usr/bin/bash
+
+YES=yes
+if [[ $1 == mute ]] ; then
+	MUTE=$YES
+	pactl set-sink-mute @DEFAULT_SINK@ toggle
+elif [[ $1 == micmute ]] ; then
+	MICMUTE=$YES
+	pactl set-source-mute @DEFAULT_SOURCE@ toggle
+elif [[ $1 == dec ]] ; then
+	DECREASE=$YES
+	pactl set-sink-volume @DEFAULT_SINK@ -10%
+elif [[ $1 == inc ]] ; then
+	INCREASE=$YES
+	pactl set-sink-volume @DEFAULT_SINK@ +10%
+fi
