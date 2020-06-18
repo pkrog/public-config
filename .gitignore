@@ -12,3 +12,7 @@ vimb/*
 *.hi
 *.o
 xmonad-x86_64-linux
+cabal/bin
+cabal/logs
+cabal/packages
+cabal/store

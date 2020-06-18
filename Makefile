@@ -1,8 +1,8 @@
 # -*- Makefile-gmake -*-
 # vi: fdm=marker
 
-BINARIES=view_csv view_tsv get-battery-charge view_vcal termcolors amutt gmutt ctrlbright runx termprg
-ROOT_CFG=signature screenrc tmux.conf tmux-plugins bashrc zshrc profile bash_profile zprofile xsessionrc xinitrc newsboat links lynx lynxrc i3status.conf Xmodmap Xresources xmonad
+BINARIES=view_csv view_tsv get-battery-charge view_vcal termcolors amutt gmutt ctrlbright runx termprg ctrlvol
+ROOT_CFG=signature screenrc tmux.conf tmux-plugins bashrc zshrc profile bash_profile zprofile xsessionrc xinitrc newsboat links lynx lynxrc i3status.conf Xmodmap Xresources xmonad xmobarrc mplayer cabal
 CONFIG_DIR=redshift.conf canto i3 vimb
 
 # Constants {{{1
@@ -40,11 +40,7 @@ all:
 # Install {{{1
 ################################################################
 
-install: versioning dev imgbg x11 $(HOME)/.mplayer/config $(addprefix $(HOME)/.config/,$(CONFIG_DIR)) $(addprefix $(HOME)/.,$(ROOT_CFG)) $(addprefix $(HOME)/bin/,$(BINARIES))
-
-# Folders
-$(addprefix $(HOME)/,.mplayer .config bin):
-	mkdir -p "$@"
+install: versioning dev imgbg x11 $(addprefix $(HOME)/.config/,$(CONFIG_DIR)) $(addprefix $(HOME)/.,$(ROOT_CFG)) $(addprefix $(HOME)/bin/,$(BINARIES))
 
 $(HOME)/.%: %
 	ln -sf "$(CURDIR)/$<" "$@"
@@ -61,14 +57,13 @@ $(HOME)/.bash_profile: profile
 $(HOME)/.zprofile: profile
 	ln -sf "$(CURDIR)/$<" "$@"
 
-$(HOME)/.config/%: % $(HOME)/.config
+$(HOME)/.config/%: %
+	@mkdir -p $(HOME)/.config
 	ln -sf "$(CURDIR)/$<" "$@"
 
-$(HOME)/bin/%: % $(HOME)/bin
+$(HOME)/bin/%: %
+	@mkdir -p $(HOME)/bin
 	ln -sf "$(CURDIR)/$<" $@
-
-$(HOME)/.mplayer/config: mplayer.conf $(HOME)/.mplayer
-	ln -sf "$(CURDIR)/$<" "$@"
 
 # Uninstall, test and clean {{{1
 ################################################################
