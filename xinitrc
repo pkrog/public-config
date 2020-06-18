@@ -1,10 +1,14 @@
 # vi: ft=sh
 
-# Set background
-feh --bg-fill -d --randomize ~/data/wallpapers/
-
 # Read X configuration (for urxvt, ...)
 xrdb -merge .Xresources
+
+# Set trayer (for status bar)
+trayer --edge top --align right --SetDockType true --SetPartialStrut true \
+ --expand true --width 10 --transparent true --tint 0x191970 --height 12 &
+
+# Set background
+feh --bg-fill -d --randomize ~/data/wallpapers/
 
 # Set compose key
 xmodmap -e "keysym Alt_R = Multi_key"
