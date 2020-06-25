@@ -19,7 +19,7 @@ main = do
         borderWidth        = 1
       , terminal           = "urxvt"
       , layoutHook = avoidStruts  $  layoutHook def
---      , workspaces              = withScreens nScreens (map show [1..5])
+      , workspaces              = withScreens nScreens (map show [1..9])
 
       -- For one xmobar:
       --, logHook = dynamicLogWithPP xmobarPP
@@ -41,17 +41,19 @@ xmobarCommand (S s) = unwords ["xmobar", "-x", show s] --, "-t", template s] whe
 --    template 0 = "%StdinReader%"
 --    template _ = "%date%%StdinReader%"
 
+-- Status bar format for workspaces, layout indicator and window title
+-- See https://hackage.haskell.org/package/xmonad-contrib-0.16/docs/XMonad-Hooks-DynamicLog.html
 pp h s = marshallPP s xmobarPP {
---    ppCurrent           = color "yellow",
-    ppCurrent = dzenColor "red" "#efebe7",
-    ppVisible = wrap "[" "]",
-    ppSort    = getSortByXineramaRule,
---    ppVisible           = color "white",
---    ppHiddenNoWindows   = color dark,
-    ppUrgent            = color "red",
---    ppSep               = "",
---    ppOrder             = \(wss:layout:title:_) -> ["\NUL", title, "\NUL", wss],
-    ppOutput            = hPutStrLn h,
-    ppTitle             = xmobarColor "green" "" . shorten 50
+      ppOutput          = hPutStrLn h
+    , ppSort            = getSortByXineramaRule
+    , ppCurrent           = xmobarColor "#eeee00" "black" . wrap "[" "]"
+    , ppHidden            = xmobarColor "white" "black"
+    , ppVisible           = xmobarColor "#2390ee" "black" . wrap "(" ")"
+    , ppHiddenNoWindows   = color "purple"
+    , ppUrgent            = xmobarColor "#f00000" "black" 
+--  , ppSep            = ""
+--  , ppWsSep          = " "
+--  , ppOrder          = \(wss:layout:title:_) -> ["\NUL", title, "\NUL", wss]
+    , ppTitle            = xmobarColor "green" "" . shorten 50
     }
     where color c = xmobarColor c ""
