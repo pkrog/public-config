@@ -50,8 +50,12 @@ is_xprg() {
 	return $ret
 }
 
+# Get font
+font=$(xrdb -query -all | grep font | head -n 1 | sed 's/^.*: *//')
+[[ -n $font ]] || font=6x13
+
 # Get choice
-prg=$(dmenu_path | dmenu)
+prg=$(dmenu_path | dmenu -fn "$font")
 debug "prg=$prg"
 
 # Get real prog if sym link

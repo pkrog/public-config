@@ -4,23 +4,26 @@ displays=$(xrandr -q | grep ' connected' | sed 's/^\([^ ]*\) .*$/\1/')
 YES=yes
 if [[ $1 == dec ]] ; then
 	DECREASE=$YES
-fi
-if [[ $DECREASE == $YES ]] ; then
-	OP='-'
-else
-	OP='+'
+elif [[ $1 == inc ]] ; then
+	INCREASE=$YES
 fi
 STEP=0.1
 MAX=2.0
 MIN=0.1
 
-# Loop on all displays
+# Get brightness of first display
 for display in $displays ; do
-
-	# Get current brightness
 	brightness=$(xrandr --verbose | grep -i brightness | head -n 1 | sed 's/.*[Bb]rightness: *\([0-9.]*\)$/\1/')
+done
+
+if [[ $INCREASE == $YES || $DECREASE == $YES ]] ; then
 
 	# Compute new brightness
+	if [[ $DECREASE == $YES ]] ; then
+		OP='-'
+	else
+		OP='+'
+	fi
 	brightness=$(echo "$brightness $OP $STEP" | bc -l)
 	if [[ $(echo "$brightness > $MAX" | bc -l) -eq 1 ]] ; then
 		brightness=$MAX
@@ -29,6 +32,12 @@ for display in $displays ; do
 		brightness=$MIN
 	fi
 
-	# Set new brightness
-	xrandr --output $display --brightness $brightness
-done
+	# Set _SAME_ brightness on all displays
+	for display in $displays ; do
+		xrandr --output $display --brightness $brightness
+	done
+fi
+
+# Display new/current brightness in %
+percent_brightness=$(echo "scale=0;$brightness * 100 / 1" | bc -l)
+echo ${percent_brightness}%

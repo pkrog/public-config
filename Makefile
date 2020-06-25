@@ -2,7 +2,7 @@
 # vi: fdm=marker
 
 BINARIES=view_csv view_tsv get-battery-charge view_vcal termcolors amutt gmutt ctrlbright runx termprg ctrlvol
-ROOT_CFG=signature screenrc tmux.conf tmux-plugins bashrc zshrc profile bash_profile zprofile xsessionrc xinitrc newsboat links lynx lynxrc i3status.conf Xmodmap Xresources xmonad xmobarrc mplayer cabal
+ROOT_CFG=signature screenrc tmux.conf tmux-plugins bashrc zshrc profile bash_profile zprofile xsessionrc xinitrc newsboat links lynx lynxrc i3status.conf Xmodmap Xresources xmonad xmobarrc mplayer cabal xbindkeysrc
 CONFIG_DIR=redshift.conf canto i3 vimb
 
 # Constants {{{1

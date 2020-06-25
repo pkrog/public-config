@@ -342,8 +342,10 @@ nmap sf :SpellCheck fr<cr>
 nmap si :SpellCheck it<cr>
 nmap sn :se nospell<cr>
 "    S  delete current line and go into insert mode.
-nmap t  gt
-nmap T  gT
+"nmap t  gt
+nnoremap <tab> gt
+nnoremap <s-tab> gT
+"nmap T  gT
 "    x  cut
 "    zb Put cursor line at bottom
 "    zc Close a fold.
@@ -382,7 +384,7 @@ augroup END
 
 augroup syntax_notes
 	autocmd!
-	autocmd Syntax * syntax keyword allTodo TODO READ EXPLAIN REMOVE REFACTOR REVIEW containedin=.*Comment.* contained
+	autocmd Syntax * syntax keyword allTodo TODO TOREAD TOEXPLAIN TOREMOVE TOREFACTOR TOREVIEW containedin=.*Comment.* contained
 	autocmd Syntax * syntax keyword allNote NOTE INFO IDEA XXX DONE containedin=.*Comment.* contained
 	autocmd Syntax * syntax keyword allUrgent URGENT DEPRECATED BROKEN BUG IMPORTANT ERROR HACK FIXME DISABLED containedin=.*Comment.* contained
 	autocmd Syntax * highlight link allTodo Todo

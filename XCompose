@@ -1,28 +1,34 @@
 <Multi_key> <4>     : "€" U20AC
+<Multi_key> <8>     : "°" U00B0
 <Multi_key> <`> <A> : "À" U00C0
 <Multi_key> <`> <a> : "à" U00E0
+<Multi_key> <`> <E> : "È" U00C8
+<Multi_key> <`> <e> : "è" U00E8
+<Multi_key> <a> <A> : "À" U00C0
+<Multi_key> <a> <a> : "à" U00E0
+<Multi_key> <a> <E> : "È" U00C8
+<Multi_key> <a> <e> : "è" U00E8
+<Multi_key> <a> <U> : "Ù" U00D9
+<Multi_key> <a> <u> : "ù" U00F9
 <Multi_key> <i> <A> : "Â" U00C2
 <Multi_key> <i> <a> : "â" U00E2
 <Multi_key> <e> <E> : "É" U00C9
 <Multi_key> <e> <e> : "é" U00E9
-<Multi_key> <`> <E> : "È" U00C8
-<Multi_key> <`> <e> : "è" U00E8
 <Multi_key> <i> <E> : "Ê" U00CA
 <Multi_key> <i> <e> : "ê" U00EA
-<Multi_key> <o> <E> : "Œ" U0152
-<Multi_key> <o> <e> : "œ" U0153
-<Multi_key> <u> <E> : "Ë" U00CB
-<Multi_key> <u> <e> : "ë" U00EB
 <Multi_key> <i> <I> : "Î" U00CE
 <Multi_key> <i> <i> : "î" U00EE
-<Multi_key> <u> <I> : "Ï" U00CF
-<Multi_key> <u> <i> : "ï" U00EF
-<Multi_key> <u> <O> : "Ö" U00D6
-<Multi_key> <u> <o> : "ö" U00F6
 <Multi_key> <i> <O> : "Ô" U00D4
 <Multi_key> <i> <o> : "ô" U00F4
 <Multi_key> <i> <U> : "Û" U00DB
 <Multi_key> <i> <u> : "û" U00FB
+<Multi_key> <o> <E> : "Œ" U0152
+<Multi_key> <o> <e> : "œ" U0153
+<Multi_key> <u> <E> : "Ë" U00CB
+<Multi_key> <u> <e> : "ë" U00EB
+<Multi_key> <u> <I> : "Ï" U00CF
+<Multi_key> <u> <i> : "ï" U00EF
+<Multi_key> <u> <O> : "Ö" U00D6
+<Multi_key> <u> <o> : "ö" U00F6
 <Multi_key> <c> <C> : "Ç" U00C7
 <Multi_key> <c> <c> : "ç" U00E7
-<Multi_key> <8>     : "°" U00B0
