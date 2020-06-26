@@ -9,7 +9,9 @@ NETWORK=
 ONELINE=
 ECHO_FLAGS=
 SEP=" | "
-ORDER="bn"
+ORDER="nbas"
+AUDIO=
+SCREEN=
 
 function get_platform {
 	[[ -n $PLATFORM ]] || PLATFORM=$(uname)
@@ -20,12 +22,14 @@ function print_help {
 	echo "Usage: sysinfo [options]"
 	echo
 	echo "Options:"
+	echo "   -a, --audio          Print audio volume information."
 	echo "   -b, --battery        Display battery information."
+	echo "   -g, --debug          Debug mode."
+	echo "   -h, --help           Print this help message."
 	echo "   -l, --oneline        Print information on one line only."
 	echo "   -n, --network        Display network information."
 	echo "   -o, --order          Set order of information display. Default is $ORDER."
-	echo "   -g, --debug          Debug mode."
-	echo "   -h, --help           Print this help message."
+	echo "   -s, --screen         Print screen brightness information."
 }
 
 function error {
@@ -53,12 +57,14 @@ function read_args {
 
 	while true ; do
 		case $1 in
+			-a|--audio)     print=$YES ; AUDIO=$YES ;;
 			-b|--battery)   print=$YES ; BATTERY=$YES ;;
 			-g|--debug)     DEBUG=$((DEBUG + 1)) ;;
 			-h|--help)      print_help ; exit 0 ;;
 			-l|--oneline)   ONELINE=$YES ;;
 			-n|--network)   print=$YES ; NETWORK=$YES ;;
 			-o|--order)     ORDER=$2 ; shift ;;
+			-s|--screen)    print=$YES ; SCREEN=$YES ;;
 			-)              error "Illegal option $1." ;;
 			--)             error "Illegal option $1." ;;
 			--*)            error "Illegal option $1." ;;
@@ -69,16 +75,20 @@ function read_args {
 		shift
 	done
 
+	[[ -z $print ]] && AUDIO=$YES
 	[[ -z $print ]] && BATTERY=$YES
 	[[ -z $print ]] && NETWORK=$YES
+	[[ -z $print ]] && SCREEN=$YES
 
 	[[ -z "$*" ]] || error "Forbidden remaining arguments: $*."
 
 	# Debug
 	debug 1 "Arguments are : $args"
+	debug 1 "AUDIO=$AUDIO"
 	debug 1 "BATTERY=$BATTERY"
 	debug 1 "NETWORK=$NETWORK"
 	debug 1 "ONELINE=$ONELINE"
+	debug 1 "SCREEN=$SCREEN"
 }
 
 function print_battery {
@@ -122,6 +132,34 @@ function print_network {
 	echo $ECHO_FLAGS "WiFi: $wifi_card $wifi_ssid $wifi_link_quality/70 $wifi_signal_level dBm"
 }
 
+function print_audio {
+	muted=$(pactl list sinks | grep -i 'mute: *yes')
+	if [[ -n $muted ]] ; then
+		msg=muted
+	else
+		msg=$(pactl list sinks | grep -i volume | head -n 1 | sed 's/^.*[^0-9]\([0-9]\+%\).*$/\1/')
+	fi
+	echo $ECHO_FLAGS "Audio: $msg"
+}
+
+function get_screen_brightness {
+
+	local brightness=
+	local displays=$(xrandr -q | grep ' connected' | sed 's/^\([^ ]*\) .*$/\1/')
+	# Get brightness of first display
+	for display in $displays ; do
+		brightness=$(xrandr --verbose | grep -i brightness | head -n 1 | sed 's/.*[Bb]rightness: *\([0-9.]*\)$/\1/')
+	done
+
+	echo $brightness
+}
+
+function print_screen {
+	brightness=$(get_screen_brightness)
+	percent_brightness=$(echo "scale=0;$brightness * 100 / 1" | bc -l)
+	echo $ECHO_FLAGS "Brightness: ${percent_brightness}%"
+}
+
 # Main
 
 read_args "$@"
@@ -133,8 +171,10 @@ for x in $(echo $ORDER | sed "s/\(.\)/\1 /g") ; do
 
 	# Get command to run
 	case $x in
+		a) test_var=AUDIO   ; cmd=print_audio ;;
 		b) test_var=BATTERY ; cmd=print_battery ;;
 		n) test_var=NETWORK ; cmd=print_network ;;
+		s) test_var=SCREEN  ; cmd=print_screen ;;
 	esac
 
 	# Run command
