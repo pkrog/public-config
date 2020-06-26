@@ -10,7 +10,7 @@ for term in $TERMINAL urxvt xfce4-terminal xterm ; do
 done
 
 X_PROGS=,openmw,
-NO_X_PROGS=,vim,R,
+NO_X_PROGS=,vim,R,ranger,
 
 debug() {
 	local m=$1
