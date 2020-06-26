@@ -3,8 +3,13 @@
 VERSION=0.1
 YES=yes
 DEBUG=0
-BATTERY=
 PLATFORM=
+BATTERY=
+NETWORK=
+ONELINE=
+ECHO_FLAGS=
+SEP=" | "
+ORDER="bn"
 
 function get_platform {
 	[[ -n $PLATFORM ]] || PLATFORM=$(uname)
@@ -16,6 +21,9 @@ function print_help {
 	echo
 	echo "Options:"
 	echo "   -b, --battery        Display battery information."
+	echo "   -l, --oneline        Print information on one line only."
+	echo "   -n, --network        Display network information."
+	echo "   -o, --order          Set order of information display. Default is $ORDER."
 	echo "   -g, --debug          Debug mode."
 	echo "   -h, --help           Print this help message."
 }
@@ -48,6 +56,9 @@ function read_args {
 			-b|--battery)   print=$YES ; BATTERY=$YES ;;
 			-g|--debug)     DEBUG=$((DEBUG + 1)) ;;
 			-h|--help)      print_help ; exit 0 ;;
+			-l|--oneline)   ONELINE=$YES ;;
+			-n|--network)   print=$YES ; NETWORK=$YES ;;
+			-o|--order)     ORDER=$2 ; shift ;;
 			-)              error "Illegal option $1." ;;
 			--)             error "Illegal option $1." ;;
 			--*)            error "Illegal option $1." ;;
@@ -59,28 +70,81 @@ function read_args {
 	done
 
 	[[ -z $print ]] && BATTERY=$YES
+	[[ -z $print ]] && NETWORK=$YES
 
 	[[ -z "$*" ]] || error "Forbidden remaining arguments: $*."
 
 	# Debug
 	debug 1 "Arguments are : $args"
+	debug 1 "BATTERY=$BATTERY"
+	debug 1 "NETWORK=$NETWORK"
+	debug 1 "ONELINE=$ONELINE"
 }
 
 function print_battery {
+
+	local charge=
+	local plugged=
+
 	if [[ $(get_platform) == Darwin ]] ; then
 		charge=$(pmset -g batt | grep InternalBattery | sed -E 's/^.*[[:space:]]([[:digit:]]+%).*$/\1/')
 		plugged=$(pmset -g batt | grep InternalBattery | sed -E -e 's/^.*InternalBattery[^;]*; *([^;]*) *;.*$/\1/' -e 's/discharging/v/' -e 's/charging|AC attached/^/' -e 's/charged//')
-	elif [[ $(get_platform) == Linux ]] && which acpi >/dev/null 2>/dev/null ; then
+	elif [[ $(get_platform) == Linux ]] && which acpi 2>&1 >/dev/null ; then
 		charge=$(acpi -b | sed 's/^.* \([0-9]\+%\).*$/\1/')
 		plugged=$(acpi -a | sed -e 's/^.* \(on\|off\)-line$/\1/' -e 's/on/^/' -e 's/off/v/')
 	else
 		debug 1 "Do not know how to get battery information for platform $(get_platform)."
 	fi
-	echo "$charge$plugged"
+
+	echo $ECHO_FLAGS "Batt: $charge$plugged"
+}
+
+function print_network {
+
+	local wifi_card=
+	local wifi_ssid=
+	local wifi_link_quality= # Link quality maximum is 70
+	local wifi_signal_level= # Signal level is in dBm (dB mW = decibel-milliwatts, power ratio in dB for one mW).
+
+	# Use /proc
+	if [[ $(get_platform) == Linux ]] ; then
+
+		wifi_card=$(iw dev | grep Interface | head -n 1 | sed 's/^\s*Interface *//')
+		wifi_ssid=$(iw dev | grep ssid | head -n 1 | sed 's/^\s*ssid *//')
+		wifi_link_quality=$(grep $wifi_card /proc/net/wireless | sed 's/^[^:]*:\s\+[0-9]\+\s\+\([0-9]\+\)\..*$/\1/')
+		wifi_signal_level=$(grep $wifi_card /proc/net/wireless | sed 's/^[^:]*:\s\+[0-9]\+\s\+[0-9.-]\+\s\+\(-[0-9]\+\)\..*$/\1/')
+
+	# No info
+	else
+		debug 1 "Do not know how to get network information for platform $(get_platform)."
+	fi
+
+	echo $ECHO_FLAGS "WiFi: $wifi_card $wifi_ssid $wifi_link_quality/70 $wifi_signal_level dBm"
 }
 
 # Main
 
 read_args "$@"
 
-[[ $BATTERY == $YES ]] && print_battery
+[[ $ONELINE == $YES ]] && ECHO_FLAGS=-n
+
+n_printed=0
+for x in $(echo $ORDER | sed "s/\(.\)/\1 /g") ; do
+
+	# Get command to run
+	case $x in
+		b) test_var=BATTERY ; cmd=print_battery ;;
+		n) test_var=NETWORK ; cmd=print_network ;;
+	esac
+
+	# Run command
+	if [[ -n $test_var && -n $cmd && ${!test_var} == $YES ]] ; then
+		[[  $ONELINE == $YES && $n_printed -gt 0 ]] && echo -n "$SEP"
+		$cmd
+		((++n_printed))
+	fi
+done
+
+[[ $ONELINE == $YES ]] && echo
+
+exit 0

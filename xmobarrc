@@ -11,7 +11,7 @@ Config {
        -- layout
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ %cpu% | %memory% | %swap% | Vol: %vol% | Batt: %batt% | Bright: %bright% | <fc=#ee9a00>%date%</fc>"
+       , template = "%StdinReader% }{ %cpu% | %memory% | %swap% | Vol: %vol% | %sysinfo% | Bright: %bright% | <fc=#ee9a00>%date%</fc>"
 
        -- plugins
        -- Refresh rate is in tenths of second
@@ -21,7 +21,7 @@ Config {
                    , Run Date "%a %d %b %H:%M" "date" 10
                    , Run StdinReader
                    , Run Com "ctrlvol" [] "vol" 10
-                   , Run Com "get-battery-charge" [] "batt" 100
+                   , Run Com "sysinfo" ["-l"] "" 10
                    , Run Com "ctrlbright" [] "bright" 10
                     ]
        }

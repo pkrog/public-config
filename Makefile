@@ -1,7 +1,7 @@
 # -*- Makefile-gmake -*-
 # vi: fdm=marker
 
-BINARIES=view_csv view_tsv get-battery-charge view_vcal termcolors amutt gmutt ctrlbright runx termprg ctrlvol
+BINARIES=view_csv view_tsv view_vcal termcolors amutt gmutt ctrlbright runx termprg ctrlvol sysinfo
 ROOT_CFG=signature screenrc tmux.conf tmux-plugins bashrc zshrc profile bash_profile zprofile xsessionrc xinitrc newsboat links lynx lynxrc i3status.conf Xmodmap Xresources xmonad xmobarrc mplayer cabal xbindkeysrc
 CONFIG_DIR=redshift.conf canto i3 vimb
 
