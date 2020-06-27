@@ -19,6 +19,8 @@ INCVOL=
 DECVOL=
 INCBRIGHT=
 DECBRIGHT=
+COLORING=
+XMOBAR=
 
 # Get platform {{{1
 ################################################################
@@ -37,6 +39,7 @@ function print_help {
 	echo "Options:"
 	echo "   -a, --audio          Print audio volume information."
 	echo "   -b, --battery        Display battery information."
+	echo "   -c, --coloring       Enable coloring of output."
 	echo "   -g, --debug          Debug mode."
 	echo "       --decbright      Decrease screen brightness."
 	echo "       --decvol         Decrease audio volume."
@@ -49,6 +52,7 @@ function print_help {
 	echo "   -n, --network        Display network information."
 	echo "   -o, --order          Set order of information display. Default is $ORDER."
 	echo "   -s, --screen         Print screen brightness information."
+	echo "   -x, --xmobar         Output for xmobar."
 }
 
 # Error {{{1
@@ -74,6 +78,79 @@ function debug {
 	[[ $DEBUG -ge $lvl ]] && echo "[DEBUG] $msg" >&2
 }
 
+# Set color {{{1
+################################################################
+
+function set_color {
+
+	local color=$1
+
+	if [[ $COLORING == $YES ]] ; then
+		if [[ $XMOBAR == $YES ]] ; then
+			case $color in
+				green) echo -n "<fc=#00ff00>" ;;
+				yellow) echo -n "<fc=#ffff00>" ;;
+				orange) echo -n "<fc=#ff8800>" ;;
+				red) echo -n "<fc=#ff0000>" ;;
+			esac
+		else
+			case $color in
+				green) echo -n $'\e[1;32m' ;;
+				yellow) echo -n $'\e[1;33m' ;;
+				orange) echo -n $'\e[1;33m' ;;
+				red) echo -n $'\e[1;31m' ;;
+			esac
+		fi
+	fi
+}
+
+# Unset color {{{1
+################################################################
+
+function unset_color {
+
+	if [[ $XMOBAR == $YES ]] ; then
+		echo -n "</fc>"
+	else
+		echo -n $'\e[0m'
+	fi
+}
+
+# Add coloring {{{1
+################################################################
+
+function add_coloring {
+
+	local msg=$1
+	local color=$2
+
+	if [[ -n $color ]] ; then
+		color_set=$(set_color $color)
+		echo -n $color_set$msg
+		[[ -z $color_set ]] || unset_color
+	else
+		echo $msg
+	fi
+}
+
+# Add level coloring {{{1
+################################################################
+
+function add_level_coloring {
+
+	local msg=$1
+	local level=$2
+
+	case $level in
+		good) color=green ;;
+		highlight) color=yellow ;;
+		bad) color=orange ;;
+		critical) color=red ;;
+	esac
+
+	add_coloring "$msg" $color
+}
+
 # Read args {{{1
 ################################################################
 
@@ -86,12 +163,14 @@ function read_args {
 		case $1 in
 			-a|--audio)     print=$YES ; AUDIO=$YES ;;
 			-b|--battery)   print=$YES ; BATTERY=$YES ;;
+			-c|--coloring)  COLORING=$YES ;;
 			-g|--debug)     DEBUG=$((DEBUG + 1)) ;;
 			-h|--help)      print_help ; exit 0 ;;
 			-l|--oneline)   ONELINE=$YES ;;
 			-n|--network)   print=$YES ; NETWORK=$YES ;;
 			-o|--order)     ORDER=$2 ; shift ;;
 			-s|--screen)    print=$YES ; SCREEN=$YES ;;
+			-x|--xmobar)    XMOBAR=$YES ;;
 			   --decbright) DECBRIGHT=$YES ;;
 			   --decvol)    DECVOL=$YES ;;
 			   --incbright) INCBRIGHT=$YES ;;
@@ -179,13 +258,27 @@ function print_network {
 ################################################################
 
 function print_audio {
-	muted=$(pactl list sinks | grep -i 'mute: *yes')
+
+	local muted=$(pactl list sinks | grep -i 'mute: *yes')
+	local level=
+
 	if [[ -n $muted ]] ; then
 		msg=muted
+		level=highlight
 	else
-		msg=$(pactl list sinks | grep -i volume | head -n 1 | sed 's/^.*[^0-9]\([0-9]\+%\).*$/\1/')
+		vol=$(pactl list sinks | grep -i volume | head -n 1 | sed 's/^.*[^0-9]\([0-9]\+\)%.*$/\1/')
+		msg="$vol%"
+		if [[ $vol -le 70 ]] ; then
+			level=good
+		elif [[ $vol -le 100 ]] ; then
+			level=bad
+		else
+			level=critical
+		fi
 	fi
-	echo $ECHO_FLAGS "Audio: $msg"
+
+	msg=$(add_level_coloring "Audio: $msg" $level)
+	echo $ECHO_FLAGS $msg
 }
 
 # Get screen brightness {{{1
@@ -203,13 +296,22 @@ function get_screen_brightness {
 	echo $brightness
 }
 
-# Print screen {{{1
+# Print screen brightness {{{1
 ################################################################
 
-function print_screen {
-	brightness=$(get_screen_brightness)
-	percent_brightness=$(echo "scale=0;$brightness * 100 / 1" | bc -l)
-	echo $ECHO_FLAGS "Brightness: ${percent_brightness}%"
+function print_screen_brightness {
+	local brightness=$(get_screen_brightness)
+	local percent_brightness=$(echo "scale=0;$brightness * 100 / 1" | bc -l)
+	local level=
+	if [[ $percent_brightness -le 70 ]] ; then
+		level=good
+	elif [[ $percent_brightness -le 100 ]] ; then 
+		level=bad
+	else
+		level=critical
+	fi
+	local msg=$(add_level_coloring "Brightness: ${percent_brightness}%" $level)
+	echo $ECHO_FLAGS $msg
 }
 
 # Modify screen brightness {{{1
@@ -273,7 +375,7 @@ for x in $(echo $ORDER | sed "s/\(.\)/\1 /g") ; do
 		a) test_var=AUDIO   ; cmd=print_audio ;;
 		b) test_var=BATTERY ; cmd=print_battery ;;
 		n) test_var=NETWORK ; cmd=print_network ;;
-		s) test_var=SCREEN  ; cmd=print_screen ;;
+		s) test_var=SCREEN  ; cmd=print_screen_brightness ;;
 	esac
 
 	# Run command

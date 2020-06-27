@@ -11,7 +11,7 @@ Config {
        -- layout
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ %cpu% | %memory% | %swap% | %sysinfo% | <fc=#ee9a00>%date%</fc>"
+       , template = "%StdinReader% }{ %cpu% | %memory% | %swap% | %sysinfo% | <fc=#ff92d6>%date%</fc>"
 
        -- plugins
        -- Refresh rate is in tenths of second
@@ -20,6 +20,6 @@ Config {
                    , Run Swap [] 10
                    , Run Date "%a %d %b %H:%M" "date" 10
                    , Run StdinReader
-                   , Run Com "sysinfo" ["-l"] "" 10
+                   , Run Com "sysinfo" ["-lcx"] "" 10
                     ]
        }
