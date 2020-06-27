@@ -37,22 +37,22 @@
 #keystate_capslock = enable
 #keystate_scrolllock= enable
 
-"ctrlvol inc"
+"sysinfo --incvol"
   XF86AudioRaiseVolume
 
-"ctrlvol dec"
+"sysinfo --decvol"
   XF86AudioLowerVolume
 
-"ctrlvol mute"
+"sysinfo --mute"
   XF86AudioMute
 
-"ctrlvol micmute"
+"sysinfo --micmute"
   XF86AudioMicMute
 
-"ctrlbright inc"
+"sysinfo --incbright"
   XF86MonBrightnessUp
 
-"ctrlbright dec"
+"sysinfo --decbright"
   XF86MonBrightnessDown
 
 # Examples of commands:

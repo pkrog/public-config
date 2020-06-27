@@ -1,4 +1,5 @@
 #!/bin/bash
+# vi: se fdm=marker
 
 VERSION=0.1
 YES=yes
@@ -12,11 +13,23 @@ SEP=" | "
 ORDER="nbas"
 AUDIO=
 SCREEN=
+MUTE=
+MICMUTE=
+INCVOL=
+DECVOL=
+INCBRIGHT=
+DECBRIGHT=
+
+# Get platform {{{1
+################################################################
 
 function get_platform {
 	[[ -n $PLATFORM ]] || PLATFORM=$(uname)
 	echo $PLATFORM
 }
+
+# Print help {{{1
+################################################################
 
 function print_help {
 	echo "Usage: sysinfo [options]"
@@ -25,12 +38,21 @@ function print_help {
 	echo "   -a, --audio          Print audio volume information."
 	echo "   -b, --battery        Display battery information."
 	echo "   -g, --debug          Debug mode."
+	echo "       --decbright      Decrease screen brightness."
+	echo "       --decvol         Decrease audio volume."
 	echo "   -h, --help           Print this help message."
+	echo "       --incbright      Increase screen brightness."
+	echo "       --incvol         Increase audio volume."
 	echo "   -l, --oneline        Print information on one line only."
+	echo "       --micmute        Mute/unmute microphone."
+	echo "       --mute           Mute/unmute audio."
 	echo "   -n, --network        Display network information."
 	echo "   -o, --order          Set order of information display. Default is $ORDER."
 	echo "   -s, --screen         Print screen brightness information."
 }
+
+# Error {{{1
+################################################################
 
 function error {
 
@@ -41,6 +63,8 @@ function error {
 	exit 1
 }
 
+# Debug {{{1
+################################################################
 
 function debug {
 
@@ -49,6 +73,9 @@ function debug {
 
 	[[ $DEBUG -ge $lvl ]] && echo "[DEBUG] $msg" >&2
 }
+
+# Read args {{{1
+################################################################
 
 function read_args {
 
@@ -65,6 +92,12 @@ function read_args {
 			-n|--network)   print=$YES ; NETWORK=$YES ;;
 			-o|--order)     ORDER=$2 ; shift ;;
 			-s|--screen)    print=$YES ; SCREEN=$YES ;;
+			   --decbright) DECBRIGHT=$YES ;;
+			   --decvol)    DECVOL=$YES ;;
+			   --incbright) INCBRIGHT=$YES ;;
+			   --incvol)    INCVOL=$YES ;;
+			   --mute)      MUTE=$YES ;;
+			   --micmute)   MICMUTE=$YES ;;
 			-)              error "Illegal option $1." ;;
 			--)             error "Illegal option $1." ;;
 			--*)            error "Illegal option $1." ;;
@@ -89,7 +122,14 @@ function read_args {
 	debug 1 "NETWORK=$NETWORK"
 	debug 1 "ONELINE=$ONELINE"
 	debug 1 "SCREEN=$SCREEN"
+	debug 1 "INCVOL=$INCVOL"
+	debug 1 "DECVOL=$DECVOL"
+	debug 1 "MUTE=$MUTE"
+	debug 1 "MICMUTE=$MICMUTE"
 }
+
+# Print battery {{{1
+################################################################
 
 function print_battery {
 
@@ -108,6 +148,9 @@ function print_battery {
 
 	echo $ECHO_FLAGS "Batt: $charge$plugged"
 }
+
+# Print network {{{1
+################################################################
 
 function print_network {
 
@@ -132,6 +175,9 @@ function print_network {
 	echo $ECHO_FLAGS "WiFi: $wifi_card $wifi_ssid $wifi_link_quality/70 $wifi_signal_level dBm"
 }
 
+# Print audio {{{1
+################################################################
+
 function print_audio {
 	muted=$(pactl list sinks | grep -i 'mute: *yes')
 	if [[ -n $muted ]] ; then
@@ -141,6 +187,9 @@ function print_audio {
 	fi
 	echo $ECHO_FLAGS "Audio: $msg"
 }
+
+# Get screen brightness {{{1
+################################################################
 
 function get_screen_brightness {
 
@@ -154,15 +203,65 @@ function get_screen_brightness {
 	echo $brightness
 }
 
+# Print screen {{{1
+################################################################
+
 function print_screen {
 	brightness=$(get_screen_brightness)
 	percent_brightness=$(echo "scale=0;$brightness * 100 / 1" | bc -l)
 	echo $ECHO_FLAGS "Brightness: ${percent_brightness}%"
 }
 
-# Main
+# Modify screen brightness {{{1
+################################################################
+
+function modify_screen_brightness {
+
+	local step=0.1
+	local max=2.0
+	local min=0.1
+	local op='+'
+
+	# Get current brightness
+	brightness=$(get_screen_brightness)
+
+	# Compute new brightness
+	if [[ $DECBRIGHT == $YES ]] ; then
+		op='-'
+	fi
+	brightness=$(echo "$brightness $op $step" | bc -l)
+	if [[ $(echo "$brightness > $max" | bc -l) -eq 1 ]] ; then
+		brightness=$max
+	fi
+	if [[ $(echo "$brightness < $min" | bc -l) -eq 1 ]] ; then
+		brightness=$min
+	fi
+
+	# Set _SAME_ brightness on all displays
+	displays=$(xrandr -q | grep ' connected' | sed 's/^\([^ ]*\) .*$/\1/')
+	for display in $displays ; do
+		xrandr --output $display --brightness $brightness
+	done
+}
+
+# Modify system {{{1
+################################################################
+
+function modify_system {
+
+	[[ $MUTE == $YES ]] && pactl set-sink-mute @DEFAULT_SINK@ toggle
+	[[ $MICMUTE == $YES ]] && pactl set-source-mute @DEFAULT_SOURCE@ toggle
+	[[ $INCVOL == $YES ]] && pactl set-sink-volume @DEFAULT_SINK@ +10%
+	[[ $DECVOL == $YES ]] && pactl set-sink-volume @DEFAULT_SINK@ -10%
+	[[ $DECBRIGHT == $YES || $INCBRIGHT == $YES ]] && modify_screen_brightness
+}
+
+# Main {{{1
+################################################################
 
 read_args "$@"
+
+modify_system
 
 [[ $ONELINE == $YES ]] && ECHO_FLAGS=-n
 
