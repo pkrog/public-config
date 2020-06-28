@@ -243,15 +243,29 @@ function print_network {
 
 		wifi_card=$(iw dev | grep Interface | head -n 1 | sed 's/^\s*Interface *//')
 		wifi_ssid=$(iw dev | grep ssid | head -n 1 | sed 's/^\s*ssid *//')
-		wifi_link_quality=$(grep $wifi_card /proc/net/wireless | sed 's/^[^:]*:\s\+[0-9]\+\s\+\([0-9]\+\)\..*$/\1/')
-		wifi_signal_level=$(grep $wifi_card /proc/net/wireless | sed 's/^[^:]*:\s\+[0-9]\+\s\+[0-9.-]\+\s\+\(-[0-9]\+\)\..*$/\1/')
+		if [[ -n $wifi_ssid ]] ; then
+			wifi_link_quality=$(grep $wifi_card /proc/net/wireless | sed 's/^[^:]*:\s\+[0-9]\+\s\+\([0-9]\+\)\..*$/\1/')
+			wifi_signal_level=$(grep $wifi_card /proc/net/wireless | sed 's/^[^:]*:\s\+[0-9]\+\s\+[0-9.-]\+\s\+\(-[0-9]\+\)\..*$/\1/')
+			msg="WiFi: $wifi_card $wifi_ssid $wifi_link_quality/70 $wifi_signal_level dBm"
+			if [[ $wifi_link_quality -ge 60 ]] ; then
+				level=good
+			elif [[ $wifi_link_quality -ge 40 ]] ; then
+				level=bad
+			else
+				level=critical
+			fi
+		else
+			msg="Not connected"
+			level=critical
+		fi
 
 	# No info
 	else
 		debug 1 "Do not know how to get network information for platform $(get_platform)."
 	fi
 
-	echo $ECHO_FLAGS "WiFi: $wifi_card $wifi_ssid $wifi_link_quality/70 $wifi_signal_level dBm"
+	local msg=$(add_level_coloring "$msg" $level)
+	echo $ECHO_FLAGS "$msg"
 }
 
 # Print audio {{{1
