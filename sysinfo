@@ -8,9 +8,8 @@ PLATFORM=
 BATTERY=
 NETWORK=
 ONELINE=
-ECHO_FLAGS=
 SEP=" | "
-ORDER="nbas"
+ORDER="nvbas"
 AUDIO=
 SCREEN=
 MUTE=
@@ -21,6 +20,7 @@ INCBRIGHT=
 DECBRIGHT=
 COLORING=
 XMOBAR=
+VPN=
 
 # Get platform {{{1
 ################################################################
@@ -52,6 +52,7 @@ function print_help {
 	echo "   -n, --network        Display network information."
 	echo "   -o, --order          Set order of information display. Default is $ORDER."
 	echo "   -s, --screen         Print screen brightness information."
+	echo "   -v, --vpn            Print VPN connection status."
 	echo "   -x, --xmobar         Output for xmobar."
 }
 
@@ -170,6 +171,7 @@ function read_args {
 			-n|--network)   print=$YES ; NETWORK=$YES ;;
 			-o|--order)     ORDER=$2 ; shift ;;
 			-s|--screen)    print=$YES ; SCREEN=$YES ;;
+			-v|--vpn)       print=$YES ; VPN=$YES ;;
 			-x|--xmobar)    XMOBAR=$YES ;;
 			   --decbright) DECBRIGHT=$YES ;;
 			   --decvol)    DECVOL=$YES ;;
@@ -191,6 +193,7 @@ function read_args {
 	[[ -z $print ]] && BATTERY=$YES
 	[[ -z $print ]] && NETWORK=$YES
 	[[ -z $print ]] && SCREEN=$YES
+	[[ -z $print ]] && VPN=$YES
 
 	[[ -z "$*" ]] || error "Forbidden remaining arguments: $*."
 
@@ -201,6 +204,7 @@ function read_args {
 	debug 1 "NETWORK=$NETWORK"
 	debug 1 "ONELINE=$ONELINE"
 	debug 1 "SCREEN=$SCREEN"
+	debug 1 "VPN=$VPN"
 	debug 1 "INCVOL=$INCVOL"
 	debug 1 "DECVOL=$DECVOL"
 	debug 1 "MUTE=$MUTE"
@@ -241,7 +245,7 @@ function print_battery {
 	fi
 
 	local msg=$(add_level_coloring "$msg" $level)
-	echo $ECHO_FLAGS $msg
+	echo -n $msg
 }
 
 # Print network {{{1
@@ -310,7 +314,7 @@ function print_network {
 	fi
 
 	local msg=$(add_level_coloring "$msg" $level)
-	echo $ECHO_FLAGS "$msg"
+	echo -n "$msg"
 }
 
 # Print audio {{{1
@@ -337,7 +341,7 @@ function print_audio {
 	fi
 
 	msg=$(add_level_coloring "Audio: $msg" $level)
-	echo $ECHO_FLAGS $msg
+	echo -n $msg
 }
 
 # Get screen brightness {{{1
@@ -370,7 +374,7 @@ function print_screen_brightness {
 		level=critical
 	fi
 	local msg=$(add_level_coloring "Brightness: ${percent_brightness}%" $level)
-	echo $ECHO_FLAGS $msg
+	echo -n $msg
 }
 
 # Modify screen brightness {{{1
@@ -417,14 +421,27 @@ function modify_system {
 	[[ $DECBRIGHT == $YES || $INCBRIGHT == $YES ]] && modify_screen_brightness
 }
 
+function print_vpn {
+
+	local msg=
+	local level=
+
+	local vpn=$(ps uxw | grep forticlientsslvpn_cli | grep -v grep)
+	if [[ -n $vpn ]] ; then
+		msg="VPN CEA"
+		level=critical
+	fi
+
+	msg=$(add_level_coloring "$msg" $level)
+	echo -n $msg
+}
+
 # Main {{{1
 ################################################################
 
 read_args "$@"
 
 modify_system
-
-[[ $ONELINE == $YES ]] && ECHO_FLAGS=-n
 
 n_printed=0
 for x in $(echo $ORDER | sed "s/\(.\)/\1 /g") ; do
@@ -434,13 +451,18 @@ for x in $(echo $ORDER | sed "s/\(.\)/\1 /g") ; do
 		a) test_var=AUDIO   ; cmd=print_audio ;;
 		b) test_var=BATTERY ; cmd=print_battery ;;
 		n) test_var=NETWORK ; cmd=print_network ;;
+		v) test_var=VPN     ; cmd=print_vpn ;;
 		s) test_var=SCREEN  ; cmd=print_screen_brightness ;;
 	esac
 
 	# Run command
 	if [[ -n $test_var && -n $cmd && ${!test_var} == $YES ]] ; then
-		[[  $ONELINE == $YES && $n_printed -gt 0 ]] && echo -n "$SEP"
-		$cmd
+		msg=$($cmd)
+		if [[ -n $msg ]] ; then
+			[[ $ONELINE == $YES && $n_printed -gt 0 ]] && echo -n "$SEP"
+			echo -n $msg
+			[[ $ONELINE == $YES ]] || echo
+		fi
 		((++n_printed))
 	fi
 done
