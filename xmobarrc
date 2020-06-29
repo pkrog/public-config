@@ -20,6 +20,6 @@ Config {
                    , Run Swap [] 10
                    , Run Date "%a %d %b %H:%M" "date" 10
                    , Run StdinReader
-                   , Run Com "sysinfo" ["-lcx"] "" 10
+                   , Run Com "sysinfo" ["-lcx", "--no-tags"] "" 10
                     ]
        }
