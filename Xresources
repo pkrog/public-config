@@ -2,6 +2,14 @@
 *.background: #000000
 *.foreground: #fffff1
 *.cursorColor: #ffffff
+!*highlightColor: #3D4452
+!*highlightTextColor: #F2F2F2
+!*cursorColor: #e7e7e7
+!*pointerColor: #515e6f
+!*pointerColor2: #e7e7e7
+!*colorBD: #e7e7e7
+!*colorUL: #95A4B2
+!*underlineColor: #566776
 
 ! Define 16 base colors
 *.color0: #000000
