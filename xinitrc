@@ -18,6 +18,9 @@ xbindkeys
 # Set DPMS (display Energy Star settings)
 xset dpms 240 480 720
 
+# Run screen saver
+xscreensaver -no-splash &
+
 case "$XSESSION" in
 	i3|i3wm)    XSESSION=i3;;
 	xmonad)     XSESSION=xmonad;;

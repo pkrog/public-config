@@ -31,9 +31,9 @@ main = do
 --      , normalBorderColor  = "#cccccc"
 --      , focusedBorderColor = "#cd8b00"
       } `additionalKeys`
-      [ ((mod4Mask .|. shiftMask, xK_l), spawn "i3lock")
-      , ((mod4Mask .|. shiftMask, xK_s), spawn "i3lock && systemctl suspend")
-      , ((mod4Mask .|. shiftMask, xK_h), spawn "i3lock && systemctl hibernate")
+      [ ((mod4Mask .|. shiftMask, xK_l), spawn "xscreensaver-command -lock")
+      , ((mod4Mask .|. shiftMask, xK_s), spawn "xscreensaver-command -lock && systemctl suspend")
+      , ((mod4Mask .|. shiftMask, xK_h), spawn "xscreensaver-command -lock && systemctl hibernate")
       , ((mod4Mask, xK_d), spawn "termprg")
       ]
 
