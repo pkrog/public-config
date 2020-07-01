@@ -439,7 +439,8 @@ function print_vpn {
 
 	local vpn=$(ps uxw | grep forticlientsslvpn_cli | grep -v grep)
 	if [[ -n $vpn ]] ; then
-		msg="VPN"
+		local ip=$(ifconfig ppp0 | grep 'inet ' | sed 's/^ *inet *\([0-9.]\+\).*$/\1/')
+		msg="VPN $ip"
 		level=critical
 	fi
 
