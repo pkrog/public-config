@@ -146,10 +146,10 @@ function add_level_coloring {
 	local level=$2
 
 	case $level in
-		good) color=green ;;
-		highlight) color=yellow ;;
-		bad) color=orange ;;
-		critical) color=red ;;
+		good)           color=green ;;
+		highlight|info) color=yellow ;;
+		bad)            color=orange ;;
+		critical)       color=red ;;
 	esac
 
 	add_coloring "$msg" $color
@@ -432,16 +432,27 @@ function modify_system {
 	[[ $DECBRIGHT == $YES || $INCBRIGHT == $YES ]] && modify_screen_brightness
 }
 
+# Print VPN info {{{1
+################################################################
+
 function print_vpn {
 
-	local msg=
+	local msg="VPN"
 	local level=
 
 	local vpn=$(ps uxw | grep forticlientsslvpn_cli | grep -v grep)
 	if [[ -n $vpn ]] ; then
 		local ip=$(ifconfig ppp0 | grep 'inet ' | sed 's/^ *inet *\([0-9.]\+\).*$/\1/')
-		msg="VPN $ip"
-		level=critical
+		if [[ -n $ip ]] ; then
+			msg="$msg $ip"
+			level=good
+		else
+			msg="$msg broken or closed"
+			level=critical
+		fi
+	else
+		msg="$msg off"
+		level=info
 	fi
 
 	msg=$(add_level_coloring "$msg" $level)
