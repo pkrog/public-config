@@ -11,6 +11,12 @@ if ! exists("g:php_search_chars")
 	let g:php_search_chars = 'A-Za-z0-9_'
 endif
 
+function! s:DumpPhpManualPage(key)
+	let l:link = 'https://www.php.net/manual-lookup.php?pattern='.a:key
+	call DumpWebpage(l:link)
+	execute "normal! jV/".a:key."\<cr>kd"
+endfunction
+
 function! s:PhpSearchManualOperator(type)
 
 	" Backup default register
@@ -25,9 +31,8 @@ function! s:PhpSearchManualOperator(type)
 		return
 	endif
 
-	" Print `man` output
-	let l:link = 'https://www.php.net/manual-lookup.php?pattern='.@@
-	call DumpWebpage(l:link)
+	" Print PHP manual page
+	call s:DumpPhpManualPage(@@)
 
 	" Restore default register
 	let @@ = saved_unnamed_register
@@ -44,8 +49,7 @@ function! s:PhpSearchManualUnderCursor()
 
 	" View man page
 	if l:selected
-		let l:link = 'https://www.php.net/manual-lookup.php?pattern='.@@
-		call DumpWebpage(l:link)
+		call s:DumpPhpManualPage(@@)
 	endif
 
 	" Restore unnamed register
