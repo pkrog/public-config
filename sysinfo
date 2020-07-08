@@ -293,18 +293,25 @@ function print_network {
 
 		# Ethernet or USB Hotspot
 		if [[ -z $connection ]] ; then
-			local conn=$(networkctl list | grep 'ether *routable')
+			local conn=$(networkctl list | grep 'ether *\(routable\|degraded\)')
 			if [[ -n $conn ]] ; then
 				local card=$(echo $conn | sed 's/^ *[0-9]\+ \([^ ]\+\) *.*$/\1/')
+				local status=$(echo $conn | sed 's/^ *[0-9]\+ [^ ]\+ ether *\([^ ]\+\).*$/\1/')
+				if [[ $status == 'degraded' ]] ; then
+					level=bad
+				elif [[ $status == 'routable' ]] ; then
+					level=good
+				else
+					level=critical
+				fi
 				local usb=$(networkctl status $card | grep usb)
 				if [[ -n $usb ]] ; then
 					local vendor=$(networkctl status $card | grep Vendor | sed 's/^ *Vendor: *\(.*\)$/\1/')
-					local vendor_short=$(echo $vendor | sed 's/^\([^ ]*\).*$/\1/')
+					local vendor_short=$(echo $vendor | sed 's/^\([^ ,]*\).*$/\1/')
 					local model=$(networkctl status $card | grep Model | sed 's/^ *Model: *\(.*\)$/\1/')
 					local ip=$(ifconfig $card | grep 'inet ' | sed 's/^ *inet *\([0-9.]\+\).*$/\1/')
 					connection=usb
 					msg="$vendor_short $card $ip"
-					level=good
 				fi
 			fi
 		fi
