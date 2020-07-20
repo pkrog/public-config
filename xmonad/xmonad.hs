@@ -11,8 +11,7 @@ import XMonad.Layout.IndependentScreens -- https://hackage.haskell.org/package/x
 import XMonad.StackSet(greedyView, shift, screen, current)
 import System.IO
 import Data.Map(fromList, union, Map)
-import XMonad.Hooks.DynamicBars(multiPP)
--- See XMonad.Hooks.DynamicBars -- https://hackage.haskell.org/package/xmonad-contrib-0.16/docs/XMonad-Hooks-DynamicBars.html
+import XMonad.Hooks.DynamicBars(multiPP) -- https://hackage.haskell.org/package/xmonad-contrib-0.16/docs/XMonad-Hooks-DynamicBars.html
 
 main = do
     -- Get number of screens
