@@ -10,7 +10,7 @@ for term in $TERMINAL urxvt xfce4-terminal xterm ; do
 done
 
 X_PROGS=,openmw,
-NO_X_PROGS=,vim,R,ranger,
+TERM_PROGS=,vim,R,ranger,htop,
 
 debug() {
 	local m=$1
@@ -25,7 +25,7 @@ is_xprg() {
 	for prg in $* ; do
 
 		# Search in NO X personal list
-		is_not_xprg=$(echo $NO_X_PROGS | grep ",$prg,")
+		is_not_xprg=$(echo $TERM_PROGS | grep ",$prg,")
 		debug "is_not_xprg=$is_not_xprg"
 		[[ -n $is_not_xprg ]] && break
 
@@ -55,7 +55,7 @@ font=$(xrdb -query -all | grep font | head -n 1 | sed 's/^.*: *//')
 [[ -n $font ]] || font=6x13
 
 # Get choice
-prg=$(dmenu_path | dmenu -fn "$font")
+prg=$(dmenu_path | dmenu -fn "$font" -i -b -p '>' -nb '#000077' -nf '#bbbb00' -sb '#777700' -sf '#0000bb')
 debug "prg=$prg"
 
 # Get real prog if sym link
