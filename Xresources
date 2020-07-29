@@ -13,18 +13,18 @@
 
 ! Define 16 base colors
 *.color0: #000000
-*.color1: #a00000
-*.color2: #00a000
-*.color3: #a0a000
-*.color4: #0000a0
-*.color5: #a000a0
-*.color6: #00a0a0
-*.color7: #a0a0a0
+*.color1: #b00000
+*.color2: #00b000
+*.color3: #b0b000
+*.color4: #478fd7
+*.color5: #b000b0
+*.color6: #00b0b0
+*.color7: #b0b0b0
 *.color8: #707070
 *.color9: #ff0000
 *.color10: #00ff00
 *.color11: #ffff00
-*.color12: #0000ff
+*.color12: #00aaff
 *.color13: #ff00ff
 *.color14: #00ffff
 *.color15: #ffffff
@@ -54,6 +54,15 @@ URxvt.url-select.underline: true
 URxvt.keysym.M-u:           perl:url-select:select_next
 URxvt.keysym.M-Escape:      perl:keyboard-select:activate
 URxvt.keysym.M-s:           perl:keyboard-select:search
+
+! do not scroll with output
+URxvt*scrollTtyOutput: false
+
+! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
+URxvt*scrollWithBuffer: true
+
+! scroll back to the bottom on keypress
+URxvt*scrollTtyKeypress: true
 
 ! XTerm
 XTerm.vt100.reverseVideo: true
