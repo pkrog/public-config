@@ -57,6 +57,7 @@ myKeyBindings modm conf = Data.Map.fromList $
       , ((modm, xK_bracketleft), spawn "sysinfo --decvol")
       , ((modm, xK_bracketright), spawn "sysinfo --incvol")
       , ((modm, xK_minus), spawn "sysinfo --mute")
+      , ((modm .|. shiftMask, xK_minus), spawn "sysinfo --switch-audio-sink")
       , ((modm, xK_equal), spawn "sysinfo --micmute")
       , ((modm, xK_d), spawn "termprg")
       ]
