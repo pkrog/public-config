@@ -32,6 +32,8 @@
 ! URxvt
 ! -misc-proggytinyttsz-medium-r-normal--0-0-0-0-c-0-iso10646-1
 !URxvt*background: #000000
+URxvt.font: 6x13
+URxvt.boldFont: 6x13
 !URxvt.font: -*-proggytinyttsz-*-iso10646-1
 !URxvt.boldFont: -*-rissole-*
 !URxvt.italicFont: -*-rissole-*
