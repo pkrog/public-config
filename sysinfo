@@ -230,39 +230,37 @@ function print_battery {
 	local platform=$(get_platform)
 	debug 1 "platform=$platform"
 
-	if command -v pmset >/dev/null 2>&1 ; then
-		if [[ $platform == Darwin ]] ; then
-			charge=$(pmset -g batt | grep InternalBattery | sed -E 's/^.*[[:space:]]([[:digit:]]+)%.*$/\1/')
-			debug 1 "charge=$charge"
-			plugged=$(pmset -g batt | grep InternalBattery | sed -E -e 's/^.*InternalBattery[^;]*; *([^;]*) *;.*$/\1/' -e 's/discharging/v/' -e 's/charging|AC attached/^/' -e 's/charged//')
-			debug 1 "plugged=$plugged"
-		elif [[ $platform == Linux ]] && which acpi 2>&1 >/dev/null ; then
-			charge=$(acpi -b | sed 's/^.* \([0-9]\+\)%.*$/\1/')
-			debug 1 "charge=$charge"
-			plugged=$(acpi -a | sed -e 's/^.* \(on\|off\)-line$/\1/' -e 's/on/^/' -e 's/off/v/')
-			debug 1 "plugged=$plugged"
-		else
-			debug 1 "Do not know how to get battery information for platform $platform."
-		fi
-
-		if [[ -z $charge ]] ; then
-			msg="unknown"
-			level=critical
-		else
-			msg="$charge%$plugged"
-			[[ $TAGS == $YES ]] && msg="Batt: $msg"
-			if [[ $charge -ge 80 ]] ; then
-				level=good
-			elif [[ $charge -ge 20 ]] ; then
-				level=bad
-			else
-				level=critical
-			fi
-		fi
-
-		local msg=$(add_level_coloring "$msg" $level)
-		echo -n $msg
+	if [[ $platform == Darwin ]] ; then
+		charge=$(pmset -g batt | grep InternalBattery | sed -E 's/^.*[[:space:]]([[:digit:]]+)%.*$/\1/')
+		debug 1 "charge=$charge"
+		plugged=$(pmset -g batt | grep InternalBattery | sed -E -e 's/^.*InternalBattery[^;]*; *([^;]*) *;.*$/\1/' -e 's/discharging/v/' -e 's/charging|AC attached/^/' -e 's/charged//')
+		debug 1 "plugged=$plugged"
+	elif [[ $platform == Linux ]] && which acpi 2>&1 >/dev/null ; then
+		charge=$(acpi -b | sed 's/^.* \([0-9]\+\)%.*$/\1/')
+		debug 1 "charge=$charge"
+		plugged=$(acpi -a | sed -e 's/^.* \(on\|off\)-line$/\1/' -e 's/on/^/' -e 's/off/v/')
+		debug 1 "plugged=$plugged"
+	else
+		debug 1 "Do not know how to get battery information for platform $platform."
 	fi
+
+	if [[ -z $charge ]] ; then
+		msg="unknown"
+		level=critical
+	else
+		msg="$charge%$plugged"
+		[[ $TAGS == $YES ]] && msg="Batt: $msg"
+		if [[ $charge -ge 80 ]] ; then
+			level=good
+		elif [[ $charge -ge 20 ]] ; then
+			level=bad
+		else
+			level=critical
+		fi
+	fi
+
+	local msg=$(add_level_coloring "$msg" $level)
+	echo -n $msg
 }
 
 # Print network {{{1
