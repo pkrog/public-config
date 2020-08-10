@@ -386,7 +386,9 @@ function print_audio {
 	else
 		vol=$(pacmd list-sinks | sed -n "/index: $sink/,/active port:/p" | grep -i volume: | head -n 1 | sed 's/^.*[^0-9]\([0-9]\+\)%.*$/\1/')
 		debug 1 "vol=$vol"
-		msg="$vol%"
+		desc=$(pactl list sinks | sed -n "/Sink #$sink/,/Formats:/p" | grep -i Description: | sed 's/^.*Description: \(.*\)$/\1/')
+		debug 1 "desc=$desc"
+		msg="$desc $vol%"
 		if [[ $vol -le 70 ]] ; then
 			level=good
 		elif [[ $vol -le 100 ]] ; then
