@@ -1,14 +1,20 @@
 # Vim backup files
 *~
-.DS_Store
-*.log
 .swp
 .*.swp
 
-# Ignore emulator files
+# Libreoffice backup files
+.~*
+
+.DS_Store
+
+# Log files
+*.log
+
+# Emulator files
 .vagrant
 
-# Ignore Galaxy tools that I'm testing
+# Galaxy tools that I'm testing
 tools/biosigner
 tools/isa2w4m
 tools/lcmsmatching
