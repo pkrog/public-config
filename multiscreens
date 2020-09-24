@@ -1,0 +1,122 @@
+#!/bin/bash
+# vi: se fdm=marker
+
+CICCIANO=cicciano
+CONFIG=
+DEBUG=0
+DIGITEO=digiteo
+OFF=
+YES=yes
+
+# Print help {{{1
+################################################################
+
+function print_help {
+	echo "Usage: multiscreens [options]"
+	echo
+	echo "Options:"
+	echo "   -c, --cicciano          Set Cicciano configuration."
+	echo "   -d, --digiteo           Set Digiteo configuration."
+	echo "   -h, --help              Print this help message."
+	echo "   -o, --off               Turn off all screens."
+}
+
+# Error {{{1
+################################################################
+
+function error {
+
+	local msg=$1
+
+	echo "ERROR: $msg" >&2
+
+	exit 1
+}
+
+# Debug {{{1
+################################################################
+
+function debug {
+
+	local lvl=$1
+	local msg=$2
+
+	[[ $DEBUG -ge $lvl ]] && echo "[DEBUG] $msg" >&2
+}
+
+# Read args {{{1
+################################################################
+
+function read_args {
+
+	local args="$*" # save arguments for debugging purpose
+	local print=
+
+	while true ; do
+		case $1 in
+			-c|--cicciano)  CONFIG=$CICCIANO ;;
+			-d|--digiteo)   CONFIG=$DIGITEO ;;
+			-g|--debug)     DEBUG=$((DEBUG + 1)) ;;
+			-h|--help)      print_help ; exit 0 ;;
+			-o|--off)       OFF=$YES ;;
+			-)              error "Illegal option $1." ;;
+			--)             error "Illegal option $1." ;;
+			--*)            error "Illegal option $1." ;;
+			-?)             error "Unknown option $1." ;;
+			-[^-]*)         split_opt=$(echo $1 | sed 's/^-//' | sed 's/\([a-zA-Z]\)/ -\1/g') ; set -- $1$split_opt "${@:2}" ;;
+			*) break
+		esac
+		shift
+	done
+
+	[[ -z "$*" ]] || error "Forbidden remaining arguments: $*."
+
+	# Debug
+	debug 1 "Arguments are : $args"
+	debug 1 "CONFIG=$CONFIG"
+	debug 1 "OFF=$OFF"
+}
+
+# Cicciano config
+################################################################
+
+function set_cicciano_config {
+	xrandr --output HDMI-1 --auto --right-of eDP-1
+}
+
+# Digiteo config
+################################################################
+
+function set_digiteo_config {
+	xrandr --output DP-1-1 --auto --right-of eDP-1
+	xrandr --output DP-1-2 --auto --right-of DP-1-1
+}
+
+# Turn off
+################################################################
+
+function turn_off {
+	screens=$(xrandr --listmonitors | tail -n +3 | sed 's/^.* \([^ ]\+\)$/\1/')
+	if [[ -n $screens ]] ; then
+		for screen in $screens ; do
+			xrandr --output $screen --off
+		done
+	fi
+}
+
+# Main {{{1
+################################################################
+
+read_args "$@"
+
+# Set configuration
+case "$CONFIG" in
+	$CICCIANO) set_cicciano_config ;;
+	$DIGITEO)  set_digiteo_config ;;
+esac
+# TODO What about the compose key?
+# xmodmap -e "keysym Alt_R = Multi_key"
+
+# Turn off screens
+[[ $OFF == $YES ]] && turn_off
+# TODO What about the xscreensaver issue after turning off screens (X window mapping error)?
