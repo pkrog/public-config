@@ -22,7 +22,7 @@ main = do
 
     xmonad $ docks def
       {
-        borderWidth     = 1
+        borderWidth     = 2
       , terminal        = "urxvt"
       , layoutHook      = avoidStruts $ layoutHook def
 --      , workspaces      = withScreens nScreens (map show [1..9])
