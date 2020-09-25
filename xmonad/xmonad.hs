@@ -5,6 +5,9 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Util.Run(spawnPipe) -- https://hackage.haskell.org/package/xmonad-contrib-0.16/docs/XMonad-Util-Run.html
 import XMonad.Layout.IndependentScreens -- https://hackage.haskell.org/package/xmonad-contrib-0.16/docs/XMonad-Layout-IndependentScreens.html
 --import XMonad.Util.WorkspaceCompare(getSortByXineramaRule)
+import XMonad.Layout.Accordion -- http://hackage.haskell.org/package/xmonad-contrib-0.16/docs/XMonad-Layout-Accordion.html
+import XMonad.Layout.Tabbed -- http://hackage.haskell.org/package/xmonad-contrib-0.16/docs/XMonad-Layout-Tabbed.html
+import XMonad.Layout.LayoutCombinators hiding ( (|||) ) -- https://hackage.haskell.org/package/xmonad-contrib-0.16/docs/XMonad-Layout-LayoutCombinators.html
 
 -- Binding keys, see https://hackage.haskell.org/package/xmonad-contrib-0.13/docs/XMonad-Util-EZConfig.html
 --import XMonad.Util.EZConfig(additionalKeys) -- https://hackage.haskell.org/package/xmonad-contrib-0.13/docs/XMonad-Util-EZConfig.html
@@ -12,6 +15,10 @@ import XMonad.StackSet(greedyView, shift, screen, current)
 import System.IO
 import Data.Map(fromList, union, Map)
 import XMonad.Hooks.DynamicBars(multiPP) -- https://hackage.haskell.org/package/xmonad-contrib-0.16/docs/XMonad-Hooks-DynamicBars.html
+
+-- My layouts
+mylayoutHook = avoidStruts (tall ||| Mirror tall ||| (tall *|* Full ) ||| Accordion ||| simpleTabbed ||| Full)
+	where  tall = Tall 1 (3/100) (1/2)
 
 main = do
     -- Get number of screens
@@ -22,9 +29,13 @@ main = do
 
     xmonad $ docks def
       {
-        borderWidth     = 2
+        borderWidth        = 4
+      , normalBorderColor  = "#cacaca"
+      , focusedBorderColor = "#dada1d"
       , terminal        = "urxvt"
-      , layoutHook      = avoidStruts $ layoutHook def
+
+	  -- Define layouts to use. `avoidStruts` is here to make place for xmobar.
+      , layoutHook      = mylayoutHook
 --      , workspaces      = withScreens nScreens (map show [1..9])
 --      , workspaces      = map show [1..9]
 

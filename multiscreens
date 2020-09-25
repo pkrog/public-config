@@ -90,18 +90,27 @@ function set_cicciano_config {
 function set_digiteo_config {
 	xrandr --output DP-1-1 --auto --right-of eDP-1
 	xrandr --output DP-1-2 --auto --right-of DP-1-1
+	xrandr --setmonitor digiteo_big 3840/1196x1080/336+1366+0 DP-1-1,DP-1-2
 }
 
 # Turn off
 ################################################################
 
 function turn_off {
+	xrandr --delmonitor digiteo_big
 	screens=$(xrandr --listmonitors | tail -n +3 | sed 's/^.* \([^ ]\+\)$/\1/')
 	if [[ -n $screens ]] ; then
 		for screen in $screens ; do
 			xrandr --output $screen --off
 		done
 	fi
+}
+
+# Print information
+################################################################
+
+function print_info {
+	xrandr --listmonitors
 }
 
 # Main {{{1
@@ -120,3 +129,6 @@ esac
 # Turn off screens
 [[ $OFF == $YES ]] && turn_off
 # TODO What about the xscreensaver issue after turning off screens (X window mapping error)?
+
+# Print info
+print_info
