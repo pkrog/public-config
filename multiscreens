@@ -2,6 +2,7 @@
 # vi: se fdm=marker
 
 CICCIANO=cicciano
+BOURG_LA_REINE=bourg-la-reine
 CONFIG=
 DEBUG=0
 DIGITEO=digiteo
@@ -15,6 +16,7 @@ function print_help {
 	echo "Usage: multiscreens [options]"
 	echo
 	echo "Options:"
+	echo "   -b, --bourg-la-reine    Set Bourg-la-Reine configuration."
 	echo "   -c, --cicciano          Set Cicciano configuration."
 	echo "   -d, --digiteo           Set Digiteo configuration."
 	echo "   -h, --help              Print this help message."
@@ -54,16 +56,17 @@ function read_args {
 
 	while true ; do
 		case $1 in
-			-c|--cicciano)  CONFIG=$CICCIANO ;;
-			-d|--digiteo)   CONFIG=$DIGITEO ;;
-			-g|--debug)     DEBUG=$((DEBUG + 1)) ;;
-			-h|--help)      print_help ; exit 0 ;;
-			-o|--off)       OFF=$YES ;;
-			-)              error "Illegal option $1." ;;
-			--)             error "Illegal option $1." ;;
-			--*)            error "Illegal option $1." ;;
-			-?)             error "Unknown option $1." ;;
-			-[^-]*)         split_opt=$(echo $1 | sed 's/^-//' | sed 's/\([a-zA-Z]\)/ -\1/g') ; set -- $1$split_opt "${@:2}" ;;
+			-b|--bourg-la-reine)    CONFIG=$BOURG_LA_REINE ;;
+			-c|--cicciano)          CONFIG=$CICCIANO ;;
+			-d|--digiteo)           CONFIG=$DIGITEO ;;
+			-g|--debug)             DEBUG=$((DEBUG + 1)) ;;
+			-h|--help)              print_help ; exit 0 ;;
+			-o|--off)               OFF=$YES ;;
+			-)                      error "Illegal option $1." ;;
+			--)                     error "Illegal option $1." ;;
+			--*)                    error "Illegal option $1." ;;
+			-?)                     error "Unknown option $1." ;;
+			-[^-]*)                 split_opt=$(echo $1 | sed 's/^-//' | sed 's/\([a-zA-Z]\)/ -\1/g') ; set -- $1$split_opt "${@:2}" ;;
 			*) break
 		esac
 		shift
@@ -75,6 +78,13 @@ function read_args {
 	debug 1 "Arguments are : $args"
 	debug 1 "CONFIG=$CONFIG"
 	debug 1 "OFF=$OFF"
+}
+
+# Bourg-la-Reine config
+################################################################
+
+function set_bourglareine_config {
+	xrandr --output HDMI-1 --auto --left-of eDP-1
 }
 
 # Cicciano config
@@ -120,8 +130,9 @@ read_args "$@"
 
 # Set configuration
 case "$CONFIG" in
-	$CICCIANO) set_cicciano_config ;;
-	$DIGITEO)  set_digiteo_config ;;
+	$BOURG_LA_REINE)    set_bourglareine_config ;;
+	$CICCIANO)          set_cicciano_config ;;
+	$DIGITEO)           set_digiteo_config ;;
 esac
 # TODO What about the compose key?
 # xmodmap -e "keysym Alt_R = Multi_key"
