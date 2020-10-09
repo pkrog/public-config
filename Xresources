@@ -49,7 +49,7 @@ URxvt.scrollBar_right: false
 !URxvt.urgentOnBell: true
 !URxvt.depth: 24
 !URxvt.iso14755: false
-URxvt.saveline: 10000
+URxvt.saveline: 1000000
 URxvt.perl-ext-common:      default,clipboard,url-select,keyboard-select
 URxvt.url-select.launcher:  xdg-open
 URxvt.url-select.underline: true
