@@ -14,6 +14,9 @@
 # Emulator files
 .vagrant
 
+# Eclipse
+.settings
+
 # Galaxy tools that I'm testing
 tools/biosigner
 tools/isa2w4m
