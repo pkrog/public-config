@@ -1,4 +1,3 @@
--- xmonad-contrib: https://hackage.haskell.org/package/xmonad-contrib
 import XMonad
 import XMonad.Hooks.DynamicLog -- https://hackage.haskell.org/package/xmonad-contrib-0.16/docs/XMonad-Hooks-DynamicLog.html
 import XMonad.Hooks.ManageDocks
@@ -17,49 +16,34 @@ import Data.Map(fromList, union, Map)
 import XMonad.Hooks.DynamicBars(multiPP) -- https://hackage.haskell.org/package/xmonad-contrib-0.16/docs/XMonad-Hooks-DynamicBars.html
 
 -- My layouts
-mylayoutHook = avoidStruts (tall ||| Mirror tall ||| (tall *|* Full ) ||| Accordion ||| simpleTabbed ||| Full)
+-- avoidStruts` is here to make place for xmobar.
+mylayoutHook = avoidStruts (tall ||| Full ||| Mirror tall ||| (tall *|* Full ) ||| Accordion ||| simpleTabbed)
 	where  tall = Tall 1 (3/100) (1/2)
 
 main = do
-    -- Get number of screens
-    nScreens <- countScreens
+	-- Get number of screens
+	nScreens <- countScreens
 
-    -- Spawn one xmobar for each screen
-    xmprocs <- mapM (spawnPipe . xmobarCommand) [0..nScreens-1]
+	-- Spawn one xmobar for each screen
+	xmprocs <- mapM (spawnPipe . xmobarCommand) [0..nScreens-1]
 
-    xmonad $ docks def
-      {
-        borderWidth        = 4
-      , normalBorderColor  = "#cacaca"
-      , focusedBorderColor = "#dada1d"
-      , terminal        = "urxvt"
-
-	  -- Define layouts to use. `avoidStruts` is here to make place for xmobar.
-      , layoutHook      = mylayoutHook
---      , workspaces      = withScreens nScreens (map show [1..9])
---      , workspaces      = map show [1..9]
-
-      -- For one xmobar:
-      --, logHook = dynamicLogWithPP xmobarPP
-      --                  { ppOutput = hPutStrLn xmproc
-      --                  , ppTitle = xmobarColor "green" "" . shorten 50
-      --                  }
-     , logHook                 = mapM_ dynamicLogWithPP $ zipWith pp xmprocs [0..nScreens-1]
-      --, logHook                 = zipWith myLogHook xmprocs [0..nScreens-1]
-      --, logHook                 = mapM_ zipWith hPutStrLn xmprocs (map show [0..nScreens-1])
-      , modMask = mod4Mask     -- Rebind Mod to the Windows key
-      , keys = mykeys
---      , normalBorderColor  = "#cccccc"
---      , focusedBorderColor = "#cd8b00"
-      }-- `additionalKeys` myKeys
+	xmonad $ docks def {
+		borderWidth        = 4,
+		normalBorderColor  = "#cacaca",
+		focusedBorderColor = "#dada1d",
+		terminal        = "urxvt",
+		layoutHook      = mylayoutHook,
+		logHook                 = mapM_ dynamicLogWithPP $ zipWith pp xmprocs [0..nScreens-1],
+		modMask = mod4Mask,     -- Rebind Mod to the Windows key
+		keys = mykeys
+	}
 
 mykeys :: XConfig Layout -> Data.Map.Map (KeyMask, KeySym) (X ())
 mykeys c = (myKeys c) `Data.Map.union` (XMonad.keys defaultConfig c)
-  where
-    myKeys conf@(XConfig {modMask = modm}) = myKeyBindings modm conf
+	where
+		myKeys conf@(XConfig {modMask = modm}) = myKeyBindings modm conf
 
 myKeyBindings modm conf = Data.Map.fromList $
---myKeyBindings conf@(XConfig {XMonad.modMask = mod4Mask}) = Data.Map.fromList $
       [ ((modm .|. shiftMask, xK_l), spawn "xscreensaver-command -lock")
       , ((modm .|. shiftMask, xK_s), spawn "xscreensaver-command -lock && systemctl suspend")
       , ((modm .|. shiftMask, xK_h), spawn "xscreensaver-command -lock && systemctl hibernate")
@@ -78,23 +62,13 @@ myKeyBindings modm conf = Data.Map.fromList $
 --        , (f, m) <- [(XMonad.StackSet.greedyView, 0), (XMonad.StackSet.shift, shiftMask)]]
 
 -- xmobar command
-xmobarCommand(S s) = unwords ["xmobar", "-x", show s] --, "-t", template s] where
---    template 0 = "%StdinReader%"
---    template _ = "%date%%StdinReader%"
-
---myLogHook :: Handle Integer -> X ()
---myLogHook handle screen = io . show s
---myLogHook handle screen = dynamicLogWithPP $ pp handle screen
-
-myOutput screen strOut = concat [show screen, " ", strOut]
+xmobarCommand(S s) = unwords ["xmobar", "-x", show s]
 
 -- Pretty Printing (pp) format for xmobar
 -- Status bar format for workspaces, layout indicator and window title
 -- See https://hackage.haskell.org/package/xmonad-contrib-0.16/docs/XMonad-Hooks-DynamicLog.html
---pp h s = marshallPP s xmobarPP {
---pp h s = XMonad.Hooks.DynamicBars.multiPP (mypp h s) (mypp h s)
 pp h s = defaultPP {
-      ppOutput              = hPutStrLn h . myOutput s
+      ppOutput              = hPutStrLn h -- takes string as other parameter
 --    , ppSort                = getSortByXineramaRule
     , ppCurrent             = xmobarColor "#eeee00" "black" . wrap "[" "]"
     , ppHidden              = xmobarColor "white" "black"
