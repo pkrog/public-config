@@ -78,7 +78,7 @@ endif
 command! -nargs=1 ViewRHelpPage call <SID>DumpRHelpPage(<args>)
 
 " Operator for searching selected word in visual mode
-vnoremap <leader>sm :<c-u>call <SID>RSearchManualOperator(visualmode())<cr>
+vnoremap <leader>sl :<c-u>call <SID>RSearchManualOperator(visualmode())<cr>
 
 " Operator for searching for word under cursor in normal node
-nnoremap <leader>sm :call <SID>RSearchManualUnderCursor()<cr>
+nnoremap <leader>sl :call <SID>RSearchManualUnderCursor()<cr>

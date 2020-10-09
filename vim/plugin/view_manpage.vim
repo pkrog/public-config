@@ -1,5 +1,5 @@
 " Usage
-" <leader>gm in visual and normal modes for opening man page.
+" <leader>om in visual and normal modes for opening man page.
 
 " Set default values for global variables
 if ! exists("g:view_manpage_chars")
@@ -92,7 +92,7 @@ command! -nargs=1 ViewManpage call <SID>DumpManpage(<args>)
 "nnoremap <leader>gm :set operatorfunc=<SID>ViewManpageOperator<cr>g@
 
 " Operator for opening selected manpage in visual mode
-vnoremap <leader>gm :<c-u>call <SID>ViewManpageOperator(visualmode())<cr>
+vnoremap <leader>sm :<c-u>call <SID>ViewManpageOperator(visualmode())<cr>
 
 " Operator for opening manpage under cursor in normal node
-nnoremap <leader>gm :call <SID>ViewManpageUnderCursor()<cr>
+nnoremap <leader>sm :call <SID>ViewManpageUnderCursor()<cr>

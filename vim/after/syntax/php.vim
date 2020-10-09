@@ -58,7 +58,7 @@ function! s:PhpSearchManualUnderCursor()
 endfunction
 
 " Operator for searching selected word in visual mode
-vnoremap <leader>sm :<c-u>call <SID>PhpSearchManualOperator(visualmode())<cr>
+vnoremap <leader>sl :<c-u>call <SID>PhpSearchManualOperator(visualmode())<cr>
 
 " Operator for searching for word under cursor in normal node
-nnoremap <leader>sm :call <SID>PhpSearchManualUnderCursor()<cr>
+nnoremap <leader>sl :call <SID>PhpSearchManualUnderCursor()<cr>
