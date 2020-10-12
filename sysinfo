@@ -10,7 +10,7 @@ BATTERY=
 NETWORK=
 ONELINE=
 SEP=" | "
-ORDER="nvbas"
+ORDER="nvbams"
 AUDIO=
 SCREEN=
 MUTE=
@@ -21,6 +21,7 @@ INCBRIGHT=
 DECBRIGHT=
 COLORING=
 XMOBAR=
+SHORTEN=
 VPN=
 SWITCH_AUDIO_SINK=
 TAGS=$YES
@@ -52,11 +53,13 @@ function print_help {
 	echo "   -l, --oneline           Print information on one line only."
 	echo "       --micmute           Mute/unmute microphone."
 	echo "       --mute              Mute/unmute audio."
+	echo "   -m, --micro             Print micro information."
 	echo "   -n, --network           Display network information."
 	echo "       --no-tags           Do not use tags as prefix of information."
 	echo "   -o, --order             Set order of information display. Default is $ORDER."
 	echo "   -s, --screen            Print screen brightness information."
 	echo "       --switch-audio-sink Switch of audio sink."
+	echo "       --shorten-msgs      Shorten messages."
 	echo "   -v, --vpn               Print VPN connection status."
 	echo "   -x, --xmobar            Output for xmobar."
 }
@@ -148,10 +151,17 @@ function add_level_coloring {
 	local level=$2
 
 	case $level in
-		good)           color=green ;;
-		highlight|info) color=yellow ;;
-		bad)            color=orange ;;
-		critical)       color=red ;;
+		lvl100)                 color=green ;;
+		lvl90)                  color=green ;;
+		lvl80|on|good)          color=green ;;
+		lvl70)                  color=yellow ;;
+		lvl60)                  color=yellow ;;
+		lvl50)                  color=yellow ;;
+		lvl40|notbad|highlight|info)  color=yellow ;;
+		lvl30)                  color=red ;;
+		lvl20|bad|broken)       color=orange ;;
+		lvl10)                  color=red ;;
+		lvl0|critical|off)      color=red ;;
 	esac
 
 	add_coloring "$msg" $color
@@ -173,9 +183,11 @@ function read_args {
 			-g|--debug)     DEBUG=$((DEBUG + 1)) ;;
 			-h|--help)      print_help ; exit 0 ;;
 			-l|--oneline)   ONELINE=$YES ;;
+			-m|--micro)     print=$YES ; MICRO=$YES ;;
 			-n|--network)   print=$YES ; NETWORK=$YES ;;
 			-o|--order)     ORDER=$2 ; shift ;;
 			-s|--screen)    print=$YES ; SCREEN=$YES ;;
+			--shorten-msgs) SHORTEN=$YES ;;
 			--switch-audio-sink) SWITCH_AUDIO_SINK=$YES ;;
 			-v|--vpn)       print=$YES ; VPN=$YES ;;
 			-x|--xmobar)    XMOBAR=$YES ;;
@@ -198,6 +210,7 @@ function read_args {
 
 	[[ -z $print ]] && AUDIO=$YES
 	[[ -z $print ]] && BATTERY=$YES
+	[[ -z $print ]] && MICRO=$YES
 	[[ -z $print ]] && NETWORK=$YES
 	[[ -z $print ]] && SCREEN=$YES
 	[[ -z $print ]] && VPN=$YES
@@ -208,16 +221,18 @@ function read_args {
 	debug 1 "Arguments are : $args"
 	debug 1 "AUDIO=$AUDIO"
 	debug 1 "BATTERY=$BATTERY"
+	debug 1 "DECVOL=$DECVOL"
+	debug 1 "INCVOL=$INCVOL"
+	debug 1 "MICMUTE=$MICMUTE"
+	debug 1 "MICRO=$MICRO"
+	debug 1 "MUTE=$MUTE"
 	debug 1 "NETWORK=$NETWORK"
 	debug 1 "ONELINE=$ONELINE"
 	debug 1 "SCREEN=$SCREEN"
-	debug 1 "VPN=$VPN"
-	debug 1 "INCVOL=$INCVOL"
-	debug 1 "DECVOL=$DECVOL"
-	debug 1 "MUTE=$MUTE"
-	debug 1 "MICMUTE=$MICMUTE"
+	debug 1 "SHORTEN=$SHORTEN"
 	debug 1 "SWITCH_AUDIO_SINK=$SWITCH_AUDIO_SINK"
 	debug 1 "TAGS=$TAGS"
+	debug 1 "VPN=$VPN"
 }
 
 # Print battery {{{1
@@ -250,15 +265,11 @@ function print_battery {
 	else
 		msg="$charge%$plugged"
 		[[ $TAGS == $YES ]] && msg="Batt: $msg"
-		if [[ $charge -ge 80 ]] ; then
-			level=good
-		elif [[ $charge -ge 20 ]] ; then
-			level=bad
-		else
-			level=critical
-		fi
+		level=lvl$(($charge/10*10))
 	fi
 
+	[[ $SHORTEN == $YES && $plugged == 'v' ]] && msg="batt"
+	[[ $SHORTEN == $YES && $plugged == '^' ]] && msg="plugged"
 	local msg=$(add_level_coloring "$msg" $level)
 	echo -n $msg
 }
@@ -287,8 +298,10 @@ function print_network {
 				# Signal level is in dBm (dB mW = decibel-milliwatts, power ratio in dB for one mW).
 				msg="$wifi_card $wifi_ssid $ip $wifi_link_quality/70 ${wifi_signal_level}dBm"
 				[[ $TAGS == $YES ]] && msg="WiFi: $msg"
-				if [[ $wifi_link_quality -ge 60 ]] ; then
+				if [[ $wifi_link_quality -ge 80 ]] ; then
 					level=good
+				elif [[ $wifi_link_quality -ge 60 ]] ; then
+					level=notbad
 				elif [[ $wifi_link_quality -ge 40 ]] ; then
 					level=bad
 				else
@@ -346,6 +359,8 @@ function print_network {
 		debug 1 "Do not know how to get network information for platform $(get_platform)."
 	fi
 
+	# Shorten message
+	[[ $SHORTEN == $YES && -n $wifi_ssid ]] && msg=$wifi_ssid
 	local msg=$(add_level_coloring "$msg" $level)
 	echo -n "$msg"
 }
@@ -359,6 +374,15 @@ function get_default_sink {
 	echo $sink
 }
 
+# Get default source {{{1
+################################################################
+
+function get_default_source {
+	local source=$(pacmd list-sources | fgrep '* index:' | sed 's/^.*index: \([0-9]*\)$/\1/')
+	debug 1 "source=$source"
+	echo $source
+}
+
 # Get sink indices {{{1
 ################################################################
 
@@ -366,6 +390,28 @@ function get_sink_indices {
 	local sinks=$(pacmd list-sinks | grep ' index:' | sed 's/^.*index: \([0-9]*\)$/\1/' | tr "\n" " ")
 	debug 1 "sinks=$sinks"
 	echo $sinks
+}
+
+# Print micro {{{1
+################################################################
+
+function print_micro {
+	local source=$(get_default_source)
+	local muted=$(pacmd list-sources | sed -n "/index: $source/,/device\.icon/p" | grep -i 'muted: *yes')
+	debug 1 "muted=$muted"
+
+	if [[ -n $muted ]] ; then
+		msg=muted
+		level=off
+	else
+		msg=on
+		level=on
+	fi
+
+	[[ $TAGS == $YES ]] && msg="Micro: $msg"
+	[[ $SHORTEN == $YES && $COLORING == $YES ]] && msg="mic"
+	msg=$(add_level_coloring "$msg" $level)
+	echo -n $msg
 }
 
 # Print audio {{{1
@@ -387,6 +433,7 @@ function print_audio {
 		desc=$(pactl list sinks | sed -n "/Sink #$sink/,/Formats:/p" | grep -i Description: | sed 's/^.*Description: \(.*\)$/\1/')
 		debug 1 "desc=$desc"
 		msg="$desc $vol%"
+		[[ $SHORTEN == $YES && -n $(echo $desc | grep -i built-in) ]] && msg="V$vol%"
 		if [[ $vol -le 70 ]] ; then
 			level=good
 		elif [[ $vol -le 100 ]] ; then
@@ -423,15 +470,18 @@ function print_screen_brightness {
 	local brightness=$(get_screen_brightness)
 	local percent_brightness=$(echo "scale=0;$brightness * 100 / 1" | bc -l)
 	local level=
-	if [[ $percent_brightness -le 70 ]] ; then
+	if [[ $percent_brightness -le 60 ]] ; then
 		level=good
+	elif [[ $percent_brightness -le 80 ]] ; then
+		level=notbad
 	elif [[ $percent_brightness -le 100 ]] ; then 
 		level=bad
 	else
 		level=critical
 	fi
 	local msg="${percent_brightness}%"
-	[[ $TAGS == $YES ]] && msg="Brightness: $msg"
+	[[ $TAGS == $YES && $SHORTEN != $YES ]] && msg="Brightness: $msg"
+	[[ $SHORTEN == $YES ]] && msg="B$msg"
 	local msg=$(add_level_coloring "$msg" $level)
 	echo -n $msg
 }
@@ -523,13 +573,14 @@ function print_vpn {
 				level=good
 			else
 				msg="$msg broken or closed"
-				level=critical
+				level=broken
 			fi
 		else
 			msg="$msg off"
-			level=info
+			level=off
 		fi
 
+		[[ $SHORTEN == $YES && $COLORING == $YES ]] && msg="VPN"
 		msg=$(add_level_coloring "$msg" $level)
 		echo -n $msg
 	fi
@@ -549,6 +600,7 @@ for x in $(echo $ORDER | sed "s/\(.\)/\1 /g") ; do
 	case $x in
 		a) test_var=AUDIO   ; cmd=print_audio ;;
 		b) test_var=BATTERY ; cmd=print_battery ;;
+		m) test_var=MICRO   ; cmd=print_micro   ;;
 		n) test_var=NETWORK ; cmd=print_network ;;
 		v) test_var=VPN     ; cmd=print_vpn ;;
 		s) test_var=SCREEN  ; cmd=print_screen_brightness ;;
