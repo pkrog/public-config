@@ -276,3 +276,15 @@ Bioconda
 Conda
 IUPAC
 XPath
+ExPASy
+MassBank
+NCI
+biodbExpasy
+biodbLipidmaps
+biodbNcbi
+biodbMassbank
+biodbNci
+biodbChemspider
+biodbMirbase
+biodbPeakforest
+Orthology
