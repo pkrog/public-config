@@ -384,7 +384,7 @@ augroup END
 
 augroup syntax_notes
 	autocmd!
-	autocmd Syntax * syntax keyword allTodo TODO TOREAD TOEXPLAIN TOREMOVE TOREFACTOR TOREVIEW containedin=.*Comment.* contained
+	autocmd Syntax * syntax keyword allTodo TODO TOREAD TOEXPLAIN TOREMOVE TOREFACTOR TOREVIEW WARNING containedin=.*Comment.* contained
 	autocmd Syntax * syntax keyword allNote NOTE INFO IDEA XXX DONE containedin=.*Comment.* contained
 	autocmd Syntax * syntax keyword allUrgent URGENT DEPRECATED BROKEN BUG IMPORTANT ERROR HACK FIXME DISABLED containedin=.*Comment.* contained
 	autocmd Syntax * highlight link allTodo Todo
