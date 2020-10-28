@@ -9,7 +9,7 @@ for term in $TERMINAL urxvt xfce4-terminal xterm ; do
 	fi
 done
 
-X_PROGS=,openmw,
+X_PROGS=,openmw,skype,
 TERM_PROGS=,vim,R,ranger,htop,
 
 debug() {
