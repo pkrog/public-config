@@ -11,14 +11,14 @@ Config {
        -- layout
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ %cpu% | %memory% | %swap% | %sysinfo% | <fc=#ff92d6>%date%</fc>"
+       , template = "%StdinReader% }{ %cpu% | %memory% | %swap% | %sysinfo% | %date%"
 
        -- plugins
        -- Refresh rate is in tenths of second
        , commands = [ Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10
                    , Run Memory ["-t","Mem: <usedratio>%"] 10
                    , Run Swap [] 10
-                   , Run Date "%a %d %b %H:%M" "date" 10
+                   , Run Date "<fc=#ff92d6>%a %d %b %H:%M</fc>" "date" 10
                    , Run StdinReader
                    , Run Com "sysinfo" ["-lcx", "--no-tags", "--shorten-msgs"] "" 10
                     ]
