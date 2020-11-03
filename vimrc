@@ -247,8 +247,8 @@ set errorformat+=%f:%l " line error in PHP Unit stack print
 "
 "
 "" Java
-"set errorformat+=[%.%#WARNING%.%#]\ %f:[%l\\,%c]\ %m    " Maven warning message. `%.%#` is here to catch color codes.
-"set errorformat+=[%.%#ERROR%.%#]\ %f:[%l\\,%c]\ %m      " Maven error message. `%.%#` is here to catch color codes.
+set errorformat+=[%.%#WARNING%.%#]\ %f:[%l\\,%c]\ %m    " Maven warning message. `%.%#` is here to catch color codes.
+set errorformat+=[%.%#ERROR%.%#]\ %f:[%l\\,%c]\ %m      " Maven error message. `%.%#` is here to catch color codes.
 ""set errorformat-=%f\\|%l\\|\ %m
 ""set errorformat+=%.%#\ %f\\|%l\\|\ %m        " ant/Java
 ""set errorformat+=%f\\|%l\\|\ %m
