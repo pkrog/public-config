@@ -16,7 +16,8 @@
 *.color1: #b00000
 *.color2: #00b000
 *.color3: #b0b000
-*.color4: #478fd7
+!*.color4: #478fd7
+*.color4: #0000b0
 *.color5: #b000b0
 *.color6: #00b0b0
 *.color7: #b0b0b0
