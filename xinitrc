@@ -21,6 +21,9 @@ xset dpms 240 480 720
 # Run screen saver
 xscreensaver -no-splash &
 
+# Auto hide mouse cursor/pointer
+unclutter &
+
 case "$XSESSION" in
 	i3|i3wm)    XSESSION=i3;;
 	xmonad)     XSESSION=xmonad;;
