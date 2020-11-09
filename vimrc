@@ -40,12 +40,20 @@ set cinoptions=(0,u0,U0)
 "set backupdir^=~/.vim/bkp//
 
 " Paths
+set path+=~/dev
+set path+=~/dev/public-notes
+set path+=~/dev/public-notes/dev
+set path+=~/dev/public-notes/cuisine
+set path+=~/dev/public-notes/misc
 set path+=~/dev/public-notes
 set path+=~/dev/public-notes/dev
 set path+=~/dev/public-notes/cuisine
 set path+=~/dev/public-notes/misc
 set path+=~/dev/private-notes
 set path+=~/dev/cea_notes
+set path+=~/private
+set path+=~/private/dev/cea_notes
+set path+=~/private/dev/private-notes
 
 " Function for getting syntax highlithing group at current cursor place.
 function! SyntaxItem()
