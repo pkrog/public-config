@@ -2,7 +2,7 @@
 auto-reload yes
 reload-time 10
 color info              color226 color22
-color background        color0   color0
+color background        color196 color0
 color listnormal        color255 color0
 color listnormal_unread color75  color0
 color listfocus         color0   color255

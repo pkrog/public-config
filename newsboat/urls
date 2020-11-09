@@ -29,7 +29,7 @@ https://www.latimes.com/world-nation/rss2.0.xml
 http://xml2.corriereobjects.it/rss/homepage.xml
 http://feed.lastampa.it/Homepage.rss
 https://www.repubblica.it/rss/homepage/rss2.0.xml
-https://napoli.repubblica.it/rss/rss2.0.xml
+#https://napoli.repubblica.it/rss/rss2.0.xml
 http://radiofrance-podcast.net/podcast09/rss_14312.xml # FC La méthode scientifique
 http://radiofrance-podcast.net/podcast09/rss_16589.xml # FI La Une de la science
 http://radiofrance-podcast.net/podcast09/rss_10206.xml # FI Le Jeu des 1000 euros
