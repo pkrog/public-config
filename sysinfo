@@ -454,11 +454,15 @@ function print_audio {
 function get_screen_brightness {
 
 	local brightness=
-	local displays=$(xrandr -q | grep ' connected' | sed 's/^\([^ ]*\) .*$/\1/')
-	# Get brightness of first display
-	for display in $displays ; do
-		brightness=$(xrandr --verbose | grep -i brightness | head -n 1 | sed 's/.*[Bb]rightness: *\([0-9.]*\)$/\1/')
-	done
+
+	# Use xrandr
+	local displays=$(xrandr -q 2>/dev/null | grep ' connected' | sed 's/^\([^ ]*\) .*$/\1/')
+	if [[ -n $displays ]] ; then
+		# Get brightness of first display
+		for display in $displays ; do
+			brightness=$(xrandr --verbose | grep -i brightness | head -n 1 | sed 's/.*[Bb]rightness: *\([0-9.]*\)$/\1/')
+		done
+	fi
 
 	echo $brightness
 }
@@ -468,22 +472,25 @@ function get_screen_brightness {
 
 function print_screen_brightness {
 	local brightness=$(get_screen_brightness)
-	local percent_brightness=$(echo "scale=0;$brightness * 100 / 1" | bc -l)
-	local level=
-	if [[ $percent_brightness -le 60 ]] ; then
-		level=good
-	elif [[ $percent_brightness -le 80 ]] ; then
-		level=notbad
-	elif [[ $percent_brightness -le 100 ]] ; then 
-		level=bad
-	else
-		level=critical
+
+	if [[ -n $brightness ]] ; then
+		local percent_brightness=$(echo "scale=0;$brightness * 100 / 1" | bc -l)
+		local level=
+		if [[ $percent_brightness -le 60 ]] ; then
+			level=good
+		elif [[ $percent_brightness -le 80 ]] ; then
+			level=notbad
+		elif [[ $percent_brightness -le 100 ]] ; then 
+			level=bad
+		else
+			level=critical
+		fi
+		local msg="${percent_brightness}%"
+		[[ $TAGS == $YES && $SHORTEN != $YES ]] && msg="Brightness: $msg"
+		[[ $SHORTEN == $YES ]] && msg="B$msg"
+		local msg=$(add_level_coloring "$msg" $level)
+		echo -n $msg
 	fi
-	local msg="${percent_brightness}%"
-	[[ $TAGS == $YES && $SHORTEN != $YES ]] && msg="Brightness: $msg"
-	[[ $SHORTEN == $YES ]] && msg="B$msg"
-	local msg=$(add_level_coloring "$msg" $level)
-	echo -n $msg
 }
 
 # Modify screen brightness {{{1
@@ -613,8 +620,8 @@ for x in $(echo $ORDER | sed "s/\(.\)/\1 /g") ; do
 			[[ $ONELINE == $YES && $n_printed -gt 0 ]] && echo -n "$SEP"
 			echo -n $msg
 			[[ $ONELINE == $YES ]] || echo
+			((++n_printed))
 		fi
-		((++n_printed))
 	fi
 done
 
