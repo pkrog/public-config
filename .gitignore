@@ -16,3 +16,4 @@ cabal/bin
 cabal/logs
 cabal/packages
 cabal/store
+!vimb/config
