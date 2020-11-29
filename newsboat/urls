@@ -1,8 +1,4 @@
-http://radiofrance-podcast.net/podcast09/rss_10055.xml
-http://radiofrance-podcast.net/podcast09/rss_10057.xml
-http://radiofrance-podcast.net/podcast09/rss_10059.xml
-http://radiofrance-podcast.net/podcast09/rss_10060.xml
-https://podcasts.files.bbci.co.uk/p02nq0gn.rss
+# French language newspapers
 https://www.lemonde.fr/rss/une.xml
 https://www.lefigaro.fr/rss/figaro_actualites.xml
 http://rss.liberation.fr/rss/9/
@@ -10,26 +6,43 @@ https://www.mediapart.fr/articles/feed
 https://syndication.lesechos.fr/rss/rss_industries_services.xml
 https://www.lesoir.be/rss/81853/cible_principale_gratuit
 https://www.letemps.ch/feed
+
+# BBC
+https://podcasts.files.bbci.co.uk/p02nq0gn.rss # BBC News podcasts
 http://feeds.bbci.co.uk/news/world/rss.xml
 http://feeds.bbci.co.uk/news/uk/rss.xml
 http://feeds.bbci.co.uk/news/business/rss.xml
 http://feeds.bbci.co.uk/news/politics/rss.xml
 http://feeds.bbci.co.uk/news/science_and_environment/rss.xml
+https://podcasts.files.bbci.co.uk/p086934c.rss # BBC Body Horror
+https://podcasts.files.bbci.co.uk/p052lph7.rss # BBC Quake
+
+# Politico
 #http://rss.politico.com/politics-news.xml
 http://rss.politico.com/energy.xml
 http://rss.politico.com/economy.xml
 http://rss.politico.com/defense.xml
 http://rss.politico.com/healthcare.xml
 http://rss.politico.com/congress.xml
+
+# Other English language newspapers
 https://www.theguardian.com/world/rss
 https://www.theatlantic.com/feed/all/
 http://feeds.skynews.com/feeds/rss/home.xml
 https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml
 https://www.latimes.com/world-nation/rss2.0.xml
+
+# Italian newspapers
 http://xml2.corriereobjects.it/rss/homepage.xml
 http://feed.lastampa.it/Homepage.rss
 https://www.repubblica.it/rss/homepage/rss2.0.xml
 #https://napoli.repubblica.it/rss/rss2.0.xml
+
+# Radio France
+http://radiofrance-podcast.net/podcast09/rss_10055.xml
+http://radiofrance-podcast.net/podcast09/rss_10057.xml
+http://radiofrance-podcast.net/podcast09/rss_10059.xml
+http://radiofrance-podcast.net/podcast09/rss_10060.xml
 http://radiofrance-podcast.net/podcast09/rss_14312.xml # FC La méthode scientifique
 http://radiofrance-podcast.net/podcast09/rss_16589.xml # FI La Une de la science
 http://radiofrance-podcast.net/podcast09/rss_10206.xml # FI Le Jeu des 1000 euros
@@ -39,8 +52,6 @@ https://radiofrance-podcast.net/podcast09/rss_13026.xml # FC Théâtre
 https://radiofrance-podcast.net/podcast09/rss_11495.xml # FC Le Feuilleton
 https://radiofrance-podcast.net/podcast09/rss_19904.xml # FC Les Aventures de Tintin
 http://www.rfi.fr/emission/couleurs-tropicales/podcast
-https://podcasts.files.bbci.co.uk/p086934c.rss # BBC Body Horror
-https://podcasts.files.bbci.co.uk/p052lph7.rss # BBC Quake
 #http://radiofrance-podcast.net/podcast09/rss_19766.xml # L'Appel des abysses
 #http://radiofrance-podcast.net/podcast09/rss_18913.xml # L'incroyable expédition de Corentin Tréguier
 #http://radiofrance-podcast.net/podcast09/rss_20793.xml # La vie trépidante de Brigitte Tornade : la magie de Noël

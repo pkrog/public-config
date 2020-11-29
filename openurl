@@ -1,0 +1,15 @@
+#!/bin/bash
+
+url="$1"
+ext=${url##*.}
+term=urxvt
+[[ -z $TERMINAL ]] || term=$TERMINAL
+
+# Audio
+if [[ $ext = mp3 ]] ; then
+	$term -e mplayer "$url"
+
+# Default
+else
+	vimb "$url"
+fi
