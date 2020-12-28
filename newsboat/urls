@@ -31,6 +31,8 @@ https://www.theatlantic.com/feed/all/
 http://feeds.skynews.com/feeds/rss/home.xml
 https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml
 https://www.latimes.com/world-nation/rss2.0.xml
+http://rss.cnn.com/rss/edition.rss # CNN Top stories
+https://www.cnbc.com/id/100003114/device/rss/rss.html # CNBC Top stories
 
 # Italian newspapers
 http://xml2.corriereobjects.it/rss/homepage.xml
