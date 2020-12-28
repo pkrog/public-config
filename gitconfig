@@ -14,3 +14,5 @@
 	path = ~/.gitlinux
 [http]
 	sslVerify = false
+[pull]
+	rebase = false
