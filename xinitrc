@@ -18,6 +18,9 @@ xbindkeys
 # Set DPMS (display Energy Star settings)
 xset dpms 240 480 720
 
+# Run auto suspend & hibernate
+xautolock -time 5 -locker "systemctl suspend-then-hibernate" &
+
 # Run screen saver
 xscreensaver -no-splash &
 
