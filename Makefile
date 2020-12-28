@@ -2,8 +2,9 @@
 # vi: fdm=marker
 
 BINARIES=view_csv view_tsv view_vcal termcolors amutt gmutt runx termprg sysinfo vpncea multiscreens skype openurl
-ROOT_CFG=signature screenrc tmux.conf tmux-plugins bashrc zshrc profile bash_profile zprofile xsessionrc xinitrc newsboat links lynx lynxrc i3status.conf Xmodmap Xresources xmonad xmobarrc mplayer cabal xbindkeysrc xscreensaver
+ROOT_CFG=signature screenrc tmux.conf tmux-plugins bashrc zshrc profile bash_profile zprofile xsessionrc xinitrc newsboat links lynx lynxrc i3status.conf Xmodmap Xresources xmonad xmobarrc mplayer cabal xbindkeysrc
 CONFIG_DIR=redshift.conf canto i3 vimb
+DST_BIN=$(HOME)/.local/bin
 
 # Constants {{{1
 ################################################################
@@ -40,7 +41,7 @@ all:
 # Install {{{1
 ################################################################
 
-install: versioning dev imgbg x11 $(addprefix $(HOME)/.config/,$(CONFIG_DIR)) $(addprefix $(HOME)/.,$(ROOT_CFG)) $(addprefix $(HOME)/bin/,$(BINARIES))
+install: versioning dev imgbg x11 $(addprefix $(HOME)/.config/,$(CONFIG_DIR)) $(addprefix $(HOME)/.,$(ROOT_CFG)) $(addprefix $(DST_BIN)/,$(BINARIES))
 
 $(HOME)/.%: %
 	ln -sf "$(CURDIR)/$<" "$@"
@@ -61,8 +62,8 @@ $(HOME)/.config/%: %
 	@mkdir -p $(HOME)/.config
 	ln -sf "$(CURDIR)/$<" "$@"
 
-$(HOME)/bin/%: %
-	@mkdir -p $(HOME)/bin
+$(DST_BIN)/%: %
+	@mkdir -p $$(dirname "$@")
 	ln -sf "$(CURDIR)/$<" $@
 
 # Uninstall, test and clean {{{1
@@ -70,7 +71,6 @@ $(HOME)/bin/%: %
 
 uninstall:
 	# TODO clean all config files ($(HOME)/.*)
-
 
 # Versioning {{{1
 ################################################################
