@@ -19,7 +19,8 @@ xbindkeys
 xset dpms 240 480 720
 
 # Run auto suspend & hibernate
-xautolock -time 5 -locker "systemctl suspend-then-hibernate" &
+#xautolock -time 5 -locker "systemctl suspend-then-hibernate" &
+# TODO Issue: goes to suspend mode event if watching movie or program running.
 
 # Run screen saver
 xscreensaver -no-splash &
