@@ -219,24 +219,44 @@ endfunction
 
 set errorformat=
 
-set errorformat+=\ %#%n.\ %m\ %f:%l:%c%.%# " R testthat
-	"   8. .self$.parseDbLinks(parsed.content) R/KeggCompoundEntry.R:37:4
-set errorformat+=%.%#.\ Error:\ %m\ (@%f#%l)\ %.%# " R testthat
-	" ── 1. Error: annotateMzValues() works correctly. (@BiodbCompounddbConn.R#121)  ─
-set errorformat+=%m\ at\ %f:%l        " R testthat error
+" R testthat {{{2
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"   8. .self$.parseDbLinks(parsed.content) R/KeggCompoundEntry.R:37:4
+set errorformat+=\ %#%n.\ %m\ %f:%l:%c%.%#
+
+" Failure (test_011_mass_fcts.R:33:5): closeMatchPpm() works correctly.
+set errorformat+=Failure\ (%f:%l:%c)\ %m
+
+" ── 1. Error: annotateMzValues() works correctly. (@BiodbCompounddbConn.R#121)  ─
+set errorformat+=%.%#.\ Error:\ %m\ (@%f#%l)\ %.%#
+
+" ????
+"   Attention ! Do not parse Maven compiling message:
+"   [INFO] Finished at: 2021-01-06T16:33:06+01:00
+"set errorformat+=%m\ at\ %f:%l        " R testthat error
+
+" R BiocCheck {{{2
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 set errorformat+=%m\ in\ %f\ (line\ %l\\,\ column\ %c) " BiocCheck error
 set errorformat+=%m\ (%f\\,\ line\ %l):\ %.%#  " BiocCheck error
 set errorformat+=%f\ (line\ %l\\,\ column\ %c) " BiocCheck error
 set errorformat+=%f\ (line\ %l) " BiocCheck error
+
+" PHP {{{2
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" .PHP Fatal error:  Constant expression contains invalid operations in
+" /home/pr228844/dev/exhalobase/site/src/DbAcqFile.php on line 37
 set errorformat+=.PHP\ Fatal\ error:\ %#%m\ in\ %f\ on\ line\ %l " PHP
-	" .PHP Fatal error:  Constant expression contains invalid operations in
-	" /home/pr228844/dev/exhalobase/site/src/DbAcqFile.php on line 37
+
 set errorformat+=PHP\ Parse\ error:\ %#%m\ in\ %f\ on\ line\ %l " PHP
+
+" Perl {{{2
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 set errorformat+=%m\ at\ %f\ line\ %l. " Perl
-set errorformat+=%f:%l:\ %m " Custom file read with cfile
-set errorformat+=%f:%l\ %m " BiocCheck error
-set errorformat+=%m\ in\ %f\ on\ line\ %l " PHP syntax error
-set errorformat+=%f:%l " line error in PHP Unit stack print
 
 " set errorformat=%-GDEBUG%.%#                           " Ignore all debug messages, starting by DEBUG.
 "set errorformat+=%-G[%.%#INFO%.%#]%.%#                  " Maven info message. We ignore all of them.
@@ -248,14 +268,28 @@ set errorformat+=%f:%l " line error in PHP Unit stack print
 "set errorformat^=%.%#[exec]%.%#\ %f:%l:%c:\ %m    " R error when run with devtools package
 "set errorformat+=%.%#(from\ %f#%l)%m  " R error when run with devtools package
 
-"
-"
-"" Java
+" Maven {{{2
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 set errorformat+=[%.%#WARNING%.%#]\ %f:[%l\\,%c]\ %m    " Maven warning message. `%.%#` is here to catch color codes.
-set errorformat+=[%.%#ERROR%.%#]\ %f:[%l\\,%c]\ %m      " Maven error message. `%.%#` is here to catch color codes.
+
+" [ERROR] /home/pr228844/private/dev/anmf/src/main/java/fr/cea/anmf/DiagPicturesPanel.java:[62,15] mousePressed(java.awt.event.MouseEvent) in fr.cea.anmf.DiagPicturesPanel cannot implement mousePressed(java.awt.event.MouseEvent) in java.awt.event.MouseListener
+" [ERROR]   attempting to assign weaker access privileges; was public
+set errorformat+=[%.%#ERROR%.%#]\ %f:[%l\\,%c]\ %m      " `%.%#` is here to catch color codes.
+
 ""set errorformat-=%f\\|%l\\|\ %m
 ""set errorformat+=%.%#\ %f\\|%l\\|\ %m        " ant/Java
 ""set errorformat+=%f\\|%l\\|\ %m
+
+
+" Generic {{{2
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Too much generic
+"set errorformat+=%f:%l:\ %m " Custom file read with cfile
+"set errorformat+=%f:%l\ %m " BiocCheck error
+"set errorformat+=%m\ in\ %f\ on\ line\ %l " PHP syntax error
+"set errorformat+=%f:%l " line error in PHP Unit stack print
 
 "" PHP
 "" 1) DbAccessTest::test_01_resetDb
