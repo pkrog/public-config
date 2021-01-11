@@ -286,60 +286,60 @@ function print_network {
 	# Linux
 	if [[ $(get_platform) == Linux ]] ; then
 
-		# WiFi
-		local wifi_card=$(iw dev | grep Interface | head -n 1 | sed 's/^\s*Interface *//')
-		if [[ -n $wifi_card ]] ; then
-			local wifi_ssid=$(iw dev | grep ssid | head -n 1 | sed 's/^\s*ssid *//')
-			if [[ -n $wifi_ssid ]] ; then
-				local wifi_link_quality=$(grep $wifi_card /proc/net/wireless | sed 's/^[^:]*:\s\+[0-9]\+\s\+\([0-9]\+\)\..*$/\1/')
-				local wifi_signal_level=$(grep $wifi_card /proc/net/wireless | sed 's/^[^:]*:\s\+[0-9]\+\s\+[0-9.-]\+\s\+\(-[0-9]\+\)\..*$/\1/')
-				local ip=$(ifconfig $wifi_card | grep 'inet ' | sed 's/^ *inet *\([0-9.]\+\).*$/\1/')
-				# Link quality maximum is 70
-				# Signal level is in dBm (dB mW = decibel-milliwatts, power ratio in dB for one mW).
-				msg="$wifi_card $wifi_ssid $ip $wifi_link_quality/70 ${wifi_signal_level}dBm"
-				[[ $TAGS == $YES ]] && msg="WiFi: $msg"
-				if [[ $wifi_link_quality -ge 80 ]] ; then
-					level=good
-				elif [[ $wifi_link_quality -ge 60 ]] ; then
-					level=notbad
-				elif [[ $wifi_link_quality -ge 40 ]] ; then
-					level=bad
-				else
-					level=critical
-				fi
-				connection=wifi
+		# Ethernet or USB Hotspot
+		local conn=$(networkctl list | grep 'ether *\(routable\|degraded\)')
+		debug 1 "conn=$conn"
+		if [[ -n $conn ]] ; then
+			local card=$(echo $conn | sed 's/^ *[0-9]\+ \([^ ]\+\) *.*$/\1/')
+			debug 1 "card=$card"
+			local status=$(echo $conn | sed 's/^ *[0-9]\+ [^ ]\+ ether *\([^ ]\+\).*$/\1/')
+			debug 1 "status=$status"
+			if [[ $status == 'degraded' ]] ; then
+				level=bad
+			elif [[ $status == 'routable' ]] ; then
+				level=good
 			else
-				wifi_off=$(networkctl list | grep $wifi_card | grep off)
+				level=critical
+			fi
+			local usb=$(networkctl status $card | grep usb)
+			local ether=$(networkctl status $card | grep 'Type: ether')
+			debug 1 "usb=$usb"
+			debug 1 "ether=$ether"
+			if [[ -n $usb || -n $ether ]] ; then
+				local vendor=$(networkctl status $card | grep Vendor | sed 's/^ *Vendor: *\(.*\)$/\1/')
+				local vendor_short=$(echo $vendor | sed 's/^\([^ ,]*\).*$/\1/')
+				local model=$(networkctl status $card | grep Model | sed 's/^ *Model: *\(.*\)$/\1/')
+				local ip=$(ifconfig $card | grep 'inet ' | sed 's/^ *inet *\([0-9.]\+\).*$/\1/')
+				connection=$YES
+				msg="$vendor_short $card $ip"
 			fi
 		fi
 
-		# Ethernet or USB Hotspot
+		# WiFi
 		if [[ -z $connection ]] ; then
-			local conn=$(networkctl list | grep 'ether *\(routable\|degraded\)')
-			debug 1 "conn=$conn"
-			if [[ -n $conn ]] ; then
-				local card=$(echo $conn | sed 's/^ *[0-9]\+ \([^ ]\+\) *.*$/\1/')
-				debug 1 "card=$card"
-				local status=$(echo $conn | sed 's/^ *[0-9]\+ [^ ]\+ ether *\([^ ]\+\).*$/\1/')
-				debug 1 "status=$status"
-				if [[ $status == 'degraded' ]] ; then
-					level=bad
-				elif [[ $status == 'routable' ]] ; then
-					level=good
+			local wifi_card=$(iw dev | grep Interface | head -n 1 | sed 's/^\s*Interface *//')
+			if [[ -n $wifi_card ]] ; then
+				local wifi_ssid=$(iw dev | grep ssid | head -n 1 | sed 's/^\s*ssid *//')
+				if [[ -n $wifi_ssid ]] ; then
+					local wifi_link_quality=$(grep $wifi_card /proc/net/wireless | sed 's/^[^:]*:\s\+[0-9]\+\s\+\([0-9]\+\)\..*$/\1/')
+					local wifi_signal_level=$(grep $wifi_card /proc/net/wireless | sed 's/^[^:]*:\s\+[0-9]\+\s\+[0-9.-]\+\s\+\(-[0-9]\+\)\..*$/\1/')
+					local ip=$(ifconfig $wifi_card | grep 'inet ' | sed 's/^ *inet *\([0-9.]\+\).*$/\1/')
+					# Link quality maximum is 70
+					# Signal level is in dBm (dB mW = decibel-milliwatts, power ratio in dB for one mW).
+					msg="$wifi_card $wifi_ssid $ip $wifi_link_quality/70 ${wifi_signal_level}dBm"
+					[[ $TAGS == $YES ]] && msg="WiFi: $msg"
+					if [[ $wifi_link_quality -ge 80 ]] ; then
+						level=good
+					elif [[ $wifi_link_quality -ge 60 ]] ; then
+						level=notbad
+					elif [[ $wifi_link_quality -ge 40 ]] ; then
+						level=bad
+					else
+						level=critical
+					fi
+					connection=wifi
 				else
-					level=critical
-				fi
-				local usb=$(networkctl status $card | grep usb)
-				local ether=$(networkctl status $card | grep 'Type: ether')
-				debug 1 "usb=$usb"
-				debug 1 "ether=$ether"
-				if [[ -n $usb || -n $ether ]] ; then
-					local vendor=$(networkctl status $card | grep Vendor | sed 's/^ *Vendor: *\(.*\)$/\1/')
-					local vendor_short=$(echo $vendor | sed 's/^\([^ ,]*\).*$/\1/')
-					local model=$(networkctl status $card | grep Model | sed 's/^ *Model: *\(.*\)$/\1/')
-					local ip=$(ifconfig $card | grep 'inet ' | sed 's/^ *inet *\([0-9.]\+\).*$/\1/')
-					connection=$YES
-					msg="$vendor_short $card $ip"
+					wifi_off=$(networkctl list | grep $wifi_card | grep off)
 				fi
 			fi
 		fi
