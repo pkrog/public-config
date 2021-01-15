@@ -30,5 +30,7 @@
 <Multi_key> <u> <i> : "ï" U00EF
 <Multi_key> <u> <O> : "Ö" U00D6
 <Multi_key> <u> <o> : "ö" U00F6
+<Multi_key> <u> <U> : "Ü" U00DC
+<Multi_key> <u> <u> : "ü" U00FC
 <Multi_key> <c> <C> : "Ç" U00C7
 <Multi_key> <c> <c> : "ç" U00E7
