@@ -41,9 +41,9 @@ hi Number                   term=NONE       ctermfg=81              cterm=NONE
 hi Float                    term=NONE       ctermfg=33              cterm=NONE
 hi Character                term=NONE       ctermfg=81              cterm=NONE
 hi String                   term=NONE       ctermfg=36              cterm=NONE
-hi Folded                   term=NONE       ctermfg=51  ctermbg=0   cterm=NONE
+hi Folded                   term=NONE       ctermfg=51              cterm=NONE
 hi fortranTab               term=NONE       ctermfg=255 ctermbg=236 cterm=NONE
-hi SpecialKey               term=NONE       ctermfg=31  ctermbg=0   cterm=NONE
+hi SpecialKey               term=NONE       ctermfg=31              cterm=NONE
 
 hi netrwCompress    term=NONE       ctermfg=220             cterm=NONE
 hi netrwData        term=NONE       ctermfg=43              cterm=NONE
@@ -85,11 +85,11 @@ hi StatusLineNC             term=reverse    ctermfg=0   ctermbg=245 cterm=NONE
 hi Directory                term=NONE       ctermfg=69              cterm=NONE 
 hi NonText                  term=NONE       ctermfg=99              cterm=NONE
 hi Visual                   term=reverse    ctermfg=0   ctermbg=240 cterm=NONE
-hi ModeMsg                  term=NONE       ctermfg=150 ctermbg=0   cterm=NONE
-hi ErrorMsg                 term=NONE       ctermfg=1   ctermbg=0   cterm=NONE
-hi WarningMsg               term=NONE       ctermfg=130 ctermbg=0   cterm=NONE
-hi LineNr                   term=NONE       ctermfg=255 ctermbg=0   cterm=NONE
-hi Question                 term=NONE       ctermfg=171 ctermbg=0   cterm=NONE
+hi ModeMsg                  term=NONE       ctermfg=150             cterm=NONE
+hi ErrorMsg                 term=NONE       ctermfg=1               cterm=NONE
+hi WarningMsg               term=NONE       ctermfg=130             cterm=NONE
+hi LineNr                   term=NONE       ctermfg=255             cterm=NONE
+hi Question                 term=NONE       ctermfg=171             cterm=NONE
 hi Search                   term=reverse    ctermfg=0   ctermbg=220 cterm=NONE
 hi IncSearch                term=reverse    ctermfg=0   ctermbg=76  cterm=NONE
 
@@ -102,10 +102,10 @@ hi Ignore                   term=reverse    ctermfg=0   ctermbg=100 cterm=NONE
 hi Cursor                   term=reverse    ctermfg=0   ctermbg=80  cterm=NONE
 hi MoreMsg                  term=reverse    ctermfg=0   ctermbg=30  cterm=NONE
 
-hi CSVColumnHeaderEven      term=NONE       ctermfg=40  ctermbg=0   cterm=NONE
-hi CSVColumnHeaderOdd       term=reverse    ctermfg=208 ctermbg=0   cterm=NONE
-hi CSVColumnEven            term=NONE       ctermfg=40  ctermbg=0   cterm=NONE
-hi CSVColumnOdd             term=reverse    ctermfg=208 ctermbg=0   cterm=NONE
+hi CSVColumnHeaderEven      term=NONE       ctermfg=40              cterm=NONE
+hi CSVColumnHeaderOdd       term=reverse    ctermfg=208             cterm=NONE
+hi CSVColumnEven            term=NONE       ctermfg=40              cterm=NONE
+hi CSVColumnOdd             term=reverse    ctermfg=208             cterm=NONE
 
 for bgcol in range(255, 0, -1)
 	for fgcol in range(255, 0, -1)
