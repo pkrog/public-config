@@ -43,7 +43,8 @@ hi Character                term=NONE       ctermfg=81              cterm=NONE
 hi String                   term=NONE       ctermfg=36              cterm=NONE
 hi Folded                   term=NONE       ctermfg=51              cterm=NONE
 hi fortranTab               term=NONE       ctermfg=255 ctermbg=236 cterm=NONE
-hi SpecialKey               term=NONE       ctermfg=31              cterm=NONE
+hi SpecialKey               term=NONE       ctermfg=31               cterm=NONE
+hi Folded                   term=NONE       ctermfg=255 ctermbg=NONE cterm=NONE
 
 hi netrwCompress    term=NONE       ctermfg=220             cterm=NONE
 hi netrwData        term=NONE       ctermfg=43              cterm=NONE
@@ -69,7 +70,7 @@ hi markdownCodeDelimiter    term=NONE       ctermfg=34              cterm=NONE
 hi markdownCode             term=NONE       ctermfg=69              cterm=NONE
 hi markdownCodeBlock        term=NONE       ctermfg=69              cterm=NONE
 
-hi LynxOutputPageTitle      term=underline  ctermfg=196 ctermbg=220              cterm=NONE
+hi LynxOutputPageTitle      term=underline  ctermfg=196 ctermbg=220 cterm=NONE
 hi LynxOutputHttpLink       term=underline  ctermfg=33              cterm=NONE
 hi LynxOutputLink           term=underline  ctermfg=220             cterm=NONE
 hi LynxOutputBulletStar     term=bold       ctermfg=154             cterm=NONE
