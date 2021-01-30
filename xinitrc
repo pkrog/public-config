@@ -30,8 +30,8 @@ unclutter &
 
 case "$XSESSION" in
 	i3|i3wm)    XSESSION=i3;;
-	xmonad)     XSESSION=xmonad;;
 	xfce|xfce4) XSESSION=startxfce4;;
-	*)          XSESSION=xmonad;;
+	gnome)      XSESSION=gnome-session ; export XDG_SESSION_TYPE=x11 ; export GDK_BACKEND=x11 ;;
+	xmonad|*)   XSESSION=xmonad;;
 esac
 exec $XSESSION
