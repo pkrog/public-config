@@ -44,17 +44,18 @@ mykeys c = (myKeys c) `Data.Map.union` (XMonad.keys defaultConfig c)
 		myKeys conf@(XConfig {modMask = modm}) = myKeyBindings modm conf
 
 myKeyBindings modm conf = Data.Map.fromList $
-      [ ((modm .|. shiftMask, xK_l), spawn "xscreensaver-command -lock")
-      , ((modm .|. shiftMask, xK_s), spawn "xscreensaver-command -lock && systemctl suspend-then-hibernate")
-      , ((modm .|. shiftMask, xK_h), spawn "xscreensaver-command -lock && systemctl hibernate")
-      , ((modm .|. shiftMask, xK_bracketleft), spawn "sysinfo --decbright")
-      , ((modm .|. shiftMask, xK_bracketright), spawn "sysinfo --incbright")
-      , ((modm, xK_bracketleft), spawn "sysinfo --decvol")
-      , ((modm, xK_bracketright), spawn "sysinfo --incvol")
-      , ((modm, xK_minus), spawn "sysinfo --mute")
-      , ((modm .|. shiftMask, xK_minus), spawn "sysinfo --switch-audio-sink")
-      , ((modm, xK_equal), spawn "sysinfo --micmute")
-      , ((modm, xK_d), spawn "termprg")
+      [
+		((modm .|. shiftMask, xK_s), spawn "xscreensaver-command -lock && systemctl suspend-then-hibernate"),
+--		((modm .|. shiftMask, xK_l), spawn "xscreensaver-command -lock"),
+--		((modm .|. shiftMask, xK_h), spawn "xscreensaver-command -lock && systemctl hibernate"),
+		((modm .|. shiftMask, xK_bracketleft), spawn "sysinfo --decbright"),
+		((modm .|. shiftMask, xK_bracketright), spawn "sysinfo --incbright"),
+		((modm, xK_bracketleft), spawn "sysinfo --decvol"),
+		((modm, xK_bracketright), spawn "sysinfo --incvol"),
+		((modm, xK_minus), spawn "sysinfo --mute"),
+		((modm .|. shiftMask, xK_minus), spawn "sysinfo --switch-audio-sink"),
+		((modm, xK_equal), spawn "sysinfo --micmute"),
+		((modm, xK_d), spawn "termprg")
       ]
 --      ++
 --      [((m .|. modm, k), windows $ onCurrentScreen f i)
