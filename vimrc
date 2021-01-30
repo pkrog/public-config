@@ -210,6 +210,7 @@ function! SyntaxItem()
 "	  return synIDattr(synID(line("."),col("."),1),"name")
   return join(map(synstack(line("."), col(".")), 'synIDattr(v:val, "name")'))
 endfunction
+" Usage: run `echo SyntaxItem()` when cursor is on the wanted text.
 
 " Display syntax highlighting group in status bar
 "set statusline+=%{SyntaxItem()}
