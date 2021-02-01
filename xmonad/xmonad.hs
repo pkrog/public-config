@@ -45,9 +45,9 @@ mykeys c = (myKeys c) `Data.Map.union` (XMonad.keys defaultConfig c)
 
 myKeyBindings modm conf = Data.Map.fromList $
       [
-		((modm .|. shiftMask, xK_s), spawn "xscreensaver-command -lock && systemctl suspend-then-hibernate"),
---		((modm .|. shiftMask, xK_l), spawn "xscreensaver-command -lock"),
---		((modm .|. shiftMask, xK_h), spawn "xscreensaver-command -lock && systemctl hibernate"),
+		((modm .|. shiftMask, xK_s), spawn "lock -x"),
+		((modm .|. shiftMask, xK_l), spawn "lock"),
+		((modm .|. shiftMask, xK_h), spawn "lock -H"),
 		((modm .|. shiftMask, xK_bracketleft), spawn "sysinfo --decbright"),
 		((modm .|. shiftMask, xK_bracketright), spawn "sysinfo --incbright"),
 		((modm, xK_bracketleft), spawn "sysinfo --decvol"),

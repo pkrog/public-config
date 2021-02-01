@@ -1,0 +1,138 @@
+#!/bin/bash
+# vi: se fdm=marker
+
+SCRIPT_FILE=$(basename $0)
+SCRIPT_DIR=$(dirname $0)
+VERSION=1.0
+YES=yes
+SUSPEND=
+HIBERNATE=
+SUSPEND_THEN_HIBERNATE=
+
+# Print help {{{1
+################################################################
+
+function print_help {
+	cat <<END_HELP_TEXT
+$SCRIPT_FILE locks the screen and makes computer enter suspend of hibernate mode after.
+
+Usage: $SCRIPT_FILE [options]
+
+Options:
+
+   -g, --debug      Debug mode.
+
+   -h, --help       Prints this help message.
+
+   -H, --hibernate  Hibernates computer after locking screen.
+
+   -s, --suspend    Suspends computer after locking screen.
+
+   -x, --suspend-then-hibernate
+                    Enters "suspend then hibernate" mode after locking screen.
+END_HELP_TEXT
+}
+
+# Error {{{1
+################################################################
+
+function error {
+
+	local msg=$1
+
+	echo "[ERROR] $msg" >&2
+
+	exit 1
+}
+
+# Debug {{{1
+################################################################
+
+function debug {
+
+	local lvl=$1
+	local msg=$2
+
+	[[ $DEBUG -ge $lvl ]] && echo "[DEBUG] $msg" >&2
+}
+
+# Read args {{{1
+################################################################
+
+function read_args {
+
+	local args="$*" # save arguments for debugging purpose
+	local print=
+
+	while true ; do
+		case $1 in
+			-g|--debug)                  DEBUG=$((DEBUG + 1)) ;;
+			-h|--help)                   print_help ; exit 0 ;;
+			-s|--suspend)                SUSPEND=$YES ;;
+			-x|--suspend-then-hibernate) SUSPEND_THEN_HIBERNATE=$YES ;;
+			-H|--hibernate)              HIBERNATE=$YES ;;
+			-|--|--*)                    error "Illegal option $1." ;;
+			-?)                          error "Unknown option $1." ;;
+			-[^-]*)                      split_opt=$(echo $1 | sed 's/^-//' | sed 's/\([a-zA-Z]\)/ -\1/g') ; set -- $1$split_opt "${@:2}" ;;
+			*) break
+		esac
+		shift
+	done
+
+	[[ -z "$*" ]] || error "Forbidden remaining arguments: $*."
+
+	# Debug
+	debug 1 "Arguments are : $args"
+	debug 1 "DEBUG=$DEBUG"
+	debug 1 "SUSPEND=$SUSPEND"
+	debug 1 "SUSPEND_THEN_HIBERNATE=$SUSPEND_THEN_HIBERNATE"
+	debug 1 "HIBERNATE=$HIBERNATE"
+}
+
+# Lock screen {{{1
+################################################################
+
+function lock_screen {
+
+	# Lock
+	xscreensaver-command -lock >/dev/null 2>&1 &
+	# Run xscreensaver in background to avoid the following error message:
+	#   xscreensaver-command: waiting for window 0x00a004d1 to map
+
+	# Check if locking is effective
+	sleep 1
+	locked=$(xscreensaver-command -time | grep "screen locked")
+	[[ -n $locked ]] || error "xscreensaver was unable to lock screen."
+}
+
+# Suspend computer {{{1
+################################################################
+
+function suspend_computer {
+	systemctl suspend
+}
+
+# Hibernate computer {{{1
+################################################################
+
+function hibernate_computer {
+	systemctl hibernate
+}
+
+# Suspend then hibernate computer {{{1
+################################################################
+
+function suspend_then_hibernate_computer {
+	systemctl suspend-then-hibernate
+}
+
+# Main {{{1
+################################################################
+
+read_args "$@"
+
+lock_screen
+
+[[ $SUSPEND == $YES ]] && suspend_computer
+[[ $HIBERNATE == $YES ]] && hibernate_computer
+[[ $SUSPEND_THEN_HIBERNATE == $YES ]] && suspend_then_hibernate_computer

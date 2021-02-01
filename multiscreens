@@ -1,6 +1,8 @@
 #!/bin/bash
 # vi: se fdm=marker
 
+SCRIPT_FILE=$(basename $0)
+SCRIPT_DIR=$(dirname $0)
 CICCIANO=cicciano
 BOURG_LA_REINE=bourg-la-reine
 CONFIG=
@@ -13,14 +15,25 @@ YES=yes
 ################################################################
 
 function print_help {
-	echo "Usage: multiscreens [options]"
-	echo
-	echo "Options:"
-	echo "   -b, --bourg-la-reine    Set Bourg-la-Reine configuration."
-	echo "   -c, --cicciano          Set Cicciano configuration."
-	echo "   -d, --digiteo           Set Digiteo configuration."
-	echo "   -h, --help              Print this help message."
-	echo "   -o, --off               Turn off all screens."
+	cat <<END_HELP_TEXT
+$SCRIPT_FILE set predefined configurations monitors for home or work.
+
+Usage: $SCRIPT_FILE [options]
+
+Options:
+
+   -b, --bourg-la-reine    Set Bourg-la-Reine configuration.
+
+   -c, --cicciano          Set Cicciano configuration.
+
+   -d, --digiteo           Set Digiteo configuration.
+
+   -g, --debug             Debug mode.
+
+   -h, --help              Print this help message.
+
+   -o, --off               Turn off all screens.
+END_HELP_TEXT
 }
 
 # Error {{{1
@@ -30,7 +43,7 @@ function error {
 
 	local msg=$1
 
-	echo "ERROR: $msg" >&2
+	echo "[ERROR] $msg" >&2
 
 	exit 1
 }
@@ -62,9 +75,7 @@ function read_args {
 			-g|--debug)             DEBUG=$((DEBUG + 1)) ;;
 			-h|--help)              print_help ; exit 0 ;;
 			-o|--off)               OFF=$YES ;;
-			-)                      error "Illegal option $1." ;;
-			--)                     error "Illegal option $1." ;;
-			--*)                    error "Illegal option $1." ;;
+			-|--|--*)               error "Illegal option $1." ;;
 			-?)                     error "Unknown option $1." ;;
 			-[^-]*)                 split_opt=$(echo $1 | sed 's/^-//' | sed 's/\([a-zA-Z]\)/ -\1/g') ; set -- $1$split_opt "${@:2}" ;;
 			*) break
@@ -77,6 +88,7 @@ function read_args {
 	# Debug
 	debug 1 "Arguments are : $args"
 	debug 1 "CONFIG=$CONFIG"
+	debug 1 "DEBUG=$DEBUG"
 	debug 1 "OFF=$OFF"
 }
 
