@@ -147,6 +147,7 @@ case "$CONFIG" in
 	$DIGITEO)           set_digiteo_config ;;
 esac
 # TODO What about the compose key?
+# NOTE It must be run inside a terminal displayed on the new screen(s).
 # xmodmap -e "keysym Alt_R = Multi_key"
 
 # Turn off screens

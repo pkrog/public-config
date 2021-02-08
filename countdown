@@ -1,0 +1,104 @@
+#!/bin/bash
+# vi: se fdm=marker
+
+SCRIPT_FILE=$(basename $0)
+SCRIPT_DIR=$(dirname $0)
+YES=yes
+COUNT=
+
+# Print help {{{1
+################################################################
+
+function print_help {
+	cat <<END_HELP_TEXT
+$SCRIPT_FILE runs a countdown and optionnaly plays a sound file at the end.
+
+Usage: $SCRIPT_FILE [options] <count>
+
+The count down is run by termdown behind, thus the same format applies for the count.
+The count is provided in seconds by default, but you can add a suffix to change the scale:
+  * 5m: 5 minutes.
+  * 1m14s.
+  * 3h13m50s.
+
+Options:
+
+   -g, --debug       Debug mode.
+
+   -h, --help        Print this help message.
+
+   -s, --sound-file  Set the path to a sound file to play at the end of the
+                     countdown. Can also be set with the COUNTDOWN_SOUND_FILE
+                     environment variable.
+
+END_HELP_TEXT
+}
+
+# Error {{{1
+################################################################
+
+function error {
+
+	local msg=$1
+
+	echo "[ERROR] $msg" >&2
+
+	exit 1
+}
+
+# Debug {{{1
+################################################################
+
+function debug {
+
+	local lvl=$1
+	local msg=$2
+
+	[[ $DEBUG -ge $lvl ]] && echo "[DEBUG] $msg" >&2
+}
+
+# Read args {{{1
+################################################################
+
+function read_args {
+
+	local args="$*" # save arguments for debugging purpose
+	local print=
+
+	while true ; do
+		case $1 in
+			-g|--debug)      DEBUG=$((DEBUG + 1)) ;;
+			-h|--help)       print_help ; exit 0 ;;
+			-s|--sound-file) SOUND_FILE="$2" ; shift ;;
+			-|--|--*)        error "Illegal option $1." ;;
+			-?)              error "Unknown option $1." ;;
+			-[^-]*)          split_opt=$(echo $1 | sed 's/^-//' | sed 's/\([a-zA-Z]\)/ -\1/g') ; set -- $1$split_opt "${@:2}" ;;
+			*) break
+		esac
+		shift
+	done
+
+	# Read remaining arguments
+	COUNT="$1"
+	shift
+
+	# Check default value
+	[[ -z $SOUND_FILE && -n $COUNTDOWN_SOUND_FILE ]] && SOUND_FILE="$COUNTDOWN_SOUND_FILE"
+
+	# Check arguments
+	[[ -z "$*" ]] || error "Forbidden remaining arguments: $*."
+	[[ -n $COUNT ]] || error "No count provided."
+
+	# Debug
+	debug 1 "Arguments are : $args"
+	debug 1 "COUNT=$COUNT"
+	debug 1 "DEBUG=$DEBUG"
+}
+
+# Main {{{1
+################################################################
+
+read_args "$@"
+
+termdown $COUNT
+[[ $? -eq 0 && -n $SOUND_FILE ]] && mplayer -really-quiet "$SOUND_FILE"
