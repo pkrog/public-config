@@ -42,7 +42,7 @@ function get_platform {
 
 function print_help {
 cat <<END_HELP_MSG
-$SCRIPT, version $VERSION, displays system information for user on command line or on xmobar status bar.
+$SCRIPT_FILE, version $VERSION, displays system information for user on command line or on xmobar status bar.
 
 Usage: $SCRIPT_FILE [options]
 

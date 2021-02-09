@@ -1,0 +1,115 @@
+#!/bin/bash
+# vi: se fdm=marker
+
+SCRIPT_FILE=$(basename $0)
+SCRIPT_DIR=$(dirname $0)
+VERSION=1.0
+YES=yes
+DEBUG=0
+DOWNLOAD=
+FILE=
+
+# Print help {{{1
+################################################################
+
+function print_help {
+cat <<END_HELP_MSG
+$SCRIPT_FILE, version $VERSION, opens a file with the right application depending on its type.
+
+Usage: $SCRIPT_FILE [options]
+
+Options:
+   -d, --download  Copy file inside downloads folder before opening it.
+   -g, --debug     Debug mode.
+   -h, --help       Print this help message.
+END_HELP_MSG
+}
+
+# Error {{{1
+################################################################
+
+function error {
+
+	local msg=$1
+
+	echo "[ERROR] $msg" >&2
+
+	exit 1
+}
+
+# Debug {{{1
+################################################################
+
+function debug {
+
+	local lvl=$1
+	local msg=$2
+
+	[[ $DEBUG -ge $lvl ]] && echo "[DEBUG] $msg" >&2
+}
+
+# Read args {{{1
+################################################################
+
+function read_args {
+
+	local args="$*" # save arguments for debugging purpose
+	local print=
+
+	while true ; do
+		case $1 in
+			-g|--debug)    DEBUG=$((DEBUG + 1)) ;;
+			-h|--help)     print_help ; exit 0 ;;
+			-d|--download) DOWNLOAD=$YES ;;
+			-|--|--*)      error "Illegal option $1." ;;
+			-?)            error "Unknown option $1." ;;
+			-[^-]*)        split_opt=$(echo $1 | sed 's/^-//' | sed 's/\([a-zA-Z]\)/ -\1/g') ; set -- $1$split_opt "${@:2}" ;;
+			*) break
+		esac
+		shift
+	done
+
+	# Read remaining arguments
+	FILE="$1"
+	shift
+
+	# Check arguments
+	[[ -z "$*" ]] || error "Forbidden remaining arguments: $*."
+	[[ -n $FILE ]] || error "No submitted file."
+	[[ -f $FILE ]] || error "File \"$FILE\" does not exist or is not readable."
+
+	# Debug
+	debug 1 "Arguments are : $args"
+	debug 1 "DOWNLOAD=$DOWNLOAD"
+	debug 1 "DEBUG=$DEBUG"
+	debug 1 "FILE=$FILE"
+}
+
+# Main {{{1
+################################################################
+
+read_args "$@"
+
+app=
+
+# Get mime type
+mimetype=$(file -b --mime-type "$FILE")
+
+# Get app
+case $mimetype in
+	application/pdf) app=foxitreader ;;
+	*) error "Unknown mime type \"$mimetype\"."
+esac
+
+# Check app
+which $app >/dev/null 2>&1 || error "Unknown application \"$app\" for mime type \"$mimetype\"."
+
+# Copy file in downloads folder
+if [[ $DOWNLOAD == $YES ]] ; then
+	dst=~/Downloads/$(basename "$FILE")
+	cp "$FILE" "$dst"
+	FILE="$dst"
+fi
+
+# Fork and run app
+"$app" "$FILE" >/dev/null 2>&1 &
