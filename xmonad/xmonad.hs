@@ -48,6 +48,8 @@ myKeyBindings modm conf = Data.Map.fromList $
 		((modm .|. shiftMask, xK_s), spawn "lock -x"),
 		((modm .|. shiftMask, xK_l), spawn "lock"),
 		((modm .|. shiftMask, xK_h), spawn "lock -H"),
+		((modm, xK_c), spawn "xsel -po | xsel -bi"),
+		((modm, xK_x), spawn "xsel -bo | xsel -pi"),
 		((modm .|. shiftMask, xK_bracketleft), spawn "sysinfo --decbright"),
 		((modm .|. shiftMask, xK_bracketright), spawn "sysinfo --incbright"),
 		((modm, xK_bracketleft), spawn "sysinfo --decvol"),
