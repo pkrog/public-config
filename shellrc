@@ -1,0 +1,321 @@
+# vi: fdm=marker
+
+if [ "$SHELL" != '/bin/bash' -a "$SHELL" != '/bin/zsh' ] ; then
+	echo "Unknown shell $SHELL." >&2
+fi
+
+# Constants {{{1
+################################################################
+
+PLATFORM=$(uname)
+
+# Load /etc/bashrc {{{1
+################################################################
+
+if [ "$SHELL" = '/bin/bash' -a -f /etc/bashrc ] ; then
+	. /etc/bashrc
+fi
+
+# Blank lines {{{1
+################################################################
+
+function blank_lines {
+
+	n=$1
+
+	# Default number of lines
+	if [[ -z $n ]] ; then
+		n=10
+	fi
+
+	# Print blank lines
+	for ((i = 0 ; i < n ; ++i)) ; do
+		echo
+	done
+}
+
+# macos FileMerge {{{1
+################################################################
+
+file_merge=/Applications/Xcode.app/Contents/Applications/FileMerge.app/Contents/MacOS/FileMerge
+if [[ -x $file_merge ]] ; then
+	function filemerge {
+		file1="$1"
+		file2="$2"
+		$file_merge -left "$file1" -right "$2" &
+	}
+fi
+
+# Terminal color {{{1
+################################################################
+
+if [[ $COLORTERM == xfce4-terminal || $TERM == xterm-256color-italic || $TERM == screen.xterm-256color ]] ; then
+	TERM=xterm-256color
+fi
+
+# ls command {{{1
+################################################################
+
+if [[ $(uname) == 'Linux' && ( $TERM == rxvt-unicode-256color || $TERM == xterm-256color || $TERM == xterm || $TERM == screen-256color ) ]] ; then
+	alias ls="ls --color=auto"
+
+	# Set colors here, since when logging inside Linux console (so before starting X), TERM will be set to "linux" when parsing "~/.profile".
+		eval $(dircolors - <<EOF
+# @@@BEGIN_DIRCOLORS@@@
+.pdf  38;5;202
+.xls  38;5;255;48;5;202
+.doc  38;5;255;48;5;202
+.ppt  38;5;255;48;5;202
+.vsd  38;5;255;48;5;202
+.odt  38;5;202
+.odp  38;5;202
+.ods  38;5;202
+.docx 38;5;202
+.xlsx 38;5;202
+.pptx 38;5;202
+.txt  38;5;202
+.rtf  38;5;255;48;5;202
+.eml  38;5;202
+.msg  38;5;255;48;5;202
+.tex  38;5;202
+.bib  38;5;202
+.ris  38;5;202
+*DESCRIPTION 38;5;208
+*LICENSE     38;5;208
+*NAMESPACE   38;5;208
+*NEWS        38;5;208
+*README      38;5;208
+*README.md   38;5;208
+*README.txt  38;5;208
+*.Rmd        38;5;208
+*.md         38;5;208
+.mk             38;5;161
+*Makefile       38;5;161
+*CMakeLists.txt 38;5;161
+.R     38;5;27
+.sas   38;5;27
+.py    38;5;220
+.php   38;5;105
+.pl    38;5;51
+.html  38;5;166
+.css   38;5;172
+.js    38;5;214
+.java  38;5;81
+.c     38;5;39
+.h     38;5;39
+.cpp   38;5;39
+.hpp   38;5;39
+.m     38;5;45 # Objective C
+.cs    38;5;75 # C#
+.sh    38;5;40
+.bash  38;5;40
+.zsh   38;5;40
+.slurm 38;5;154
+.dockerfile  38;5;169
+*Dockerfile  38;5;169
+*Vagrantfile 38;5;169
+.tar       38;5;160
+.bz        38;5;160
+.bz2       38;5;160
+.bzip2     38;5;160
+.gz        38;5;160
+.xz        38;5;160
+.tgz       38;5;160
+.tbz       38;5;160
+.tbz2      38;5;160
+.txz       38;5;160
+.zip       38;5;160
+.7z        38;5;160
+.deb       38;5;160
+.rpm       38;5;160
+.dmg       38;5;160
+.iso       38;5;160
+.sqlite    38;5;200
+.tsv       38;5;200
+.csv       38;5;200
+.json      38;5;200
+.xml       38;5;200
+.h5        38;5;200
+.mat       38;5;200
+.po       38;5;118
+.mo       38;5;118
+.pot      38;5;118
+.yml      38;5;118
+.yaml     38;5;118
+*rc       38;5;118
+.cfg      38;5;118 # Like setup.cfg for Python.
+*conf     38;5;118
+*gitignore 38;5;118
+*gitconfig 38;5;118
+*gitmodule 38;5;118
+*gitlinux  38;5;118
+*profile   38;5;118
+.htaccess  38;5;118
+*signature 38;5;118
+*Xcompose  38;5;118
+.dia  38;5;136
+.svg  38;5;136
+.xcf  38;5;136
+.bmp  38;5;226
+.jpeg 38;5;226
+.jpg  38;5;226
+.png  38;5;226
+.gif  38;5;226
+.tif  38;5;226
+.tiff 38;5;226
+.webp 38;5;226
+.mp3  38;5;148
+.wav  38;5;148
+.ogg  38;5;148
+.mp4  38;5;129
+.mpg  38;5;129
+.avi  38;5;129
+.mkv  38;5;129
+.sto  38;5;129
+.osp  38;5;129
+.log       38;5;000;48;5;220
+*Rprof.out 38;5;000;48;5;220
+.prof      38;5;000;48;5;220
+.bak       38;5;000;48;5;046
+.bkp       38;5;000;48;5;046
+*~         38;5;000;48;5;046
+.tmp       38;5;000;48;5;046
+.pid       38;5;226;48;5;160
+.lock      38;5;226;48;5;160
+*__        38;5;226;48;5;160
+EXEC       38;5;226;48;5;018
+.exe       38;5;226;48;5;018
+.com       38;5;226;48;5;018
+.o         38;5;226;48;5;018
+.pyc       38;5;226;48;5;018
+DIR        38;5;094
+# @@@END_DIRCOLORS@@@
+EOF
+		)
+else
+	alias ls="ls -F"
+fi
+
+# Alias {{{1
+################################################################
+
+[[ $PLATFORM == Darwin ]] && alias lock='/System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resources/CGSession -suspend'
+#alias vscreen="cd $HOME/dev && screen vim private-notes/todo.md && cd -"
+#alias vtmux="cd $HOME/dev && tmux new-session vim private-notes/todo.md && cd -"
+alias xterm="xterm -bg black -cr white -fg white"
+alias today='date "+%a %b %e %k:%M %Z W%V"'
+alias docker-clean='docker rm $(docker ps -aq) ; docker rmi $(docker images -aq)'
+alias runglx='([[ -d .venv ]] || virtualenv .venv) && R_LIBS_USER= && ./run.sh'
+
+# Top {{{2
+if [ "$PLATFORM" = "Linux" ] ; then
+	alias top='top'
+elif [ "$PLATFORM" = "Darwin" ] ; then
+	if [ "`which top 2>/dev/null`" != "/usr/bin/top" ] ; then
+		# GNU version of top
+		top_head='  PID COMMAND    USER   %CPU   TIME   #TH #PRTS RPRVT  RSHRD  RSIZE   VSIZE #MREGS'
+		top_line='$aaaa ^bbbbbbbbb ^nnn $cccc% $wwwwwww $ee $ffff-$hhhh- $iiii- $jjjj-  $llll-$ggggg'
+		alias top="top -o-cpu -P '$top_head' -p '$top_line'"
+	fi
+	alias top="/usr/bin/top -ocpu -R -s2"
+fi
+
+# Prompt {{{1
+################################################################
+
+host=$(hostname | sed 's/[.-].*$//' )
+
+case $host in
+	champignac) host_color_256=99  ;;
+	poildur)    host_color_256=172 ;;
+	seccotine)  host_color_256=124 ;;
+	spip)       host_color_256=220 ;;
+#	rat)        host_color_256=249 ;;
+#	pig)        host_color_256=212 ;;
+	is*)        host_color_256=160 ;;
+	*)          host_color_256=255 ;;
+esac
+
+prompt_check_mail() {
+
+	output=
+
+	# Check unsent messages
+	if [ -d ~/.msmtp.queue -a -n "$(ls ~/.msmtp.queue)" ] ; then
+		n=$(ls -1 ~/.msmtp.queue/*.mail | wc -l)
+		if [ $n -gt 0 ] ; then
+			output=1
+			echo -n "You have "
+			echo -n $'\e[31m' # red fg
+			echo -n "$n unset message"
+			[ $n -gt 1 ] && echo -n "s"
+			echo -n $'\e[0m' # cancel color
+		fi
+	fi
+
+	# Check new messages
+	if [ -d ~/mail ] ; then
+		for m in $(ls ~/mail) ; do
+			n=$(ls -1 ~/mail/$m/inbox/new | wc -l)
+			if [ $n -gt 0 ] ; then
+
+				# Start phrase if needed
+				if [ -z "$output" ] ; then
+					echo -n "You have "
+				else
+					echo -n ", "
+				fi
+
+				# Set mailbox color
+				color=31
+				[ $m = apple ]  && color=35 # purple
+				[ $m = cea ]    && color=31 # red
+				[ $m = free ]   && color=36 # cyan
+				[ $m = google ] && color=33 # brown
+				echo -n $'\e['$color'm' # red fg
+
+				# Print new messages count
+					echo -n "$n $m new message"
+				[ $n -gt 1 ] && echo -n "s"
+
+ 				# Cancel color
+				echo -n $'\e[0m'
+
+				output=1
+			fi
+		done
+	fi
+
+	[ -z "$output" ] || echo .
+}
+
+if [ "$SHELL" = '/bin/bash' ] ; then
+
+	export PROMPT_COMMAND=prompt_check_mail
+
+	export PS1="\[\e[38;5;255m\]\u@\[\e[38;5;${host_color_256}m\]$host\[\e[38;5;255m\]:\W$ "
+elif [ "$SHELL" = '/bin/zsh' ] ; then
+	export PS1="%F{255}%n@%F{$host_color_256}$host%F{255}:%1~%# "
+fi
+
+# Keyboard shortcuts {{{1
+################################################################
+
+# Define another key for beginning-of-line (originally C-a), so it doesn't conflict with `screen`. C-b was backward-char (i.e.: cursor left).
+if [ "$SHELL" = '/bin/bash' ] ; then
+	bind '"\C-b":beginning-of-line'
+fi
+
+# Conda {{{1
+################################################################################
+
+conda_cfg=/etc/profile.d/conda.sh
+if [ -f "$conda_cfg" ] ; then
+	. $conda_cfg
+fi
+
+# Private definitions {{{1
+################################################################
+
+private_shellrc="$HOME/.private.shellrc"
+[ -f "$private_shellrc" ] && source "$private_shellrc"
