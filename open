@@ -98,6 +98,9 @@ mimetype=$(file -b --mime-type "$FILE")
 # Get app
 case $mimetype in
 	application/pdf) app=foxitreader ;;
+	application/vnd.openxmlformats-officedocument.*) app=libreoffice ;;
+	image/*)         app=vimiv ;;
+	text/html)       app=xdg-open ;;
 	*) error "Unknown mime type \"$mimetype\"."
 esac
 
