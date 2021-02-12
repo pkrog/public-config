@@ -1,5 +1,5 @@
 se download-path=~/Downloads
-#se dark-mode=true
+se dark-mode=true
 
 # GUI color settings
 # Color scheme: Base16 Eighties (https://github.com/chriskempson/base16)
