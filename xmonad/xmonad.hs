@@ -48,8 +48,9 @@ myKeyBindings modm conf = Data.Map.fromList $
 		((modm .|. shiftMask, xK_s), spawn "lock -x"),
 		((modm .|. shiftMask, xK_l), spawn "lock"),
 		((modm .|. shiftMask, xK_h), spawn "lock -H"),
-		((modm, xK_c), spawn "xsel -po | xsel -bi"),
-		((modm, xK_x), spawn "xsel -bo | xsel -pi"),
+		((modm, xK_c), spawn "xsel -po | xsel -bi"), -- copy X primary selection into clipboard
+		((modm, xK_x), spawn "xsel -bo | xsel -pi"), -- copy clipboard into X primary selection
+		((modm, xK_z), spawn "xsel -po | xsel -si ; xsel -bo | xsel -pi ; xsel -so | xsel -bi"), -- exchange clipboard and X primary selection
 		((modm .|. shiftMask, xK_bracketleft), spawn "sysinfo --decbright"),
 		((modm .|. shiftMask, xK_bracketright), spawn "sysinfo --incbright"),
 		((modm, xK_bracketleft), spawn "sysinfo --decvol"),
