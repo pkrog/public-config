@@ -356,6 +356,9 @@ nnoremap <leader>dw V:s/[[:space:]]\+$//<cr>
 " Quote current word in normal mode
 nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
 
+" Clipboard copy & paste
+" TODO
+
 inoremap jk <esc>
 inoremap jj <esc>:w<cr>
 "inoremap <esc> <nop>
