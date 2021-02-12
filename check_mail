@@ -1,0 +1,222 @@
+#!/bin/bash
+# vi: se fdm=marker
+
+SCRIPT_FILE=$(basename $0)
+SCRIPT_DIR=$(dirname $0)
+
+VERSION=0.1
+DEBUG=0
+INBOX_ONLY=
+INBOX_NAME=INBOX
+PING_COUNT=1
+PING_TIMEOUT=1
+QUICK_SYNC=
+QUIET=
+LOG=
+LOG_FILE=$HOME/.$SCRIPT_FILE.log
+CAL=${CHECK_MAIL_CAL:+1}
+DRY_RUN=
+WRK_SRV=${CHECK_MAIL_WRK_SRV:-}  # Work server to ping
+WRK_ACC=${CHECK_MAIL_WRK_ACC:-}  # Work accounts
+PER_ACC=${CHECK_MAIL_PER_ACC:-}  # Personal accounts
+
+# Error {{{1
+################################################################
+
+function error {
+	local msg="$1"
+
+	[[ -n $LOG ]] && echo "[ERROR] $msg" >>$LOG_FILE
+	[[ -n $QUIET ]] || echo "[ERROR] $msg" >&2
+
+	exit 1
+}
+
+# Debug {{{1
+################################################################
+
+function debug {
+
+	local lvl=$1
+	local msg=$2
+
+	[[ $DEBUG -ge $lvl && -n $LOG ]] && echo "[DEBUG] $msg" >>$LOG_FILE
+	[[ -z $QUIET && $DEBUG -ge $lvl ]] && echo "[DEBUG] $msg" >&2
+}
+
+# Print help {{{1
+################################################################
+
+function print_help {
+cat <<END_HELP_MSG
+$SCRIPT_FILE, version $VERSION, runs offlineimap to check mail work and personal boxes.
+
+Usage: $SCRIPT_FILE [options]
+
+Options:
+   -c, --cal        Synchronize calendars and contacts too. Can also be enabled
+                    by setting CHECK_MAIL_CAL env var.
+       --dry-run    Display which synchronizations would be run, but do not run
+                    anything.
+   -g, --debug      Debug mode.
+   -h, --help       Print this help message.
+   -i, --inbox-only Check INBOX only.
+   -k, --quick-sync Run a quick synchronization.
+   -l, --log        Writes log file at $LOG_FILE.
+   -p, --personal-accounts <accounts>
+                    Comma seperated list of offlineimap personal accounts to synchronize.
+   -q, --quiet      Quiet.
+   -s, --work-server <server>
+                    Set work server to ping.
+   -w, --work-accounts <accounts>
+                    Comma seperated list of offlineimap work accounts to synchronize.
+END_HELP_MSG
+}
+
+# Read args {{{1
+################################################################
+
+function read_args {
+
+	local args="$*" # save arguments for debugging purpose
+
+	while true ; do
+		case $1 in
+			-c|--cal)         CAL=1 ;;
+			--dry-run)        DRY_RUN=1 ;;
+			-g|--debug)       DEBUG=$((DEBUG + 1)) ;;
+			-h|--help)        print_help ; exit 0 ;;
+			-i|--inbox-only)  INBOX_ONLY=1 ;;
+			-k|--quick-sync)  QUICK_SYNC=1 ;;
+			-l|--log)         LOG=1 ;;
+			-p|--personal-accounts) PER_ACC="$2" ; shift ;;
+			-q|--quiet)       QUIET=1 ;;
+			-s|--work-server) WRK_SRV="$2" ; shift ;;
+			-w|--work-accounts) WRK_ACC="$2" ; shift ;;
+			-|--|--*)         error "Illegal option $1." ;;
+			-?)               error "Unknown option $1." ;;
+			-[^-]*)           split_opt=$(echo $1 | sed 's/^-//' | sed 's/\([a-zA-Z]\)/ -\1/g') ; set -- $1$split_opt "${@:2}" ;;
+			*) break
+		esac
+		shift
+	done
+
+	# Check arguments
+	[[ -z "$*" ]] || error "Forbidden remaining arguments: $*."
+
+	# Debug
+	debug 1 "Arguments are : $args"
+	debug 1 "CAL=$CAL"
+	debug 1 "DEBUG=$DEBUG"
+	debug 1 "DRY_RUN=$DRY_RUN"
+	debug 1 "INBOX_ONLY=$INBOX_ONLY"
+	debug 1 "PER_ACC=$PER_ACC"
+	debug 1 "QUICK_SYNC=$QUICK_SYNC"
+	debug 1 "QUIET=$QUIET"
+	debug 1 "WRK_SRV=$WRK_SRV"
+	debug 1 "WRK_ACC=$WRK_ACC"
+}
+
+# Check mail {{{1
+################################################################
+
+function check {
+
+	local accounts="$1"
+	local status=0
+	debug 1 "CHECKING ACCOUNTS $accounts"
+
+	# Set flags
+	local flags="-a $accounts"
+	[[ -n $INBOX_ONLY ]] && flags+=" -f $INBOX_NAME"
+	[[ -n $QUICK_SYNC ]] && flags+=" -q"
+	debug 1 "OFFLINEIMAP FLAGS=$flags"
+
+	# Set command
+	local cmd="offlineimap $flags"
+
+	if [[ -n $DRY_RUN ]] ; then
+		echo "$cmd" >&2
+	elif [[ -n $LOG ]] ; then
+		$cmd >>$LOG_FILE 2>&1
+		status=$?
+	elif [[ -n $QUIET ]] ; then
+		$cmd >/dev/null 2>&1
+		status=$?
+	else
+		$cmd
+		status=$?
+	fi
+
+	debug 1 offlineimap_status=$status
+	return $status
+}
+
+# Is on work intranet {{{1
+################################################################
+
+function is_on_work_intranet {
+
+	local status=1
+
+	if [[ -n $WRK_SRV ]] ; then
+		local ping_flags="-c $PING_COUNT -W $PING_TIMEOUT"
+		debug 1 "PING FLAGS=$ping_flags"
+
+		if [[ -n $LOG ]] ; then
+			ping $ping_flags $WRK_SRV >>$LOG_FILE 2>&1
+			status=$?
+		elif [[ -n $QUIET ]] ; then
+			ping $ping_flags $WRK_SRV >/dev/null 2>&1
+			status=$?
+		else
+			ping $ping_flags $WRK_SRV
+			status=$?
+		fi
+	fi
+
+	debug 1 ping_status=$status
+	return $status
+}
+
+# Synchronize calendars {{{1
+################################################################
+
+function sync_cal {
+
+	local status=0
+	local cmd="vdirsyncer sync"
+
+	if [[ -n $DRY_RUN ]] ; then
+		echo "$cmd" >&2
+	elif [[ -n $LOG ]] ; then
+		$cmd >>$LOG_FILE 2>&1
+	elif [[ -n $QUIET ]] ; then
+		$cmd >/dev/null 2>&1
+		status=$?
+	else
+		$cmd
+		status=$?
+	fi
+
+	debug 1 vdirsyncer_status=$status
+	return $status
+}
+
+# Main {{{1
+################################################################
+
+read_args "$@"
+
+[[ -n $LOG ]] && rm $LOG_FILE
+
+if [[ -n $WRK_ACC ]] && is_on_work_intranet ; then
+	check $WRK_ACC
+elif [[ -n $PER_ACC ]] ; then
+	[[ -n $CAL ]] && sync_cal
+	check $PER_ACC
+fi
+
+[[ -z $QUIET && -n $LOG ]] && cat $LOG_FILE
+
+exit 0
